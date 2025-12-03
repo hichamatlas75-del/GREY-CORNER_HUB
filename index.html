@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direction - Grey Corner Cafe</title>
+    <style>
+        :root {
+            /* Palette de couleurs "Premium" */
+            --bg-color: #121212;         /* Fond très sombre */
+            --card-bg: #1e1e1e;          /* Fond des cartes */
+            --text-main: #ffffff;        /* Texte blanc */
+            --text-muted: #a0a0a0;       /* Texte gris clair */
+            --accent-gold: #D4AF37;      /* Or élégant */
+            --accent-hover: #F2C94C;     /* Or plus clair au survol */
+            --border-radius: 16px;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at top, #2c3e50 0%, #121212 70%);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Container principal */
+        .container {
+            width: 100%;
+            max-width: 600px; /* Largeur idéale pour un dashboard de direction */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Style du Logo */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        .logo-img {
+            max-width: 250px; /* Ajustez la taille du logo ici */
+            height: auto;
+            border-radius: 10px; /* Légèrement arrondi si nécessaire */
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
+        }
+
+        h1 {
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-top: 10px;
+            text-align: center;
+            border-bottom: 1px solid var(--accent-gold);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Style des Cartes (Boutons) */
+        .nav-link {
+            display: flex;
+            align-items: center;
+            background-color: var(--card-bg);
+            padding: 20px 25px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            color: var(--text-main);
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15); /* Ombre dorée */
+            background-color: #252525;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: var(--accent-gold);
+            opacity: 0.7;
+        }
+
+        /* Icones et Texte */
+        .icon {
+            font-size: 1.8rem;
+            margin-right: 20px;
+            width: 40px;
+            text-align: center;
+        }
+
+        .text-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Grille pour les plannings (côte à côte en bas) */
+        .planning-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 500px) {
+            .planning-grid {
+                grid-template-columns: 1fr; /* Sur mobile, les plannings passent l'un sous l'autre */
+            }
+        }
+
+        /* Animation d'apparition */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        /* Décalage des animations pour un effet cascade */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+
+        footer {
+            margin-top: 50px;
+            color: #555;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- 1. LOGO -->
+        <div class="logo-container">
+            <!-- Remplacez 'votre-logo.png' par le nom réel de votre fichier image -->
+            <img src="LOGO.jpg" alt="Grey Corner Logo" class="logo-img">
+            <h1>Espace Direction</h1>
+        </div>
+
+        <!-- 2. PERSONNEL (Priorité haute) -->
+        <a href="https://personnelgreycorner.pages.dev/" class="nav-link fade-in delay-1">
+            <div class="icon">👥</div>
+            <div class="text-content">
+                <span class="title">GESTION DU PERSONNEL</span>
+                <span class="subtitle">Administration staff & accès</span>
+            </div>
+        </a>
+
+        <!-- 3. MENU PRINCIPAL (Site Client) -->
+        <a href="https://greycorner.pages.dev/" class="nav-link fade-in delay-2">
+            <div class="icon">☕</div>
+            <div class="text-content">
+                <span class="title">MENU PRINCIPAL</span>
+                <span class="subtitle">Carte officielle Grey Corner</span>
+            </div>
+        </a>
+
+        <!-- 4. MENU RAMADAN -->
+        <a href="https://ramadan-greycorner.pages.dev/" class="nav-link fade-in delay-3">
+            <div class="icon">🌙</div>
+            <div class="text-content">
+                <span class="title">MENU RAMADAN</span>
+                <span class="subtitle">Offres spéciales & Ftours</span>
+            </div>
+        </a>
+
+        <!-- 5. FICHE TECHNIQUE -->
+        <a href="https://fiche-technique.pages.dev/" class="nav-link fade-in delay-4">
+            <div class="icon">📋</div>
+            <div class="text-content">
+                <span class="title">FICHES TECHNIQUES</span>
+                <span class="subtitle">Process & Recettes</span>
+            </div>
+        </a>
+
+        <!-- 6. PLANNINGS (Regroupés en bas) -->
+        <div class="planning-grid fade-in delay-5">
+            <a href="https://plannig-serveurs.pages.dev/" class="nav-link">
+                <div class="icon">🍽️</div>
+                <div class="text-content">
+                    <span class="title">SERVICE</span>
+                    <span class="subtitle">Planning Salle</span>
+                </div>
+            </a>
+            
+            <a href="https://planning-bar.pages.dev/" class="nav-link">
+                <div class="icon">🍹</div>
+                <div class="text-content">
+                    <span class="title">BAR</span>
+                    <span class="subtitle">Planning Bar</span>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <footer>
+        © Grey Corner Management
+    </footer>
+
+</body>
+</html>
