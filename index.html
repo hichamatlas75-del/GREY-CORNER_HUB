@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Direction - Grey Corner Cafe</title>
+    <title>Direction - Grey Corner Fêtes</title>
     <style>
         :root {
-            /* Palette de couleurs "Premium" */
-            --bg-color: #121212;         /* Fond très sombre */
-            --card-bg: #1e1e1e;          /* Fond des cartes */
-            --text-main: #ffffff;        /* Texte blanc */
-            --text-muted: #a0a0a0;       /* Texte gris clair */
-            --accent-gold: #D4AF37;      /* Or élégant */
-            --accent-hover: #F2C94C;     /* Or plus clair au survol */
+            /* Palette Fêtes "Premium" */
+            --bg-color: #1a0505;         /* Fond très sombre rouge */
+            --card-bg: rgba(30, 30, 30, 0.85); /* Fond semi-transparent */
+            --text-main: #ffffff;
+            --text-muted: #dcdcdc;
+            --accent-gold: #FFD700;      /* Or Jaune Festif */
+            --accent-red: #c0392b;
             --border-radius: 16px;
         }
 
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
-            background-image: radial-gradient(circle at top, #2c3e50 0%, #121212 70%);
+            background-image: radial-gradient(circle at top, #6e0000 0%, #0f0f0f 80%);
             color: var(--text-main);
             margin: 0;
             padding: 40px 20px;
@@ -27,6 +27,21 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden; /* Pour la neige */
+        }
+
+        /* --- EFFET NEIGE --- */
+        #snow-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0;
+        }
+        .snowflake {
+            position: absolute; top: -10px; color: #fff; font-size: 1em; opacity: 0.8;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0.3; }
         }
 
         /* Container principal */
@@ -36,6 +51,8 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            z-index: 10; /* Au-dessus de la neige */
+            position: relative;
         }
 
         /* Style du Logo */
@@ -46,23 +63,27 @@
         }
 
         .logo-img {
-            max-width: 250px;
+            max-width: 200px;
             height: auto;
-            border-radius: 10px;
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
+            border-radius: 50%;
+            border: 3px solid var(--accent-gold);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+            background: #fff;
         }
 
         h1 {
-            font-weight: 300;
-            letter-spacing: 4px;
+            font-weight: 900;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            font-size: 1.2rem;
-            color: var(--accent-gold);
-            margin-top: 10px;
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin-top: 15px;
             text-align: center;
-            border-bottom: 1px solid var(--accent-gold);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            border-bottom: 2px solid var(--accent-gold);
             padding-bottom: 15px;
             margin-bottom: 30px;
+            display: inline-block;
         }
 
         /* Style des Cartes (Boutons) */
@@ -74,20 +95,22 @@
             border-radius: var(--border-radius);
             text-decoration: none;
             color: var(--text-main);
-            border: 1px solid #333;
+            border: 1px solid rgba(255, 215, 0, 0.3); /* Bordure dorée subtile */
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(5px);
         }
 
         .nav-link:hover {
             transform: translateY(-3px);
             border-color: var(--accent-gold);
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15); /* Ombre dorée */
-            background-color: #252525;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2); /* Lueur dorée */
+            background-color: rgba(50, 50, 50, 0.9);
         }
 
+        /* Barre latérale dorée */
         .nav-link::before {
             content: '';
             position: absolute;
@@ -95,8 +118,7 @@
             top: 0;
             height: 100%;
             width: 4px;
-            background-color: var(--accent-gold);
-            opacity: 0.7;
+            background: linear-gradient(to bottom, var(--accent-gold), #b8860b);
         }
 
         /* Icones et Texte */
@@ -105,6 +127,7 @@
             margin-right: 20px;
             width: 40px;
             text-align: center;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
 
         .text-content {
@@ -114,14 +137,16 @@
 
         .title {
             font-size: 1.1rem;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.5px;
+            color: #fff;
         }
 
         .subtitle {
             font-size: 0.85rem;
-            color: var(--text-muted);
+            color: var(--accent-gold); /* Sous-titres dorés */
             margin-top: 4px;
+            opacity: 0.9;
         }
 
         /* Animation d'apparition */
@@ -141,24 +166,29 @@
         .delay-4 { animation-delay: 0.4s; }
         .delay-5 { animation-delay: 0.5s; }
         .delay-6 { animation-delay: 0.6s; }
-        .delay-7 { animation-delay: 0.7s; } /* Nouveau délai pour Dépenses */
+        .delay-7 { animation-delay: 0.7s; }
 
         footer {
             margin-top: 50px;
-            color: #555;
+            color: rgba(255,255,255,0.4);
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            z-index: 10;
         }
     </style>
 </head>
 <body>
+
+    <!-- Neige -->
+    <div id="snow-container"></div>
 
     <div class="container">
         
         <!-- 1. LOGO -->
         <div class="logo-container">
             <img src="LOGO.jpg" alt="Grey Corner Logo" class="logo-img">
+            <br>
             <h1>Espace Direction</h1>
         </div>
 
@@ -216,7 +246,7 @@
             </div>
         </a>
 
-        <!-- 8. DÉPENSES (NOUVEAU) -->
+        <!-- 8. DÉPENSES -->
         <a href="https://depenses-grey-corner.pages.dev/" class="nav-link fade-in delay-7">
             <div class="icon">💸</div>
             <div class="text-content">
@@ -228,8 +258,27 @@
     </div>
 
     <footer>
-        © Grey Corner Management
+        © Grey Corner Management • Edition Fêtes
     </footer>
+
+    <script>
+        function createSnow() {
+            const container = document.getElementById('snow-container');
+            const flakesCount = 25; 
+
+            for (let i = 0; i < flakesCount; i++) {
+                const flake = document.createElement('div');
+                flake.classList.add('snowflake');
+                flake.textContent = '❄';
+                flake.style.left = Math.random() * 100 + 'vw';
+                flake.style.fontSize = (Math.random() * 10 + 8) + 'px';
+                flake.style.animationDuration = (Math.random() * 5 + 5) + 's'; 
+                flake.style.animationDelay = (Math.random() * 5) + 's';
+                container.appendChild(flake);
+            }
+        }
+        createSnow();
+    </script>
 
 </body>
 </html>
