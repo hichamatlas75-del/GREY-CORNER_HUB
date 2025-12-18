@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Direction - Grey Corner Fêtes</title>
+    <title>Direction - Grey Corner Hub</title>
     <style>
         :root {
-            /* Palette Fêtes "Premium" */
-            --bg-color: #1a0505;         /* Fond très sombre rouge */
-            --card-bg: rgba(30, 30, 30, 0.85); /* Fond semi-transparent */
-            --text-main: #ffffff;
-            --text-muted: #dcdcdc;
-            --accent-gold: #FFD700;      /* Or Jaune Festif */
-            --accent-red: #c0392b;
-            --border-radius: 16px;
+            /* Palette "Dark Grey Premium" */
+            --bg-color: #2E388C;         /* Gris très sombre (presque noir mais plus doux) */
+            --card-bg: #1e1e1e;          /* Gris anthracite (surface) */
+            --card-hover: #2c2c2c;       /* Gris plus clair au survol */
+            --text-main: #e0e0e0;        /* Blanc cassé (plus doux que blanc pur) */
+            --text-muted: #9e9e9e;       /* Gris moyen pour les détails */
+            --accent-border: #333333;    /* Bordures discrètes */
+            --highlight: #757575;        /* Touche de gris clair */
+            --radius: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: 'Roboto', 'Segoe UI', sans-serif;
             background-color: var(--bg-color);
-            background-image: radial-gradient(circle at top, #6e0000 0%, #0f0f0f 80%);
             color: var(--text-main);
             margin: 0;
             padding: 40px 20px;
@@ -27,63 +32,48 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden; /* Pour la neige */
-        }
-
-        /* --- EFFET NEIGE --- */
-        #snow-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 0;
-        }
-        .snowflake {
-            position: absolute; top: -10px; color: #fff; font-size: 1em; opacity: 0.8;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0.3; }
         }
 
         /* Container principal */
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            z-index: 10; /* Au-dessus de la neige */
-            position: relative;
+            gap: 16px;
         }
 
-        /* Style du Logo */
+        /* Logo */
         .logo-container {
             text-align: center;
             margin-bottom: 30px;
-            animation: fadeIn 1.5s ease-in;
+            animation: fadeIn 0.8s ease-out;
         }
 
         .logo-img {
-            max-width: 200px;
+            max-width: 140px;
             height: auto;
             border-radius: 50%;
-            border: 3px solid var(--accent-gold);
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+            border: 2px solid var(--card-bg);
+            /* Lueur grise très subtile */
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
             background: #fff;
         }
 
         h1 {
-            font-weight: 900;
-            letter-spacing: 3px;
+            font-weight: 700;
+            font-size: 1.3rem;
             text-transform: uppercase;
-            font-size: 1.4rem;
-            color: var(--text-main);
-            margin-top: 15px;
-            text-align: center;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            border-bottom: 2px solid var(--accent-gold);
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-            display: inline-block;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .header-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 400;
         }
 
         /* Style des Cartes (Boutons) */
@@ -91,194 +81,172 @@
             display: flex;
             align-items: center;
             background-color: var(--card-bg);
-            padding: 20px 25px;
-            border-radius: var(--border-radius);
+            padding: 18px 22px;
+            border-radius: var(--radius);
             text-decoration: none;
             color: var(--text-main);
-            border: 1px solid rgba(255, 215, 0, 0.3); /* Bordure dorée subtile */
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 1px solid var(--accent-border); /* Bordure fine */
+            transition: all 0.2s ease;
             position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(5px);
         }
 
         .nav-link:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent-gold);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2); /* Lueur dorée */
-            background-color: rgba(50, 50, 50, 0.9);
+            background-color: var(--card-hover);
+            transform: translateY(-2px);
+            border-color: var(--highlight);
         }
 
-        /* Barre latérale dorée */
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--accent-gold), #b8860b);
+        .nav-link:active {
+            transform: scale(0.98);
+            background-color: var(--card-bg);
         }
 
-        /* Icones et Texte */
-        .icon {
-            font-size: 1.8rem;
+        /* Icones */
+        .icon-box {
+            font-size: 1.5rem;
             margin-right: 20px;
-            width: 40px;
+            width: 30px;
             text-align: center;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            opacity: 0.9;
         }
 
         .text-content {
             display: flex;
             flex-direction: column;
+            flex: 1;
         }
 
         .title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
         }
 
         .subtitle {
-            font-size: 0.85rem;
-            color: var(--accent-gold); /* Sous-titres dorés */
+            font-size: 0.8rem;
+            color: var(--text-muted);
             margin-top: 4px;
-            opacity: 0.9;
+        }
+
+        /* Petite flèche chevron */
+        .chevron {
+            color: #555;
+            font-size: 1.2rem;
+            font-weight: 300;
         }
 
         /* Animation d'apparition */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
+            animation: fadeIn 0.5s ease-out forwards;
             opacity: 0;
         }
         
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-        .delay-5 { animation-delay: 0.5s; }
-        .delay-6 { animation-delay: 0.6s; }
-        .delay-7 { animation-delay: 0.7s; }
+        .delay-1 { animation-delay: 0.05s; }
+        .delay-2 { animation-delay: 0.1s; }
+        .delay-3 { animation-delay: 0.15s; }
+        .delay-4 { animation-delay: 0.2s; }
+        .delay-5 { animation-delay: 0.25s; }
+        .delay-6 { animation-delay: 0.3s; }
+        .delay-7 { animation-delay: 0.35s; }
 
         footer {
             margin-top: 50px;
-            color: rgba(255,255,255,0.4);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 10;
+            color: #444;
+            font-size: 0.75rem;
+            text-align: center;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+            width: 100%;
+            max-width: 300px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Neige -->
-    <div id="snow-container"></div>
-
     <div class="container">
         
-        <!-- 1. LOGO -->
+        <!-- LOGO -->
         <div class="logo-container">
             <img src="LOGO.jpg" alt="Grey Corner Logo" class="logo-img">
-            <br>
-            <h1>Espace Direction</h1>
+            <h1>Grey Corner</h1>
+            <div class="header-subtitle">Hub de Direction</div>
         </div>
 
-        <!-- 2. PERSONNEL -->
+        <!-- MENU LINKS -->
+
         <a href="https://personnelgreycorner.pages.dev/" class="nav-link fade-in delay-1">
-            <div class="icon">👥</div>
+            <div class="icon-box">👥</div>
             <div class="text-content">
-                <span class="title">GESTION DU PERSONNEL</span>
-                <span class="subtitle">Administration staff & accès</span>
+                <span class="title">Personnel</span>
+                <span class="subtitle">Gestion staff & accès</span>
             </div>
+            <span class="chevron">›</span>
         </a>
 
-        <!-- 3. MENU PRINCIPAL -->
         <a href="https://greycorner.pages.dev/" class="nav-link fade-in delay-2">
-            <div class="icon">☕</div>
+            <div class="icon-box">☕</div>
             <div class="text-content">
-                <span class="title">MENU PRINCIPAL</span>
-                <span class="subtitle">Carte officielle Grey Corner</span>
+                <span class="title">Menu Principal</span>
+                <span class="subtitle">La carte officielle</span>
             </div>
+            <span class="chevron">›</span>
         </a>
 
-        <!-- 4. MENU RAMADAN -->
         <a href="https://ramadan-greycorner.pages.dev/" class="nav-link fade-in delay-3">
-            <div class="icon">🌙</div>
+            <div class="icon-box">🌙</div>
             <div class="text-content">
-                <span class="title">MENU RAMADAN</span>
+                <span class="title">Ramadan</span>
                 <span class="subtitle">Offres spéciales & Ftours</span>
             </div>
+            <span class="chevron">›</span>
         </a>
 
-        <!-- 5. FICHE TECHNIQUE -->
         <a href="https://fiche-technique.pages.dev/" class="nav-link fade-in delay-4">
-            <div class="icon">📋</div>
+            <div class="icon-box">📋</div>
             <div class="text-content">
-                <span class="title">FICHES TECHNIQUES</span>
+                <span class="title">Fiches Techniques</span>
                 <span class="subtitle">Process & Recettes</span>
             </div>
+            <span class="chevron">›</span>
         </a>
 
-        <!-- 6. PORTAIL STAFF -->
         <a href="https://grey-corner-app.pages.dev/" class="nav-link fade-in delay-5">
-            <div class="icon">📅</div>
+            <div class="icon-box">📅</div>
             <div class="text-content">
-                <span class="title">PORTAIL STAFF</span>
-                <span class="subtitle">Planning Bar & Service</span>
+                <span class="title">Portail Staff</span>
+                <span class="subtitle">Planning de service</span>
             </div>
+            <span class="chevron">›</span>
         </a>
 
-        <!-- 7. COST FOOD -->
         <a href="https://costfood.pages.dev/" class="nav-link fade-in delay-6">
-            <div class="icon">📊</div>
+            <div class="icon-box">📊</div>
             <div class="text-content">
-                <span class="title">COST FOOD</span>
-                <span class="subtitle">Analytique Food Cost & Marges</span>
+                <span class="title">Food Cost</span>
+                <span class="subtitle">Marges & Analytique</span>
             </div>
+            <span class="chevron">›</span>
         </a>
 
-        <!-- 8. DÉPENSES -->
         <a href="https://depenses-grey-corner.pages.dev/" class="nav-link fade-in delay-7">
-            <div class="icon">💸</div>
+            <div class="icon-box">💸</div>
             <div class="text-content">
-                <span class="title">DÉPENSES</span>
-                <span class="subtitle">Suivi des coûts & Achats</span>
+                <span class="title">Dépenses</span>
+                <span class="subtitle">Achats & Suivi coûts</span>
             </div>
+            <span class="chevron">›</span>
         </a>
 
     </div>
 
     <footer>
-        © Grey Corner Management • Edition Fêtes
+        Système de gestion v2.2
     </footer>
-
-    <script>
-        function createSnow() {
-            const container = document.getElementById('snow-container');
-            const flakesCount = 25; 
-
-            for (let i = 0; i < flakesCount; i++) {
-                const flake = document.createElement('div');
-                flake.classList.add('snowflake');
-                flake.textContent = '❄';
-                flake.style.left = Math.random() * 100 + 'vw';
-                flake.style.fontSize = (Math.random() * 10 + 8) + 'px';
-                flake.style.animationDuration = (Math.random() * 5 + 5) + 's'; 
-                flake.style.animationDelay = (Math.random() * 5) + 's';
-                container.appendChild(flake);
-            }
-        }
-        createSnow();
-    </script>
 
 </body>
 </html>
