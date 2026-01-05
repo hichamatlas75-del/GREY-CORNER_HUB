@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grey Corner • Direction</title>
+    <title>Grey Corner • Direction Executive</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -14,101 +16,172 @@
             color: #0f172a;
             -webkit-font-smoothing: antialiased;
         }
-        .bg-mesh {
-            background-image: 
-                radial-gradient(at 0% 0%, hsla(225,39%,30%,0.03) 0, transparent 50%), 
-                radial-gradient(at 100% 0%, hsla(225,39%,20%,0.03) 0, transparent 50%);
+        
+        .glass-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
         }
-        .nav-card {
+
+        .action-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .nav-card:hover {
+
+        .action-card:hover {
             border-color: #6366f1;
             transform: translateY(-2px);
-            box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 12px 20px -8px rgba(99, 102, 241, 0.15);
         }
-        @keyframes fadeIn {
+
+        .bg-pattern {
+            background-image: radial-gradient(#e2e8f0 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+
+        @keyframes slideUp {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade {
-            animation: fadeIn 0.5s ease-out forwards;
+
+        .animate-slide-up {
+            animation: slideUp 0.5s ease-out forwards;
         }
     </style>
+
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@19.0.0",
+        "react-dom/client": "https://esm.sh/react-dom@19.0.0/client"
+      }
+    }
+    </script>
 </head>
-<body class="bg-mesh min-h-screen flex flex-col items-center py-12 px-6">
+<body class="bg-pattern min-h-screen">
+    <div id="root"></div>
 
-    <div class="text-center mb-10 animate-fade">
-        <img src="LOGO.jpg" alt="Logo" class="w-24 h-24 rounded-full mx-auto mb-4 border-2 border-white shadow-md object-cover">
-        <h1 class="text-xl font-extrabold tracking-tight text-slate-900 uppercase">Espace Direction</h1>
-        <div class="h-1 w-12 bg-indigo-600 mx-auto mt-2 rounded-full"></div>
-    </div>
+    <script type="module">
+        import React from 'react';
+        import { createRoot } from 'react-dom/client';
 
-    <div class="w-full max-w-md space-y-3">
-        
-        <a href="https://personnelgreycorner.pages.dev/" class="nav-card flex items-center p-5 rounded-2xl animate-fade" style="animation-delay: 0.1s">
-            <div class="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-xl mr-4">👥</div>
-            <div>
-                <span class="block font-bold text-slate-800 text-sm tracking-wide">GESTION DU PERSONNEL</span>
-                <span class="text-xs text-slate-500">Administration & Accès staff</span>
-            </div>
-        </a>
+        const NAV_ITEMS = [
+          {
+            id: 'personnel',
+            title: 'Gestion du Personnel',
+            subtitle: 'Ressources humaines & Accès administratifs',
+            href: 'https://personnelgreycorner.pages.dev/',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`
+          },
+          {
+            id: 'menu-principal',
+            title: 'Menu Principal',
+            subtitle: 'Consultation de la carte officielle',
+            href: 'https://greycorner.pages.dev/',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>`
+          },
+          {
+            id: 'menu-ramadan',
+            title: 'Offres Saisonnières',
+            subtitle: 'Campagnes spéciales & Ramadan',
+            href: 'https://ramadan-greycorner.pages.dev/',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`
+          },
+          {
+            id: 'fiches-techniques',
+            title: 'Fiches Techniques',
+            subtitle: 'Documentation process & Recettes',
+            href: 'https://fiche-technique.pages.dev/',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>`
+          },
+          {
+            id: 'portail-staff',
+            title: 'Portail Opérations',
+            subtitle: 'Planning & Coordination du Staff',
+            href: 'https://grey-corner-app.pages.dev/',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg>`
+          },
+          {
+            id: 'cost-food',
+            title: 'Analytique Cost Food',
+            subtitle: 'Contrôle des marges & Performance',
+            href: 'https://costfood.pages.dev/',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg>`
+          },
+          {
+            id: 'depenses',
+            title: 'Suivi Trésorerie',
+            subtitle: 'Journal des achats & Dépenses',
+            href: 'https://depenses-grey-corner.pages.dev/',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`
+          }
+        ];
 
-        <a href="https://greycorner.pages.dev/" class="nav-card flex items-center p-5 rounded-2xl animate-fade" style="animation-delay: 0.2s">
-            <div class="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center text-xl mr-4">☕</div>
-            <div>
-                <span class="block font-bold text-slate-800 text-sm tracking-wide">MENU PRINCIPAL</span>
-                <span class="text-xs text-slate-500">Carte officielle Grey Corner</span>
-            </div>
-        </a>
+        const App = () => {
+          return React.createElement('div', { className: 'flex flex-col items-center pb-20' },
+            // Header Section
+            React.createElement('div', { className: 'w-full glass-header sticky top-0 z-50 py-6 px-6 flex justify-center mb-12 shadow-sm' },
+              React.createElement('div', { className: 'max-w-xl w-full flex items-center justify-between' },
+                React.createElement('div', { className: 'flex items-center gap-4' },
+                   React.createElement('img', { 
+                     src: 'LOGO.jpg', 
+                     className: 'w-10 h-10 rounded-lg shadow-sm',
+                     onError: (e) => { e.target.src = 'https://picsum.photos/40/40?grayscale' }
+                   }),
+                   React.createElement('div', null,
+                     React.createElement('h2', { className: 'text-sm font-black uppercase tracking-tighter text-slate-900 leading-none' }, 'Grey Corner'),
+                     React.createElement('p', { className: 'text-[10px] font-bold text-indigo-600 uppercase tracking-widest mt-1' }, 'Direction')
+                   )
+                ),
+                React.createElement('div', { className: 'px-3 py-1 bg-slate-100 rounded-full' },
+                   React.createElement('span', { className: 'text-[9px] font-bold text-slate-500 uppercase tracking-widest' }, 'v4.2 PRO')
+                )
+              )
+            ),
 
-        <a href="https://ramadan-greycorner.pages.dev/" class="nav-card flex items-center p-5 rounded-2xl animate-fade" style="animation-delay: 0.3s">
-            <div class="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center text-xl mr-4">🌙</div>
-            <div>
-                <span class="block font-bold text-slate-800 text-sm tracking-wide">MENU RAMADAN</span>
-                <span class="text-xs text-slate-500">Offres spéciales & Ftours</span>
-            </div>
-        </a>
+            // Main Content
+            React.createElement('header', { className: 'max-w-xl w-full px-6 mb-10' },
+              React.createElement('h1', { className: 'text-3xl font-black text-slate-900 tracking-tight mb-2' }, 'Tableau de Bord'),
+              React.createElement('p', { className: 'text-slate-500 text-sm font-medium' }, 'Bienvenue. Sélectionnez un module de gestion pour continuer.')
+            ),
 
-        <a href="https://fiche-technique.pages.dev/" class="nav-card flex items-center p-5 rounded-2xl animate-fade" style="animation-delay: 0.4s">
-            <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-xl mr-4">📋</div>
-            <div>
-                <span class="block font-bold text-slate-800 text-sm tracking-wide">FICHES TECHNIQUES</span>
-                <span class="text-xs text-slate-500">Process & Recettes cuisine</span>
-            </div>
-        </a>
+            React.createElement('main', { className: 'max-w-xl w-full px-6 space-y-3' },
+              NAV_ITEMS.map((item, idx) => 
+                React.createElement('a', {
+                  key: item.id,
+                  href: item.href,
+                  className: 'action-card group flex items-center p-4 rounded-xl opacity-0 animate-slide-up',
+                  style: { animationDelay: `${idx * 50}ms` }
+                },
+                  React.createElement('div', { 
+                    className: 'w-10 h-10 flex items-center justify-center rounded-lg bg-slate-50 text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors shrink-0',
+                    dangerouslySetInnerHTML: { __html: item.icon }
+                  }),
+                  React.createElement('div', { className: 'ml-4 flex-grow' },
+                    React.createElement('div', { className: 'text-[12px] font-bold text-slate-900 uppercase tracking-tight' }, item.title),
+                    React.createElement('div', { className: 'text-[11px] text-slate-400 font-medium' }, item.subtitle)
+                  ),
+                  React.createElement('div', { className: 'ml-auto text-slate-300 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all' },
+                    React.createElement('svg', { className: 'w-4 h-4', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: '3' },
+                      React.createElement('path', { d: 'M9 18l6-6-6-6' })
+                    )
+                  )
+                )
+              )
+            ),
 
-        <a href="https://grey-corner-app.pages.dev/" class="nav-card flex items-center p-5 rounded-2xl animate-fade" style="animation-delay: 0.5s">
-            <div class="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center text-xl mr-4">📅</div>
-            <div>
-                <span class="block font-bold text-slate-800 text-sm tracking-wide">PORTAIL STAFF</span>
-                <span class="text-xs text-slate-500">Planning Bar & Service</span>
-            </div>
-        </a>
+            // Footer
+            React.createElement('footer', { className: 'mt-20 text-center opacity-40 px-6' },
+               React.createElement('p', { className: 'text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500' }, 
+                 `Propriété de Grey Corner © ${new Date().getFullYear()} • Accès Restreint`
+               )
+            )
+          );
+        };
 
-        <a href="https://costfood.pages.dev/" class="nav-card flex items-center p-5 rounded-2xl animate-fade" style="animation-delay: 0.6s">
-            <div class="w-10 h-10 bg-rose-50 rounded-xl flex items-center justify-center text-xl mr-4">📊</div>
-            <div>
-                <span class="block font-bold text-slate-800 text-sm tracking-wide">COST FOOD</span>
-                <span class="text-xs text-slate-500">Analytique & Marges</span>
-            </div>
-        </a>
-
-        <a href="https://depenses-grey-corner.pages.dev/" class="nav-card flex items-center p-5 rounded-2xl animate-fade" style="animation-delay: 0.7s">
-            <div class="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-xl mr-4">💸</div>
-            <div>
-                <span class="block font-bold text-slate-800 text-sm tracking-wide">DÉPENSES</span>
-                <span class="text-xs text-slate-500">Suivi des coûts & Achats</span>
-            </div>
-        </a>
-
-    </div>
-
-    <footer class="mt-12 text-[10px] text-slate-400 uppercase tracking-[2px]">
-        © Grey Corner Management
-    </footer>
-
+        const root = createRoot(document.getElementById('root'));
+        root.render(React.createElement(App));
+    </script>
 </body>
 </html>
