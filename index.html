@@ -2,283 +2,270 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#0f172a">
-    <title>Grey Corner • Executive Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direction - Grey Corner Fêtes</title>
     <style>
         :root {
-            --bg-primary: #0f172a;
+            /* Palette Fêtes "Premium" */
+            --bg-color: #1a0505;         /* Fond très sombre rouge */
+            --card-bg: rgba(30, 30, 30, 0.85); /* Fond semi-transparent */
+            --text-main: #ffffff;
+            --text-muted: #dcdcdc;
+            --accent-gold: #FFD700;      /* Or Jaune Festif */
+            --accent-red: #c0392b;
+            --border-radius: 16px;
         }
-        
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-primary);
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at top, #6e0000 0%, #0f0f0f 80%);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden; /* Pour la neige */
         }
 
-        .font-display {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
+    
 
-        /* Background effects */
-        .blob {
-            position: absolute;
-            width: 80vw;
-            height: 80vw;
+        /* Container principal */
+        .container {
+            width: 100%;
             max-width: 600px;
-            max-height: 600px;
-            background: linear-gradient(180deg, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
-            filter: blur(80px);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 10; /* Au-dessus de la neige */
+            position: relative;
+        }
+
+        /* Style du Logo */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        .logo-img {
+            max-width: 200px;
+            height: auto;
             border-radius: 50%;
-            z-index: -1;
-            animation: move 20s infinite alternate cubic-bezier(0.45, 0, 0.55, 1);
+            border: 3px solid var(--accent-gold);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+            background: #fff;
         }
 
-        .blob-2 {
-            background: linear-gradient(180deg, rgba(244, 63, 94, 0.15) 0%, rgba(251, 146, 60, 0.15) 100%);
-            right: -10%;
-            top: -10%;
-            animation-duration: 25s;
-            animation-delay: -5s;
+        h1 {
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin-top: 15px;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            display: inline-block;
         }
 
-        @keyframes move {
-            from { transform: translate(-5%, -5%) rotate(0deg) scale(1); }
-            to { transform: translate(10%, 15%) rotate(15deg) scale(1.2); }
+        /* Style des Cartes (Boutons) */
+        .nav-link {
+            display: flex;
+            align-items: center;
+            background-color: var(--card-bg);
+            padding: 20px 25px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            color: var(--text-main);
+            border: 1px solid rgba(255, 215, 0, 0.3); /* Bordure dorée subtile */
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        .nav-link:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2); /* Lueur dorée */
+            background-color: rgba(50, 50, 50, 0.9);
         }
 
-        .glass-card:active {
-            transform: scale(0.97);
-            background: rgba(255, 255, 255, 0.1);
+        /* Barre latérale dorée */
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--accent-gold), #b8860b);
         }
 
-        .pulse-live {
-            animation: pulse 2s infinite;
+        /* Icones et Texte */
+        .icon {
+            font-size: 1.8rem;
+            margin-right: 20px;
+            width: 40px;
+            text-align: center;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(0.95); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-            100% { transform: scale(0.95); opacity: 1; }
+        .text-content {
+            display: flex;
+            flex-direction: column;
         }
 
-        @keyframes slideUp {
+        .title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #fff;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: var(--accent-gold); /* Sous-titres dorés */
+            margin-top: 4px;
+            opacity: 0.9;
+        }
+
+        /* Animation d'apparition */
+        @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .animate-item {
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
             opacity: 0;
-            animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
-        /* Enhanced color shadows for mobile depth */
-        .color-shadow-emerald { box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.2); }
-        .color-shadow-blue { box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.2); }
-        .color-shadow-amber { box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.2); }
-        .color-shadow-rose { box-shadow: 0 10px 30px -10px rgba(244, 63, 94, 0.2); }
-        .color-shadow-indigo { box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.2); }
-        .color-shadow-violet { box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.2); }
-        .color-shadow-teal { box-shadow: 0 10px 30px -10px rgba(20, 184, 166, 0.2); }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
 
-        /* Custom scrollbar for clean mobile look */
-        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        footer {
+            margin-top: 50px;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
     </style>
-
-    <script type="importmap">
-    {
-      "imports": {
-        "react": "https://esm.sh/react@19.0.0",
-        "react-dom/client": "https://esm.sh/react-dom@19.0.0/client"
-      }
-    }
-    </script>
 </head>
-<body class="min-h-screen text-white relative antialiased">
-    <div class="blob"></div>
-    <div class="blob blob-2"></div>
-    
-    <div id="root"></div>
+<body>
 
-    <script type="module">
-        import React, { useState, useEffect } from 'react';
-        import { createRoot } from 'react-dom/client';
 
-        const NAV_ITEMS = [
-          {
-            id: 'personnel',
-            title: 'Gestion du Personnel',
-            subtitle: 'RH, Contrats & Accès Staff',
-            href: 'https://personnelgreycorner.pages.dev/',
-            color: 'emerald',
-            category: 'RH',
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`
-          },
-          {
-            id: 'menu-principal',
-            title: 'Menu Principal',
-            subtitle: 'Carte Digitale & Tarifs Officiels',
-            href: 'https://greycorner.pages.dev/',
-            color: 'blue',
-            category: 'OFFRE',
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>`
-          },
-          {
-            id: 'menu-ramadan',
-            title: 'Offres Ramadan',
-            subtitle: 'Menus Spéciaux & Campagnes',
-            href: 'https://ramadan-greycorner.pages.dev/',
-            color: 'amber',
-            category: 'SEASONAL',
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`
-          },
-          {
-            id: 'fiches-techniques',
-            title: 'Fiches Techniques',
-            subtitle: 'Recettes, Coûts & Procédés',
-            href: 'https://fiche-technique.pages.dev/',
-            color: 'rose',
-            category: 'PRODUCTION',
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>`
-          },
-          {
-            id: 'portail-staff',
-            title: 'Portail Opérations',
-            subtitle: 'Coordination & Briefing Staff',
-            href: 'https://grey-corner-app.pages.dev/',
-            color: 'indigo',
-            category: 'FLOW',
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg>`
-          },
-          {
-            id: 'cost-food',
-            title: 'Contrôle Cost Food',
-            subtitle: 'Optimisation des Marges & Pertes',
-            href: 'https://costfood.pages.dev/',
-            color: 'violet',
-            category: 'FINANCE',
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg>`
-          },
-          {
-            id: 'depenses',
-            title: 'Suivi de Trésorerie',
-            subtitle: 'Achats, Factures & Dépenses',
-            href: 'https://depenses-grey-corner.pages.dev/',
-            color: 'teal',
-            category: 'CASHFLOW',
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`
-          }
-        ];
 
-        const COLOR_MAP = {
-          emerald: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20 shadow-emerald-500/20',
-          blue: 'text-blue-400 bg-blue-500/10 border-blue-500/20 shadow-blue-500/20',
-          amber: 'text-amber-400 bg-amber-500/10 border-amber-500/20 shadow-amber-500/20',
-          rose: 'text-rose-400 bg-rose-500/10 border-rose-500/20 shadow-rose-500/20',
-          indigo: 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20 shadow-indigo-500/20',
-          violet: 'text-violet-400 bg-violet-500/10 border-violet-500/20 shadow-violet-500/20',
-          teal: 'text-teal-400 bg-teal-500/10 border-teal-500/20 shadow-teal-500/20',
-        };
+<div class="container">
 
-        const ModuleCard = ({ item, index }) => {
-          const styleClasses = COLOR_MAP[item.color] || COLOR_MAP.indigo;
-          
-          return React.createElement('a', {
-            href: item.href,
-            className: `glass-card group flex items-center p-5 rounded-[1.75rem] animate-item color-shadow-${item.color}`,
-            style: { animationDelay: `${index * 80}ms` }
-          },
-            React.createElement('div', { 
-              className: `w-14 h-14 flex items-center justify-center rounded-2xl shrink-0 ${styleClasses}`,
-              dangerouslySetInnerHTML: { __html: item.icon }
-            }),
-            React.createElement('div', { className: 'ml-5 flex-grow overflow-hidden' },
-              React.createElement('span', { className: 'text-[9px] font-black uppercase tracking-widest text-white/30 mb-0.5 block' }, item.category),
-              React.createElement('h3', { className: 'text-[15px] font-bold text-white leading-tight truncate' }, item.title),
-              React.createElement('p', { className: 'text-[12px] text-white/40 font-medium truncate' }, item.subtitle)
-            ),
-            React.createElement('div', { className: 'ml-3 shrink-0' },
-              React.createElement('svg', { className: 'w-5 h-5 text-white/10 group-active:text-white transition-colors', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: '3' },
-                React.createElement('path', { d: 'M9 18l6-6-6-6', strokeLinecap: 'round', strokeLinejoin: 'round' })
-              )
-            )
-          );
-        };
+    <!-- 1. LOGO -->
+    <div class="logo-container">
+        <img src="LOGO.jpg" alt="Grey Corner Logo" class="logo-img">
+        <br>
+        <h1>Espace Direction</h1>
+    </div>
 
-        const App = () => {
-          const [time, setTime] = useState(new Date());
+    <!-- 2. PERSONNEL -->
+    <a href="https://personnelgreycorner.pages.dev/" class="nav-link fade-in delay-1">
+        <div class="icon">👥</div>
+        <div class="text-content">
+            <span class="title">GESTION DU PERSONNEL</span>
+            <span class="subtitle">Administration staff & accès</span>
+        </div>
+    </a>
 
-          useEffect(() => {
-            const timer = setInterval(() => setTime(new Date()), 1000);
-            return () => clearInterval(timer);
-          }, []);
+    <!-- 3. MENU PRINCIPAL -->
+    <a href="https://greycorner.pages.dev/" class="nav-link fade-in delay-2">
+        <div class="icon">☕</div>
+        <div class="text-content">
+            <span class="title">MENU PRINCIPAL</span>
+            <span class="subtitle">Carte officielle Grey Corner</span>
+        </div>
+    </a>
 
-          return React.createElement('div', { className: 'max-w-xl mx-auto px-5 py-10 md:py-20 relative z-10' },
-            // Header
-            React.createElement('header', { className: 'flex flex-col items-center mb-12 animate-item' },
-              React.createElement('div', { className: 'relative mb-6' },
-                React.createElement('div', { className: 'w-20 h-20 bg-white/10 rounded-[2rem] p-0.5 backdrop-blur-3xl border border-white/20 overflow-hidden shadow-2xl' },
-                  React.createElement('img', { 
-                    src: 'LOGO.jpg', 
-                    alt: 'Logo',
-                    className: 'w-full h-full rounded-[1.85rem] object-cover',
-                    onError: (e) => { e.target.src = 'https://ui-avatars.com/api/?name=GC&background=0f172a&color=fff&bold=true&size=128' }
-                  })
-                ),
-                React.createElement('div', { className: 'absolute -bottom-1 -right-1 bg-emerald-500 px-2 py-0.5 rounded-full flex items-center gap-1.5 shadow-lg border-2 border-[#0f172a]' },
-                  React.createElement('div', { className: 'w-1.5 h-1.5 bg-white rounded-full pulse-live' }),
-                  React.createElement('span', { className: 'text-[8px] font-black text-white uppercase tracking-tighter' }, 'Live')
-                )
-              ),
-              React.createElement('h1', { className: 'text-3xl font-display font-black tracking-tighter text-center' }, 
-                React.createElement('span', { className: 'text-white' }, 'Grey '),
-                React.createElement('span', { className: 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-rose-400 to-amber-400' }, 'Corner')
-              ),
-              React.createElement('p', { className: 'text-white/40 text-[10px] font-bold uppercase tracking-[0.4em] mt-2' }, 'Direction Executive'),
-              
-              React.createElement('div', { className: 'mt-6 bg-white/5 backdrop-blur-md px-5 py-1.5 rounded-full border border-white/10 flex items-center gap-3' },
-                React.createElement('span', { className: 'text-[10px] font-bold text-white/60' }, time.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })),
-                React.createElement('div', { className: 'w-1 h-1 bg-white/20 rounded-full' }),
-                React.createElement('span', { className: 'text-[10px] font-bold text-white/40 uppercase tracking-widest' }, 'Admin Portal')
-              )
-            ),
+    <!-- 4. MENU RAMADAN -->
+    <a href="https://ramadan-greycorner.pages.dev/" class="nav-link fade-in delay-3">
+        <div class="icon">🌙</div>
+        <div class="text-content">
+            <span class="title">MENU RAMADAN</span>
+            <span class="subtitle">Offres spéciales & Ftours</span>
+        </div>
+    </a>
 
-            // Navigation Grid
-            React.createElement('nav', { className: 'space-y-4' },
-              NAV_ITEMS.map((item, idx) => 
-                React.createElement(ModuleCard, { key: item.id, item, index: idx })
-              )
-            ),
+    <!-- 5. FICHE TECHNIQUE -->
+    <a href="https://fiche-technique.pages.dev/" class="nav-link fade-in delay-4">
+        <div class="icon">📋</div>
+        <div class="text-content">
+            <span class="title">FICHES TECHNIQUES</span>
+            <span class="subtitle">Process & Recettes</span>
+        </div>
+    </a>
 
-            // Footer
-            React.createElement('footer', { className: 'mt-20 text-center animate-item', style: { animationDelay: '600ms' } },
-              React.createElement('p', { className: 'text-[9px] font-black uppercase tracking-[0.5em] text-white/20 mb-4' }, '© 2025 Grey Corner • Restricted Access'),
-              React.createElement('div', { className: 'flex justify-center gap-2' },
-                React.createElement('div', { className: 'h-1 w-8 bg-indigo-500/20 rounded-full' }),
-                React.createElement('div', { className: 'h-1 w-12 bg-white/10 rounded-full' }),
-                React.createElement('div', { className: 'h-1 w-8 bg-rose-500/20 rounded-full' })
-              )
-            )
-          );
-        };
+    <!-- 6. PORTAIL STAFF -->
+    <a href="https://grey-corner-app.pages.dev/" class="nav-link fade-in delay-5">
+        <div class="icon">📅</div>
+        <div class="text-content">
+            <span class="title">PORTAIL STAFF</span>
+            <span class="subtitle">Planning Bar & Service</span>
+        </div>
+    </a>
 
-        const root = createRoot(document.getElementById('root'));
-        root.render(React.createElement(App));
-    </script>
+    <!-- 7. COST FOOD -->
+    <a href="https://costfood.pages.dev/" class="nav-link fade-in delay-6">
+        <div class="icon">📊</div>
+        <div class="text-content">
+            <span class="title">COST FOOD</span>
+            <span class="subtitle">Analytique Food Cost & Marges</span>
+        </div>
+    </a>
+
+    <!-- 8. DÉPENSES -->
+    <a href="https://depenses-grey-corner.pages.dev/" class="nav-link fade-in delay-7">
+        <div class="icon">💸</div>
+        <div class="text-content">
+            <span class="title">DÉPENSES</span>
+            <span class="subtitle">Suivi des coûts & Achats</span>
+        </div>
+    </a>
+
+</div>
+
+<footer>
+    © Grey Corner Management • Edition Fêtes
+</footer>
+
+<script>
+    function createSnow() {
+        const container = document.getElementById('snow-container');
+        const flakesCount = 25;
+
+        for (let i = 0; i < flakesCount; i++) {
+            const flake = document.createElement('div');
+            flake.classList.add('snowflake');
+            flake.textContent = '❄';
+            flake.style.left = Math.random() * 100 + 'vw';
+            flake.style.fontSize = (Math.random() * 10 + 8) + 'px';
+            flake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            flake.style.animationDelay = (Math.random() * 5) + 's';
+            container.appendChild(flake);
+        }
+    }
+    createSnow();
+</script>
+
 </body>
 </html>
