@@ -39,7 +39,7 @@
             width: 4px;
         }
 
-        /* Palette de différenciation sobre */
+        /* Palette de différenciation Grey Corner */
         .border-personnel::before { background-color: #3b82f6; } /* Bleu */
         .border-planning::before { background-color: #a855f7; }  /* Violet */
         .border-menu::before { background-color: #10b981; }      /* Vert */
@@ -47,6 +47,7 @@
         .border-tech::before { background-color: #ef4444; }      /* Rouge */
         .border-cost::before { background-color: #06b6d4; }      /* Cyan */
         .border-finance::before { background-color: #64748b; }   /* Slate */
+        .border-google::before { background-color: #fbbf24; }    /* Jaune Google */
 
         .icon-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); }
     </style>
@@ -141,9 +142,26 @@
                     <svg class="w-4 h-4 text-slate-700 group-hover:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="3"></path></svg>
                 </a>
 
+   <a href="https://www.google.com/search?q=Grey+Corner+Fes+avis&lrd=0xd9ecb900657ffa33:0x996f22b4d9407471,1,1" target="_blank" class="animate-card card-pro border-google group flex items-center p-4 rounded-xl" style="animation-delay: 800ms">
+    <div class="w-11 h-11 flex items-center justify-center icon-box rounded-lg mr-4 text-yellow-500">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+    </div>
+    <div class="flex flex-col flex-grow">
+        <div class="flex items-center gap-2">
+            <span class="text-[13px] font-bold text-slate-100 uppercase tracking-wide">Avis Google</span>
+            <span class="text-yellow-500 text-[10px] font-bold">4.8 ★</span>
+        </div>
+        <span class="text-[10px] text-slate-500">Voir les plus récents</span>
+    </div>
+    <svg class="w-4 h-4 text-slate-700 group-hover:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="3"></path></svg>
+</a>
+
             </nav>
 
-            <footer class="mt-16 text-center animate-card" style="animation-delay: 800ms">
+            <footer class="mt-16 text-center animate-card" style="animation-delay: 900ms">
                 <p class="text-slate-700 text-[8px] font-bold uppercase tracking-[0.6em]">Management Secure Link &bull; 2026</p>
             </footer>
 
