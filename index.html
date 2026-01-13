@@ -17,11 +17,6 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
-        }
         .animate-card { animation: fadeIn 0.4s ease-out forwards; opacity: 0; }
         
         .card-pro {
@@ -36,7 +31,6 @@
             border-color: rgba(255,255,255,0.1);
         }
 
-        /* Liseré latéral pour les cartes standards */
         .card-pro::before {
             content: '';
             position: absolute;
@@ -52,27 +46,16 @@
         .border-cost::before { background-color: #06b6d4; }
         .border-finance::before { background-color: #64748b; }
 
-        /* NOUVEAU STYLE : Badge Google "Premium" */
-        .google-pill {
-            background: rgba(251, 191, 36, 0.07);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(251, 191, 36, 0.3);
-            border-radius: 100px; /* Forme pilule */
-            transition: all 0.3s ease;
-        }
-        .google-pill:hover {
-            background: rgba(251, 191, 36, 0.15);
-            border-color: rgba(251, 191, 36, 0.6);
-            transform: translateY(-3px);
-        }
-        .pulse-icon {
-            animation: pulse-gold 2s infinite;
-        }
-
         .icon-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        /* Style spécifique pour le bloc Réputation */
+        .reputation-box {
+            background: linear-gradient(145deg, rgba(251, 191, 36, 0.05) 0%, rgba(129, 140, 248, 0.05) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased text-slate-300">
 
     <div class="flex flex-col items-center py-12 px-6">
         <div class="w-full max-w-[460px]">
@@ -85,71 +68,59 @@
 
             <nav class="flex flex-col gap-3">
                 
-                <a href="https://personnelgreycorner.pages.dev/" class="animate-card card-pro border-personnel group flex items-center p-4 rounded-xl" style="animation-delay: 100ms text-blue-400">
+                <a href="https://personnelgreycorner.pages.dev/" class="animate-card card-pro border-personnel group flex items-center p-4 rounded-xl" style="animation-delay: 100ms">
                     <div class="w-11 h-11 flex items-center justify-center icon-box rounded-lg mr-4 text-blue-400">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </div>
-                    <div class="flex flex-col flex-grow text-left">
-                        <span class="text-[13px] font-bold text-slate-100 uppercase tracking-wide">Gestion RH</span>
-                        <span class="text-[10px] text-slate-500">Contrats & Dossiers Staff</span>
+                    <div class="flex flex-col flex-grow">
+                        <span class="text-[13px] font-bold text-white uppercase tracking-wide">Gestion RH</span>
+                        <span class="text-[10px] text-slate-500 uppercase">Contrats & Staff</span>
                     </div>
                 </a>
 
                 <a href="https://grey-corner-app.pages.dev/" class="animate-card card-pro border-planning group flex items-center p-4 rounded-xl" style="animation-delay: 200ms">
                     <div class="w-11 h-11 flex items-center justify-center icon-box rounded-lg mr-4 text-purple-400">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v12a2 2 0 002 2z"></path></svg>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     </div>
-                    <div class="flex flex-col flex-grow text-left">
-                        <span class="text-[13px] font-bold text-slate-100 uppercase tracking-wide">Plannings Hebdo</span>
-                        <span class="text-[10px] text-slate-500">Bar, Service, Cuisine, Ménage</span>
+                    <div class="flex flex-col flex-grow">
+                        <span class="text-[13px] font-bold text-white uppercase tracking-wide text-purple-200">Plannings Hebdo</span>
+                        <span class="text-[10px] text-slate-500 uppercase">Opérations</span>
                     </div>
                 </a>
 
-                <div class="py-4 flex justify-center animate-card" style="animation-delay: 300ms">
-                    <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1" target="_blank" class="google-pill px-6 py-3 flex items-center gap-4 group">
-                        <div class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-white pulse-icon">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                        </div>
-                        <div class="flex flex-col">
-                            <span class="text-[11px] font-black text-yellow-500 uppercase tracking-[0.2em]">Avis Clients</span>
-                            <span class="text-[13px] font-bold text-white tracking-tight group-hover:text-yellow-200 transition-colors">Voir les plus récents</span>
-                        </div>
-                        <div class="ml-2 text-yellow-500 opacity-50 group-hover:opacity-100 transition-all group-hover:translate-x-1">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 7l5 5-5 5M6 7l5 5-5 5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                        </div>
+                <div class="animate-card reputation-box p-4 rounded-2xl flex flex-col gap-3 my-2" style="animation-delay: 300ms">
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] ml-1">Espace Réputation</span>
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1" target="_blank" class="bg-yellow-500/10 border border-yellow-500/20 p-3 rounded-xl flex flex-col items-center gap-2 hover:bg-yellow-500/20 transition-all group">
+                            <svg class="w-6 h-6 text-yellow-500 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <span class="text-[11px] font-black text-white uppercase">Voir Avis</span>
+                        </a>
+                        <a href="https://gemini.google.com/app?prompt=Agis%20en%20tant%20que%20gérant%20du%20Grey%20Corner%20Fès.%20Rédige%20une%20réponse%20chaleureuse%20et%20cosy%20à%20cet%20avis%20client%20:" target="_blank" class="bg-indigo-500/10 border border-indigo-500/20 p-3 rounded-xl flex flex-col items-center gap-2 hover:bg-indigo-500/20 transition-all group">
+                            <svg class="w-6 h-6 text-indigo-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                            <span class="text-[11px] font-black text-white uppercase tracking-tighter text-center">Générer Réponse</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <a href="https://greycorner.pages.dev/" class="card-pro border-menu p-4 rounded-xl animate-card" style="animation-delay: 400ms">
+                        <span class="text-[12px] font-bold text-white uppercase block mb-1">Carte</span>
+                        <span class="text-[9px] text-emerald-400 uppercase font-medium">Menu Officiel</span>
+                    </a>
+                    <a href="https://ramadan-greycorner.pages.dev/" class="card-pro border-ramadan p-4 rounded-xl animate-card" style="animation-delay: 500ms text-amber-500">
+                        <span class="text-[12px] font-bold text-white uppercase block mb-1">Ramadan</span>
+                        <span class="text-[9px] text-amber-500 uppercase font-medium">Offres Spéciales</span>
                     </a>
                 </div>
 
-                <a href="https://greycorner.pages.dev/" class="animate-card card-pro border-menu group flex items-center p-4 rounded-xl" style="animation-delay: 400ms text-emerald-400">
-                    <div class="w-11 h-11 flex items-center justify-center icon-box rounded-lg mr-4 text-emerald-400">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                    </div>
-                    <div class="flex flex-col flex-grow text-left">
-                        <span class="text-[13px] font-bold text-slate-100 uppercase tracking-wide">Menu Principal</span>
-                        <span class="text-[10px] text-slate-500">Édition Carte</span>
-                    </div>
-                </a>
-
-                <a href="https://ramadan-greycorner.pages.dev/" class="animate-card card-pro border-ramadan group flex items-center p-4 rounded-xl" style="animation-delay: 500ms">
-                    <div class="w-11 h-11 flex items-center justify-center icon-box rounded-lg mr-4 text-amber-400">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                    </div>
-                    <div class="flex flex-col flex-grow text-left">
-                        <span class="text-[13px] font-bold text-slate-100 uppercase tracking-wide">Menu Ramadan</span>
-                        <span class="text-[10px] text-slate-500">Offres & Ftours</span>
-                    </div>
-                </a>
-
                 <div class="grid grid-cols-2 gap-3">
-                    <a href="https://fiche-technique.pages.dev/" class="animate-card card-pro border-tech p-4 rounded-xl" style="animation-delay: 600ms">
-                        <span class="text-[11px] font-bold text-slate-100 uppercase block mb-1 text-left">Recettes</span>
-                        <span class="text-[9px] text-slate-500 block text-left text-red-400">Fiches Tech</span>
+                    <a href="https://fiche-technique.pages.dev/" class="card-pro border-tech p-4 rounded-xl animate-card" style="animation-delay: 600ms">
+                        <span class="text-[11px] font-bold text-white uppercase block mb-1">Fiches Tech</span>
+                        <span class="text-[9px] text-red-500 uppercase font-medium">Standards</span>
                     </a>
-                    <a href="https://costfood.pages.dev/" class="animate-card card-pro border-cost p-4 rounded-xl" style="animation-delay: 700ms">
-                        <span class="text-[11px] font-bold text-slate-100 uppercase block mb-1 text-left">Analytique</span>
-                        <span class="text-[9px] text-slate-500 block text-left text-cyan-400">Food Cost</span>
+                    <a href="https://costfood.pages.dev/" class="card-pro border-cost p-4 rounded-xl animate-card" style="animation-delay: 700ms text-cyan-500">
+                        <span class="text-[11px] font-bold text-white uppercase block mb-1">Analytique</span>
+                        <span class="text-[9px] text-cyan-500 uppercase font-medium">Marge & Profit</span>
                     </a>
                 </div>
 
@@ -158,15 +129,15 @@
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2"></path></svg>
                     </div>
                     <div class="flex flex-col flex-grow text-left">
-                        <span class="text-[13px] font-bold text-slate-100 uppercase tracking-wide text-slate-300">Dépenses</span>
-                        <span class="text-[10px] text-slate-500 uppercase tracking-tighter">Achats & Factures</span>
+                        <span class="text-[13px] font-bold text-white uppercase tracking-wide">Dépenses</span>
+                        <span class="text-[10px] text-slate-500 uppercase">Suivi Achats</span>
                     </div>
                 </a>
 
             </nav>
 
-            <footer class="mt-16 text-center animate-card" style="animation-delay: 900ms">
-                <p class="text-slate-700 text-[8px] font-bold uppercase tracking-[0.6em]">Management Secure Link &bull; 2026</p>
+            <footer class="mt-16 text-center animate-card" style="animation-delay: 900ms text-slate-800">
+                <p class="text-slate-800 text-[8px] font-bold uppercase tracking-[0.6em]">Management Secure Link &bull; 2026</p>
             </footer>
 
         </div>
