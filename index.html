@@ -3,73 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Direction • Grey Corner</title>
+    <title>Direction • Grey Corner Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d0f14;
-            color: #e2e8f0;
+            background: var(--bg-gradient);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #1e293b;
             min-height: 100vh;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
-        }
-        .animate-card { animation: fadeIn 0.4s ease-out forwards; opacity: 0; }
         
-        .card-pro {
-            position: relative;
-            background: #1a1f26;
-            border: 1px solid rgba(255,255,255,0.03);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        .card-vibrant {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
-        .card-pro:hover {
-            transform: translateX(6px);
-            background: #222831;
-            border-color: rgba(255,255,255,0.1);
+        
+        .card-vibrant:hover {
+            transform: translateY(-4px) translateX(4px);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.95);
         }
 
-        /* Liseré latéral pour les cartes standards */
-        .card-pro::before {
+        /* Liseré latéral vibrant */
+        .card-vibrant::before {
             content: '';
             position: absolute;
             left: 0; top: 0; bottom: 0;
-            width: 4px;
+            width: 5px;
+            border-radius: 3px 0 0 3px;
         }
 
-        .border-personnel::before { background-color: #3b82f6; }
-        .border-planning::before { background-color: #a855f7; }
-        .border-menu::before { background-color: #10b981; }
-        .border-ramadan::before { background-color: #f59e0b; }
-        .border-tech::before { background-color: #ef4444; }
-        .border-cost::before { background-color: #06b6d4; }
-        .border-finance::before { background-color: #64748b; }
+        .border-personnel::before { background: linear-gradient(to bottom, #3b82f6, #1d4ed8); }
+        .border-planning::before { background: linear-gradient(to bottom, #a855f7, #7e22ce); }
+        .border-menu::before { background: linear-gradient(to bottom, #10b981, #059669); }
+        .border-ramadan::before { background: linear-gradient(to bottom, #f59e0b, #d97706); }
+        .border-tech::before { background: linear-gradient(to bottom, #ef4444, #b91c1c); }
+        .border-cost::before { background: linear-gradient(to bottom, #06b6d4, #0891b2); }
+        .border-finance::before { background: linear-gradient(to bottom, #64748b, #334155); }
 
-        /* NOUVEAU STYLE : Badge Google "Premium" */
         .google-pill {
-            background: rgba(251, 191, 36, 0.07);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(251, 191, 36, 0.3);
-            border-radius: 100px; /* Forme pilule */
+            background: white;
+            border: 1px solid rgba(251, 191, 36, 0.4);
+            border-radius: 100px;
+            box-shadow: 0 10px 15px -3px rgba(251, 191, 36, 0.1);
             transition: all 0.3s ease;
         }
         .google-pill:hover {
-            background: rgba(251, 191, 36, 0.15);
-            border-color: rgba(251, 191, 36, 0.6);
-            transform: translateY(-3px);
-        }
-        .pulse-icon {
-            animation: pulse-gold 2s infinite;
+            transform: scale(1.03);
+            border-color: #fbbf24;
+            box-shadow: 0 15px 20px -3px rgba(251, 191, 36, 0.2);
         }
 
-        .icon-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-reveal { animation: fadeIn 0.5s ease-out forwards; opacity: 0; }
+        
+        .icon-box { background: #f1f5f9; border: 1px solid rgba(0,0,0,0.05); }
     </style>
 </head>
 <body class="antialiased">
@@ -77,96 +75,96 @@
     <div class="flex flex-col items-center py-12 px-6">
         <div class="w-full max-w-[460px]">
             
-            <header class="text-center mb-10 animate-card" style="animation-delay: 0ms">
-                <img src="LOGO.jpg" alt="Logo" class="w-20 h-20 mx-auto mb-6 rounded-2xl grayscale border border-white/5 shadow-2xl">
-                <h1 class="text-xl font-extrabold tracking-[0.25em] text-white uppercase">Direction Hub</h1>
-                <p class="text-[10px] text-slate-500 uppercase tracking-[0.3em] mt-2 font-medium">Système de Gestion Opérationnelle</p>
+            <header class="text-center mb-12 animate-reveal" style="animation-delay: 0ms">
+                <div class="relative inline-block mb-6">
+                    <div class="absolute inset-0 bg-blue-400/20 blur-2xl rounded-full"></div>
+                    <img src="LOGO.jpg" alt="Logo" class="w-24 h-24 relative rounded-3xl border-4 border-white shadow-2xl bg-white p-1">
+                </div>
+                <h1 class="text-2xl font-black tracking-tight text-slate-800 uppercase">Direction Hub</h1>
+                <p class="text-[10px] text-blue-600 uppercase tracking-[0.4em] mt-2 font-black">Management & Opérations</p>
             </header>
 
-            <nav class="flex flex-col gap-3">
+            <nav class="flex flex-col gap-4">
                 
-                <a href="https://personnelgreycorner.pages.dev/" class="animate-card card-pro border-personnel group flex items-center p-4 rounded-xl" style="animation-delay: 100ms text-blue-400">
-                    <div class="w-11 h-11 flex items-center justify-center icon-box rounded-lg mr-4 text-blue-400">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                <a href="https://personnelgreycorner.pages.dev/" class="animate-reveal card-vibrant border-personnel group flex items-center p-5 rounded-2xl" style="animation-delay: 100ms">
+                    <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </div>
-                    <div class="flex flex-col flex-grow text-left">
-                        <span class="text-[13px] font-bold text-slate-100 uppercase tracking-wide">Gestion RH</span>
-                        <span class="text-[10px] text-slate-500">Contrats & Dossiers Staff</span>
-                    </div>
-                </a>
-
-                <a href="https://grey-corner-app.pages.dev/" class="animate-card card-pro border-planning group flex items-center p-4 rounded-xl" style="animation-delay: 200ms">
-                    <div class="w-11 h-11 flex items-center justify-center icon-box rounded-lg mr-4 text-purple-400">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v12a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <div class="flex flex-col flex-grow text-left">
-                        <span class="text-[13px] font-bold text-slate-100 uppercase tracking-wide">Plannings Hebdo</span>
-                        <span class="text-[10px] text-slate-500">Bar, Service, Cuisine, Ménage</span>
+                    <div class="flex flex-col text-left">
+                        <span class="text-[14px] font-extrabold text-slate-800 uppercase tracking-tight">Gestion RH</span>
+                        <span class="text-[11px] text-slate-500 font-medium">Contrats & Dossiers Staff</span>
                     </div>
                 </a>
 
-                <div class="py-4 flex justify-center animate-card" style="animation-delay: 300ms">
-                    <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1" target="_blank" class="google-pill px-6 py-3 flex items-center gap-4 group">
-                        <div class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-white pulse-icon">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <a href="https://grey-corner-app.pages.dev/" class="animate-reveal card-vibrant border-planning group flex items-center p-5 rounded-2xl" style="animation-delay: 200ms">
+                    <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-purple-600 transition-colors group-hover:bg-purple-600 group-hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <div class="flex flex-col text-left">
+                        <span class="text-[14px] font-extrabold text-slate-800 uppercase tracking-tight">Plannings Hebdo</span>
+                        <span class="text-[11px] text-slate-500 font-medium">Flux Opérationnel</span>
+                    </div>
+                </a>
+
+                <div class="py-4 flex justify-center animate-reveal" style="animation-delay: 300ms">
+                    <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1" target="_blank" class="google-pill px-8 py-4 flex items-center gap-5">
+                        <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white shadow-lg">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                             </svg>
                         </div>
-                        <div class="flex flex-col">
-                            <span class="text-[11px] font-black text-yellow-500 uppercase tracking-[0.2em]">Avis Clients</span>
-                            <span class="text-[13px] font-bold text-white tracking-tight group-hover:text-yellow-200 transition-colors">Voir les plus récents</span>
-                        </div>
-                        <div class="ml-2 text-yellow-500 opacity-50 group-hover:opacity-100 transition-all group-hover:translate-x-1">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 7l5 5-5 5M6 7l5 5-5 5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        <div class="flex flex-col text-left">
+                            <span class="text-[10px] font-black text-yellow-600 uppercase tracking-[0.2em]">Avis Clients</span>
+                            <span class="text-[14px] font-bold text-slate-800 tracking-tight">Réputation Google</span>
                         </div>
                     </a>
                 </div>
 
-                <a href="https://greycorner.pages.dev/" class="animate-card card-pro border-menu group flex items-center p-4 rounded-xl" style="animation-delay: 400ms text-emerald-400">
-                    <div class="w-11 h-11 flex items-center justify-center icon-box rounded-lg mr-4 text-emerald-400">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                <a href="https://greycorner.pages.dev/" class="animate-reveal card-vibrant border-menu group flex items-center p-5 rounded-2xl" style="animation-delay: 400ms">
+                    <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-emerald-600 transition-colors group-hover:bg-emerald-600 group-hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                     </div>
-                    <div class="flex flex-col flex-grow text-left">
-                        <span class="text-[13px] font-bold text-slate-100 uppercase tracking-wide">Menu Principal</span>
-                        <span class="text-[10px] text-slate-500">Édition Carte</span>
-                    </div>
-                </a>
-
-                <a href="https://ramadan-greycorner.pages.dev/" class="animate-card card-pro border-ramadan group flex items-center p-4 rounded-xl" style="animation-delay: 500ms">
-                    <div class="w-11 h-11 flex items-center justify-center icon-box rounded-lg mr-4 text-amber-400">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                    </div>
-                    <div class="flex flex-col flex-grow text-left">
-                        <span class="text-[13px] font-bold text-slate-100 uppercase tracking-wide">Menu Ramadan</span>
-                        <span class="text-[10px] text-slate-500">Offres & Ftours</span>
+                    <div class="flex flex-col text-left">
+                        <span class="text-[14px] font-extrabold text-slate-800 uppercase tracking-tight">Menu Principal</span>
+                        <span class="text-[11px] text-slate-500 font-medium">Édition de la Carte</span>
                     </div>
                 </a>
 
-                <div class="grid grid-cols-2 gap-3">
-                    <a href="https://fiche-technique.pages.dev/" class="animate-card card-pro border-tech p-4 rounded-xl" style="animation-delay: 600ms">
-                        <span class="text-[11px] font-bold text-slate-100 uppercase block mb-1 text-left">Recettes</span>
-                        <span class="text-[9px] text-slate-500 block text-left text-red-400">Fiches Tech</span>
+                <a href="https://ramadan-greycorner.pages.dev/" class="animate-reveal card-vibrant border-ramadan group flex items-center p-5 rounded-2xl" style="animation-delay: 500ms">
+                    <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-amber-500 transition-colors group-hover:bg-amber-500 group-hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </div>
+                    <div class="flex flex-col text-left">
+                        <span class="text-[14px] font-extrabold text-slate-800 uppercase tracking-tight">Menu Ramadan</span>
+                        <span class="text-[11px] text-slate-500 font-medium">Saisonnier & Ftours</span>
+                    </div>
+                </a>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <a href="https://fiche-technique.pages.dev/" class="animate-reveal card-vibrant border-tech p-5 rounded-2xl relative overflow-hidden" style="animation-delay: 600ms">
+                        <span class="text-[12px] font-black text-slate-800 uppercase block mb-1">Recettes</span>
+                        <span class="text-[10px] text-red-600 font-bold uppercase tracking-wider">Fiches Tech</span>
                     </a>
-                    <a href="https://costfood.pages.dev/" class="animate-card card-pro border-cost p-4 rounded-xl" style="animation-delay: 700ms">
-                        <span class="text-[11px] font-bold text-slate-100 uppercase block mb-1 text-left">Analytique</span>
-                        <span class="text-[9px] text-slate-500 block text-left text-cyan-400">Food Cost</span>
+                    <a href="https://costfood.pages.dev/" class="animate-reveal card-vibrant border-cost p-5 rounded-2xl relative overflow-hidden" style="animation-delay: 700ms">
+                        <span class="text-[12px] font-black text-slate-800 uppercase block mb-1">Analytique</span>
+                        <span class="text-[10px] text-cyan-600 font-bold uppercase tracking-wider">Food Cost</span>
                     </a>
                 </div>
 
-                <a href="https://depenses-grey-corner.pages.dev/" class="animate-card card-pro border-finance group flex items-center p-4 rounded-xl" style="animation-delay: 800ms">
-                    <div class="w-11 h-11 flex items-center justify-center icon-box rounded-lg mr-4 text-slate-400">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2"></path></svg>
+                <a href="https://depenses-grey-corner.pages.dev/" class="animate-reveal card-vibrant border-finance group flex items-center p-5 rounded-2xl" style="animation-delay: 800ms">
+                    <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-slate-500 transition-colors group-hover:bg-slate-700 group-hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2"></path></svg>
                     </div>
-                    <div class="flex flex-col flex-grow text-left">
-                        <span class="text-[13px] font-bold text-slate-100 uppercase tracking-wide text-slate-300">Dépenses</span>
-                        <span class="text-[10px] text-slate-500 uppercase tracking-tighter">Achats & Factures</span>
+                    <div class="flex flex-col text-left">
+                        <span class="text-[14px] font-extrabold text-slate-800 uppercase tracking-tight">Comptabilité</span>
+                        <span class="text-[11px] text-slate-500 font-medium">Achats & Facturation</span>
                     </div>
                 </a>
 
             </nav>
 
-            <footer class="mt-16 text-center animate-card" style="animation-delay: 900ms">
-                <p class="text-slate-700 text-[8px] font-bold uppercase tracking-[0.6em]">Management Secure Link &bull; 2026</p>
+            <footer class="mt-16 text-center animate-reveal" style="animation-delay: 900ms">
+                <p class="text-slate-400 text-[9px] font-black uppercase tracking-[0.5em]">Management Hub &bull; Excellence 2026</p>
             </footer>
 
         </div>
