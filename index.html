@@ -23,6 +23,7 @@
             border: 1px solid rgba(255, 255, 255, 0.5);
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            position: relative;
         }
         
         .card-vibrant:hover {
@@ -31,7 +32,6 @@
             background: rgba(255, 255, 255, 0.95);
         }
 
-        /* Liseré latéral vibrant */
         .card-vibrant::before {
             content: '';
             position: absolute;
@@ -42,10 +42,11 @@
 
         .border-personnel::before { background: linear-gradient(to bottom, #3b82f6, #1d4ed8); }
         .border-planning::before { background: linear-gradient(to bottom, #a855f7, #7e22ce); }
-        .border-menu::before { background: linear-gradient(to bottom, #10b981, #059669); }
+        .border-live::before { background: linear-gradient(to bottom, #10b981, #059669); } /* Nouveau */
+        .border-menu::before { background: linear-gradient(to bottom, #06b6d4, #0891b2); }
         .border-ramadan::before { background: linear-gradient(to bottom, #f59e0b, #d97706); }
         .border-tech::before { background: linear-gradient(to bottom, #ef4444, #b91c1c); }
-        .border-cost::before { background: linear-gradient(to bottom, #06b6d4, #0891b2); }
+        .border-cost::before { background: linear-gradient(to bottom, #6366f1, #4338ca); }
         .border-finance::before { background: linear-gradient(to bottom, #64748b, #334155); }
 
         .google-pill {
@@ -66,7 +67,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .animate-reveal { animation: fadeIn 0.5s ease-out forwards; opacity: 0; }
-        
         .icon-box { background: #f1f5f9; border: 1px solid rgba(0,0,0,0.05); }
     </style>
 </head>
@@ -106,6 +106,16 @@
                     </div>
                 </a>
 
+                <a href="https://dashboard-presence.pages.dev/" class="animate-reveal card-vibrant border-live group flex items-center p-5 rounded-2xl" style="animation-delay: 250ms">
+                    <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-emerald-600 transition-colors group-hover:bg-emerald-600 group-hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div class="flex flex-col text-left">
+                        <span class="text-[14px] font-extrabold text-slate-800 uppercase tracking-tight text-emerald-700">Supervision Live</span>
+                        <span class="text-[11px] text-slate-500 font-medium">Présences & Ponctualité</span>
+                    </div>
+                </a>
+
                 <div class="py-4 flex justify-center animate-reveal" style="animation-delay: 300ms">
                     <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1" target="_blank" class="google-pill px-8 py-4 flex items-center gap-5">
                         <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white shadow-lg">
@@ -121,7 +131,7 @@
                 </div>
 
                 <a href="https://greycorner.pages.dev/" class="animate-reveal card-vibrant border-menu group flex items-center p-5 rounded-2xl" style="animation-delay: 400ms">
-                    <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-emerald-600 transition-colors group-hover:bg-emerald-600 group-hover:text-white">
+                    <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-cyan-600 transition-colors group-hover:bg-cyan-600 group-hover:text-white">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                     </div>
                     <div class="flex flex-col text-left">
@@ -147,7 +157,7 @@
                     </a>
                     <a href="https://costfood.pages.dev/" class="animate-reveal card-vibrant border-cost p-5 rounded-2xl relative overflow-hidden" style="animation-delay: 700ms">
                         <span class="text-[12px] font-black text-slate-800 uppercase block mb-1">Analytique</span>
-                        <span class="text-[10px] text-cyan-600 font-bold uppercase tracking-wider">Food Cost</span>
+                        <span class="text-[10px] text-indigo-600 font-bold uppercase tracking-wider">Food Cost</span>
                     </a>
                 </div>
 
