@@ -42,12 +42,32 @@
 
         .border-personnel::before { background: linear-gradient(to bottom, #3b82f6, #1d4ed8); }
         .border-planning::before { background: linear-gradient(to bottom, #a855f7, #7e22ce); }
-        .border-live::before { background: linear-gradient(to bottom, #10b981, #059669); } /* Nouveau */
+        .border-live::before { background: linear-gradient(to bottom, #10b981, #059669); }
         .border-menu::before { background: linear-gradient(to bottom, #06b6d4, #0891b2); }
         .border-ramadan::before { background: linear-gradient(to bottom, #f59e0b, #d97706); }
         .border-tech::before { background: linear-gradient(to bottom, #ef4444, #b91c1c); }
         .border-cost::before { background: linear-gradient(to bottom, #6366f1, #4338ca); }
         .border-finance::before { background: linear-gradient(to bottom, #64748b, #334155); }
+
+        /* Animation Point Live */
+        .status-ping {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            height: 8px;
+            width: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+        }
+        .status-ping::after {
+            content: '';
+            position: absolute;
+            width: 100%; height: 100%;
+            background-color: #10b981;
+            border-radius: 50%;
+            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+        @keyframes ping { 75%, 100% { transform: scale(3); opacity: 0; } }
 
         .google-pill {
             background: white;
@@ -107,6 +127,7 @@
                 </a>
 
                 <a href="https://dashboard-presence.pages.dev/" class="animate-reveal card-vibrant border-live group flex items-center p-5 rounded-2xl" style="animation-delay: 250ms">
+                    <span class="status-ping"></span>
                     <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-emerald-600 transition-colors group-hover:bg-emerald-600 group-hover:text-white">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
@@ -117,14 +138,17 @@
                 </a>
 
                 <div class="py-4 flex justify-center animate-reveal" style="animation-delay: 300ms">
-                    <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1" target="_blank" class="google-pill px-8 py-4 flex items-center gap-5">
+                    <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1" target="_blank" class="google-pill px-8 py-4 flex items-center gap-5 relative">
                         <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white shadow-lg">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                             </svg>
                         </div>
                         <div class="flex flex-col text-left">
-                            <span class="text-[10px] font-black text-yellow-600 uppercase tracking-[0.2em]">Avis Clients</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] font-black text-yellow-600 uppercase tracking-[0.2em]">Avis Clients</span>
+                                <span class="bg-yellow-100 text-yellow-700 text-[9px] px-2 py-0.5 rounded-full font-bold">★ 4.8/5</span>
+                            </div>
                             <span class="text-[14px] font-bold text-slate-800 tracking-tight">Réputation Google</span>
                         </div>
                     </a>
