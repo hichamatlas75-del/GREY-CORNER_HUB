@@ -13,14 +13,12 @@
             --night: #0f172a;
         }
         body {
-            /* Dégradé Nuit Profonde */
             background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
             font-family: 'Plus Jakarta Sans', sans-serif;
             color: #f8fafc;
             min-height: 100vh;
         }
         
-        /* Effet Verre Sombre Ramadan */
         .card-ramadan {
             background: rgba(30, 41, 59, 0.4);
             backdrop-filter: blur(16px);
@@ -45,7 +43,6 @@
             opacity: 0.8;
         }
 
-        /* Bordures colorées avec lueur */
         .border-personnel::before { background: #3b82f6; box-shadow: 2px 0 10px #3b82f6; }
         .border-planning::before { background: #a855f7; box-shadow: 2px 0 10px #a855f7; }
         .border-live::before { background: #10b981; box-shadow: 2px 0 10px #10b981; }
@@ -54,6 +51,9 @@
         .border-tech::before { background: #ef4444; box-shadow: 2px 0 10px #ef4444; }
         .border-cost::before { background: #6366f1; box-shadow: 2px 0 10px #6366f1; }
         .border-finance::before { background: #94a3b8; box-shadow: 2px 0 10px #94a3b8; }
+        /* Nouvelles bordures pour présence/pointage */
+        .border-presence::before { background: #14b8a6; box-shadow: 2px 0 10px #14b8a6; }
+        .border-pointage::before { background: #f59e0b; box-shadow: 2px 0 10px #f59e0b; }
 
         .status-ping {
             position: absolute;
@@ -90,10 +90,8 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .animate-reveal { animation: fadeIn 0.6s ease-out forwards; opacity: 0; }
-
         .icon-box { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
         
-        /* Motif d'étoiles discret */
         .stars {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -112,7 +110,6 @@
             
             <header class="text-center mb-12 animate-reveal" style="animation-delay: 0ms">
                 <div class="relative inline-block mb-6">
-                    <!-- Décoration Croissant -->
                     <div class="absolute -top-4 -right-4 text-amber-400 text-2xl opacity-80 rotate-12">🌙</div>
                     <img src="LOGO.jpg" alt="Logo" class="w-24 h-24 relative rounded-full border-4 border-amber-400 shadow-[0_0_30px_rgba(251,191,36,0.2)] bg-white p-1">
                 </div>
@@ -126,7 +123,6 @@
 
             <nav class="flex flex-col gap-4">
                 
-                <!-- GESTION RH -->
                 <a href="https://personnelgreycorner.pages.dev/" class="animate-reveal card-ramadan border-personnel group flex items-center p-5 rounded-2xl" style="animation-delay: 100ms">
                     <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-blue-400 transition-all group-hover:bg-blue-500 group-hover:text-white">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -137,7 +133,6 @@
                     </div>
                 </a>
 
-                <!-- PLANNINGS -->
                 <a href="https://grey-corner-app.pages.dev/" class="animate-reveal card-ramadan border-planning group flex items-center p-5 rounded-2xl" style="animation-delay: 200ms">
                     <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-purple-400 transition-all group-hover:bg-purple-500 group-hover:text-white">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v12a2 2 0 002 2z"></path></svg>
@@ -148,7 +143,6 @@
                     </div>
                 </a>
 
-                <!-- LIVE SUPERVISION -->
                 <a href="https://dashboard-presence.pages.dev/" class="animate-reveal card-ramadan border-live group flex items-center p-5 rounded-2xl" style="animation-delay: 250ms">
                     <span class="status-ping"></span>
                     <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-emerald-400 transition-all group-hover:bg-emerald-500 group-hover:text-white">
@@ -156,12 +150,22 @@
                     </div>
                     <div class="flex flex-col text-left">
                         <span class="text-[14px] font-extrabold text-emerald-400 uppercase tracking-tight">Supervision Live</span>
-                        <span class="text-[11px] text-slate-400 font-medium">Présences & Ponctualité</span>
+                        <span class="text-[11px] text-slate-400 font-medium">Tableau de Bord Temps Réel</span>
                     </div>
                 </a>
 
-                <!-- RECO GOOGLE -->
-                <div class="py-4 flex justify-center animate-reveal" style="animation-delay: 300ms">
+                <div class="grid grid-cols-2 gap-4">
+                    <a href="https://feuille-de-presence.pages.dev/" class="animate-reveal card-ramadan border-presence p-5 rounded-2xl" style="animation-delay: 300ms">
+                        <span class="text-[12px] font-black text-white uppercase block mb-1">Présence</span>
+                        <span class="text-[10px] text-teal-400 font-bold uppercase tracking-wider">Feuille Digitale</span>
+                    </a>
+                    <a href="https://pointage-greycorner.pages.dev/" class="animate-reveal card-ramadan border-pointage p-5 rounded-2xl" style="animation-delay: 350ms">
+                        <span class="text-[12px] font-black text-white uppercase block mb-1">Pointage</span>
+                        <span class="text-[10px] text-amber-500 font-bold uppercase tracking-wider">Entrées/Sorties</span>
+                    </a>
+                </div>
+
+                <div class="py-4 flex justify-center animate-reveal" style="animation-delay: 400ms">
                     <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1" target="_blank" class="google-pill px-8 py-4 flex items-center gap-5">
                         <div class="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center text-white shadow-[0_0_15px_rgba(245,158,11,0.4)]">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -178,8 +182,7 @@
                     </a>
                 </div>
 
-                <!-- MENU PRINCIPAL -->
-                <a href="https://greycorner.pages.dev/" class="animate-reveal card-ramadan border-menu group flex items-center p-5 rounded-2xl" style="animation-delay: 400ms">
+                <a href="https://greycorner.pages.dev/" class="animate-reveal card-ramadan border-menu group flex items-center p-5 rounded-2xl" style="animation-delay: 450ms">
                     <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-cyan-400 transition-all group-hover:bg-cyan-500 group-hover:text-white">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                     </div>
@@ -189,7 +192,6 @@
                     </div>
                 </a>
 
-                <!-- FOCUS RAMADAN -->
                 <a href="https://ramadan-greycorner.pages.dev/" class="animate-reveal card-ramadan border-ramadan group flex items-center p-5 rounded-2xl bg-amber-400/5" style="animation-delay: 500ms">
                     <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-amber-400 transition-all group-hover:bg-amber-500 group-hover:text-white shadow-[0_0_15px_rgba(251,191,36,0.1)]">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -200,19 +202,17 @@
                     </div>
                 </a>
 
-                <!-- PETITS BOUTONS ANALYTIQUES -->
                 <div class="grid grid-cols-2 gap-4">
-                    <a href="https://fiche-technique.pages.dev/" class="animate-reveal card-ramadan border-tech p-5 rounded-2xl relative" style="animation-delay: 600ms">
+                    <a href="https://fiche-technique.pages.dev/" class="animate-reveal card-ramadan border-tech p-5 rounded-2xl" style="animation-delay: 600ms">
                         <span class="text-[12px] font-black text-white uppercase block mb-1">Recettes</span>
                         <span class="text-[10px] text-red-400 font-bold uppercase tracking-wider">Fiches Tech</span>
                     </a>
-                    <a href="https://costfood.pages.dev/" class="animate-reveal card-ramadan border-cost p-5 rounded-2xl relative" style="animation-delay: 700ms">
+                    <a href="https://costfood.pages.dev/" class="animate-reveal card-ramadan border-cost p-5 rounded-2xl" style="animation-delay: 700ms">
                         <span class="text-[12px] font-black text-white uppercase block mb-1">Analytique</span>
                         <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-wider">Food Cost</span>
                     </a>
                 </div>
 
-                <!-- COMPTABILITÉ -->
                 <a href="https://depenses-grey-corner.pages.dev/" class="animate-reveal card-ramadan border-finance group flex items-center p-5 rounded-2xl" style="animation-delay: 800ms">
                     <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-slate-400 transition-all group-hover:bg-slate-400 group-hover:text-slate-900">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2"></path></svg>
