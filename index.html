@@ -10,7 +10,6 @@
 
   <style>
     :root{
-      /* Theme (refonte) */
       --bg0:#070A12;
       --bg1:#0B1326;
       --surface: rgba(255,255,255,.06);
@@ -20,7 +19,6 @@
       --text:#F8FAFC;
       --muted: rgba(226,232,240,.72);
 
-      /* Accents */
       --a-gold:#FBBF24;
       --a-emerald:#34D399;
       --a-sky:#60A5FA;
@@ -47,7 +45,6 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* Safe areas */
     .safe{
       padding-left: max(16px, env(safe-area-inset-left));
       padding-right: max(16px, env(safe-area-inset-right));
@@ -56,7 +53,6 @@
       padding-bottom: max(14px, env(safe-area-inset-bottom));
     }
 
-    /* Glass surface */
     .glass{
       background: linear-gradient(180deg, var(--surface2), var(--surface));
       border: 1px solid var(--stroke);
@@ -64,7 +60,6 @@
       -webkit-backdrop-filter: blur(14px);
     }
 
-    /* Header card */
     .hero{
       border-radius: calc(var(--r) + 6px);
       box-shadow:
@@ -86,7 +81,6 @@
 
     .muted{ color: var(--muted); }
 
-    /* NEW BANNER (changer bannière) */
     .banner{
       position: relative;
       border-radius: var(--r);
@@ -97,7 +91,6 @@
     .banner:active{ transform: scale(.988); }
 
     .banner::before{
-      /* subtle pattern */
       content:"";
       position:absolute; inset:0;
       background:
@@ -107,9 +100,7 @@
       opacity:.9;
       pointer-events:none;
     }
-
     .banner::after{
-      /* gradient border glow */
       content:"";
       position:absolute; inset:-1px;
       border-radius: calc(var(--r) + 1px);
@@ -165,7 +156,6 @@
       flex:0 0 auto;
     }
 
-    /* Small tiles */
     .tile{
       position:relative;
       border-radius: var(--r);
@@ -200,7 +190,6 @@
       margin-bottom: 10px;
     }
 
-    /* Live dot */
     .dot{
       width:10px;height:10px;border-radius:999px;
       background: var(--a-emerald);
@@ -220,7 +209,6 @@
       100%{ transform: scale(1.25); opacity:0; }
     }
 
-    /* Floating footer dock */
     .dock{
       position: fixed;
       left: 0; right: 0; bottom: 0;
@@ -246,12 +234,12 @@
     }
     .dock a{
       border-radius: 16px;
-      padding: 10px 12px;
+      padding: 10px 10px;
       display:flex;
       flex-direction:column;
       align-items:center;
       gap:6px;
-      min-width: 82px;
+      min-width: 74px;
       border: 1px solid transparent;
       transition: transform .14s ease, background .14s ease, border-color .14s ease;
       position:relative;
@@ -265,7 +253,7 @@
       background: rgba(255,255,255,.06);
       display:grid; place-items:center;
     }
-    .dock-spacer{ height: 120px; }
+    .dock-spacer{ height: 128px; }
 
     @media (prefers-reduced-motion: reduce){
       .dot::after{ animation:none; }
@@ -311,31 +299,9 @@
       </div>
     </section>
 
-    <!-- BANNIÈRES LONGUES -->
+    <!-- BANNIÈRES LONGUES (SANS AVIS ICI) -->
     <section class="grid grid-cols-1 gap-3">
-      <!-- Avis Google (longue) -->
-      <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1"
-         class="banner glass" style="--accent: var(--a-gold);">
-        <div class="banner-inner">
-          <div class="flex items-center gap-4 flex-1 min-w-0">
-            <div class="icon" style="color: var(--a-gold);">
-              <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-            </div>
-            <div class="min-w-0">
-              <div class="flex items-center gap-2">
-                <span class="text-[13px] font-extrabold">Avis Google</span>
-                <span class="pill" style="border-color: rgba(251,191,36,.35); color:#FDE68A;">★ 4.8</span>
-              </div>
-              <div class="muted text-[11px] mt-0.5 truncate">Réputation & avis clients</div>
-            </div>
-          </div>
-          <span class="chev" style="color: var(--a-gold);">→</span>
-        </div>
-      </a>
-
-      <!-- Gestion RH (longue) -->
+      <!-- Gestion RH -->
       <a href="https://personnelgreycorner.pages.dev/"
          class="banner glass" style="--accent: var(--a-sky);">
         <div class="banner-inner">
@@ -355,7 +321,7 @@
         </div>
       </a>
 
-      <!-- Menu (longue) -->
+      <!-- Menu -->
       <a href="https://greycorner.pages.dev/"
          class="banner glass" style="--accent: var(--a-cyan);">
         <div class="banner-inner">
@@ -375,7 +341,7 @@
         </div>
       </a>
 
-      <!-- Menu Ramadan (longue) -->
+      <!-- Menu Ramadan -->
       <a href="https://ramadan-greycorner.pages.dev/"
          class="banner glass" style="--accent: var(--a-amber);">
         <div class="banner-inner">
@@ -396,7 +362,7 @@
       </a>
     </section>
 
-    <!-- Présence / Pointage (courtes) -->
+    <!-- Présence / Pointage -->
     <section class="mt-5 grid grid-cols-2 gap-3">
       <a href="https://feuille-de-presence.pages.dev/" class="tile glass">
         <div class="tile-inner">
@@ -431,7 +397,7 @@
       </a>
     </section>
 
-    <!-- Fiche technique + Food cost (bannières courtes) -->
+    <!-- Fiche technique + Food cost -->
     <section class="mt-5 grid grid-cols-2 gap-3">
       <a href="https://fiche-technique.pages.dev/" class="tile glass">
         <div class="tile-inner">
@@ -466,7 +432,7 @@
       </a>
     </section>
 
-    <!-- Comptabilité (bannière longue, dernier) -->
+    <!-- Comptabilité -->
     <section class="mt-3">
       <a href="https://depenses-grey-corner.pages.dev/"
          class="banner glass" style="--accent: var(--a-slate);">
@@ -488,14 +454,23 @@
       </a>
     </section>
 
-    <!-- Spacer for floating footer -->
     <div class="dock-spacer"></div>
   </main>
 
-  <!-- Footer flottant: Supervision Live, Menu, Planning -->
+  <!-- Footer flottant: Avis, Live, Menu, Planning -->
   <div class="dock safe safe-bottom pb-4">
     <div class="glass dock-inner">
       <div class="relative flex items-center justify-between gap-2">
+        <!-- Avis -->
+        <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1">
+          <div class="dock-ico" style="color: var(--a-gold);">
+            <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <div class="text-[10px] font-extrabold muted">Avis</div>
+        </a>
+
         <!-- Live -->
         <a href="https://dashboard-presence.pages.dev/">
           <div class="dock-ico" style="color: var(--a-emerald);">
