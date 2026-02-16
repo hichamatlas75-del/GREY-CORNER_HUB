@@ -1,60 +1,434 @@
-<!-- Updated order: Google Avis → RH → Planning → Supervision (long banners) → Presence/Pointage → Menu/Menu Ramadan → Recettes/FoodCost/Compta -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-<title>Grey Corner Hub</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-<style>
-body{font-family:'Plus Jakarta Sans',sans-serif;background:#0b1223;color:#f8fafc}
-.glass{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(14px);border-radius:18px}
-.tile{padding:16px;display:flex;align-items:center;justify-content:space-between}
-.tile:active{transform:scale(.98)}
-.muted{color:#cbd5e1}
-.section{display:grid;gap:12px;margin-top:14px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.icon{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Direction • Grey Corner Mobile Hub</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg0:#070A12;
+      --bg1:#0B1223;
+      --card: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.10);
+      --muted: rgba(226,232,240,.68);
+      --text: #F8FAFC;
+
+      --c-rh:#60A5FA;
+      --c-plan:#C084FC;
+      --c-live:#34D399;
+      --c-pres:#2DD4BF;
+      --c-point:#FBBF24;
+      --c-menu:#22D3EE;
+      --c-ram:#F59E0B;
+      --c-rec:#FB7185;
+      --c-cost:#818CF8;
+      --c-fin:#94A3B8;
+
+      --radius: 20px;
+    }
+
+    html,body{
+      height:100%;
+      font-family:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1200px 700px at 20% -10%, rgba(34,211,238,.14), transparent 60%),
+        radial-gradient(900px 600px at 110% 10%, rgba(251,191,36,.14), transparent 55%),
+        radial-gradient(800px 600px at 40% 120%, rgba(192,132,252,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg0));
+      color:var(--text);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Safe areas iPhone */
+    .safe{
+      padding-left: max(16px, env(safe-area-inset-left));
+      padding-right: max(16px, env(safe-area-inset-right));
+    }
+    .safe-bottom{
+      padding-bottom: max(14px, env(safe-area-inset-bottom));
+    }
+
+    /* Glass */
+    .glass{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* Header glow */
+    .glow{
+      box-shadow:
+        0 18px 50px rgba(0,0,0,.45),
+        0 0 0 1px rgba(255,255,255,.06) inset;
+    }
+
+    /* Tile */
+    .tile{
+      position:relative;
+      border-radius: var(--radius);
+      overflow:hidden;
+      transform: translateZ(0);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .tile:active{ transform: scale(.985); }
+
+    .tile::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(220px 120px at 20% 20%, rgba(255,255,255,.10), transparent 60%),
+        radial-gradient(180px 140px at 90% 30%, rgba(255,255,255,.06), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+
+    .accent{
+      position:absolute;
+      inset: 0;
+      opacity:.22;
+      filter: blur(18px);
+      transform: translateZ(0);
+      pointer-events:none;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      white-space: nowrap;
+    }
+
+    .muted{ color: var(--muted); }
+
+    /* Live dot */
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: var(--c-live);
+      box-shadow: 0 0 0 6px rgba(52,211,153,.10);
+      position:relative;
+    }
+    .dot::after{
+      content:"";
+      position:absolute; inset:-6px;
+      border-radius:999px;
+      border:1px solid rgba(52,211,153,.35);
+      animation: pulse 1.6s infinite;
+    }
+    @keyframes pulse{
+      0%{ transform: scale(.65); opacity:.9; }
+      100%{ transform: scale(1.25); opacity:0; }
+    }
+
+    .icon{
+      width: 34px; height: 34px;
+      display:grid; place-items:center;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      flex: 0 0 auto;
+    }
+
+    /* Long banner layout */
+    .banner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:16px;
+    }
+
+    .arrow{
+      font-weight: 900;
+      font-size: 14px;
+      opacity: .9;
+      flex: 0 0 auto;
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .dot::after{ animation:none; }
+      .tile{ transition:none; }
+    }
+  </style>
 </head>
-<body class="p-4 max-w-[560px] mx-auto">
 
-<!-- LONG BANNERS -->
-<div class="section">
+<body>
+  <main class="safe max-w-[560px] mx-auto">
+    <!-- Header -->
+    <section class="pt-8 pb-5">
+      <div class="glass glow rounded-[26px] p-5">
+        <div class="flex items-center gap-4">
+          <div class="relative">
+            <div class="absolute -inset-2 rounded-full opacity-40"
+                 style="background: radial-gradient(circle at 30% 30%, rgba(251,191,36,.35), transparent 60%);"></div>
+            <img src="LOGO.jpg" alt="Logo Grey Corner"
+                 class="relative w-16 h-16 rounded-full border border-white/15 bg-white p-1" />
+          </div>
 
-<a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1" class="glass tile">
-<span class="font-bold">Avis Google</span><span class="muted">Réputation →</span></a>
+          <div class="flex-1">
+            <div class="flex items-center justify-between gap-3">
+              <h1 class="text-[16px] font-extrabold tracking-wide uppercase">Management Hub</h1>
+              <span class="chip text-[11px] font-bold">
+                <span class="text-amber-300">🌙</span>
+                <span class="muted">Ramadan 2026</span>
+              </span>
+            </div>
+            <p class="muted text-[12px] mt-1 leading-snug">
+              Accès rapide aux outils Grey Corner — mobile
+            </p>
 
-<a href="https://personnelgreycorner.pages.dev/" class="glass tile">
-<span class="font-bold">Gestion RH</span><span class="muted">Staff →</span></a>
+            <div class="flex items-center gap-2 mt-3">
+              <div class="dot" aria-hidden="true"></div>
+              <span class="text-[12px] font-semibold text-emerald-200">Live prêt</span>
+              <span class="muted text-[12px]">•</span>
+              <span class="muted text-[12px]">Fès</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<a href="https://grey-corner-app.pages.dev/" class="glass tile">
-<span class="font-bold">Planning</span><span class="muted">Hebdo →</span></a>
+    <!-- LONG BANNERS (ordre demandé) -->
+    <section class="grid grid-cols-1 gap-3">
+      <!-- Avis Google -->
+      <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1"
+         class="tile glass banner">
+        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(251,191,36,.95), transparent 60%);"></div>
+        <div class="relative flex items-center gap-4 flex-1 min-w-0">
+          <div class="icon" style="color: var(--c-point);">
+            <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-[13px] font-extrabold">Avis Google</span>
+              <span class="chip text-[10px] font-extrabold" style="border-color: rgba(251,191,36,.35); color:#FDE68A; padding:6px 10px;">
+                ★ 4.8
+              </span>
+            </div>
+            <div class="muted text-[11px] mt-0.5 truncate">Réputation & avis clients</div>
+          </div>
+        </div>
+        <span class="arrow" style="color: var(--c-point);">→</span>
+      </a>
 
-<a href="https://dashboard-presence.pages.dev/" class="glass tile">
-<span class="font-bold">Supervision</span><span class="muted">Live →</span></a>
+      <!-- Gestion RH -->
+      <a href="https://personnelgreycorner.pages.dev/"
+         class="tile glass banner">
+        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(96,165,250,.95), transparent 60%);"></div>
+        <div class="relative flex items-center gap-4 flex-1 min-w-0">
+          <div class="icon" style="color: var(--c-rh);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <div class="text-[13px] font-extrabold">Gestion RH</div>
+            <div class="muted text-[11px] mt-0.5 truncate">Contrats • staff • dossiers</div>
+          </div>
+        </div>
+        <span class="arrow" style="color: var(--c-rh);">→</span>
+      </a>
 
-</div>
+      <!-- Planning -->
+      <a href="https://grey-corner-app.pages.dev/"
+         class="tile glass banner">
+        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(192,132,252,.95), transparent 60%);"></div>
+        <div class="relative flex items-center gap-4 flex-1 min-w-0">
+          <div class="icon" style="color: var(--c-plan);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <div class="text-[13px] font-extrabold">Planning</div>
+            <div class="muted text-[11px] mt-0.5 truncate">Plannings hebdo • Ramadan</div>
+          </div>
+        </div>
+        <span class="arrow" style="color: var(--c-plan);">→</span>
+      </a>
 
-<!-- PRESENCE POINTAGE -->
-<div class="grid2 mt-4">
-<a href="https://feuille-de-presence.pages.dev/" class="glass tile"><span>Présence</span><span>→</span></a>
-<a href="https://pointage-greycorner.pages.dev/" class="glass tile"><span>Pointage</span><span>→</span></a>
-</div>
+      <!-- Supervision -->
+      <a href="https://dashboard-presence.pages.dev/"
+         class="tile glass banner">
+        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(52,211,153,.9), transparent 60%);"></div>
+        <div class="relative flex items-center gap-4 flex-1 min-w-0">
+          <div class="icon" style="color: var(--c-live);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-[13px] font-extrabold">Supervision</span>
+              <span class="chip text-[10px] font-extrabold" style="border-color: rgba(52,211,153,.35); padding:6px 10px;">
+                <span class="dot" style="width:8px;height:8px;box-shadow:none;"></span> LIVE
+              </span>
+            </div>
+            <div class="muted text-[11px] mt-0.5 truncate">Tableau de bord temps réel</div>
+          </div>
+        </div>
+        <span class="arrow" style="color: var(--c-live);">→</span>
+      </a>
+    </section>
 
-<!-- MENUS -->
-<div class="grid2 mt-4">
-<a href="https://greycorner.pages.dev/" class="glass tile"><span>Menu</span><span>→</span></a>
-<a href="https://ramadan-greycorner.pages.dev/" class="glass tile"><span>Menu Ramadan</span><span>→</span></a>
-</div>
+    <!-- Sous: Présence / Pointage -->
+    <section class="mt-5 grid grid-cols-2 gap-3">
+      <a href="https://feuille-de-presence.pages.dev/"
+         class="tile glass p-4 min-h-[104px]">
+        <div class="accent" style="background: radial-gradient(circle at 25% 25%, rgba(45,212,191,.95), transparent 60%);"></div>
+        <div class="relative flex flex-col h-full">
+          <div class="icon" style="color: var(--c-pres); width:28px;height:28px;border-radius:10px;">
+            <svg class="w-[16px] h-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12h6m-6 4h6M7 7h10M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <div class="mt-3">
+            <div class="text-[12px] font-extrabold">Présence</div>
+            <div class="muted text-[10px] mt-1">Feuille digitale</div>
+          </div>
+          <div class="mt-auto pt-3 flex justify-end">
+            <span class="text-[12px] font-black" style="color: var(--c-pres);">→</span>
+          </div>
+        </div>
+      </a>
 
-<!-- FINAL -->
-<div class="section mt-4">
-<a href="https://fiche-technique.pages.dev/" class="glass tile"><span>Fiche Technique</span><span>→</span></a>
-<a href="https://costfood.pages.dev/" class="glass tile"><span>Food Cost</span><span>→</span></a>
-<a href="https://depenses-grey-corner.pages.dev/" class="glass tile"><span>Comptabilité</span><span>→</span></a>
-</div>
+      <a href="https://pointage-greycorner.pages.dev/"
+         class="tile glass p-4 min-h-[104px]">
+        <div class="accent" style="background: radial-gradient(circle at 25% 25%, rgba(251,191,36,.95), transparent 60%);"></div>
+        <div class="relative flex flex-col h-full">
+          <div class="icon" style="color: var(--c-point); width:28px;height:28px;border-radius:10px;">
+            <svg class="w-[16px] h-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3M12 2a10 10 0 100 20 10 10 0 000-20z"></path>
+            </svg>
+          </div>
+          <div class="mt-3">
+            <div class="text-[12px] font-extrabold">Pointage</div>
+            <div class="muted text-[10px] mt-1">Entrées / sorties</div>
+          </div>
+          <div class="mt-auto pt-3 flex justify-end">
+            <span class="text-[12px] font-black" style="color: var(--c-point);">→</span>
+          </div>
+        </div>
+      </a>
+    </section>
 
+    <!-- Après: Menu / Menu Ramadan -->
+    <section class="mt-5 grid grid-cols-2 gap-3">
+      <a href="https://greycorner.pages.dev/"
+         class="tile glass p-4 min-h-[104px]">
+        <div class="accent" style="background: radial-gradient(circle at 30% 30%, rgba(34,211,238,.95), transparent 60%);"></div>
+        <div class="relative flex flex-col h-full">
+          <div class="icon" style="color: var(--c-menu); width:28px;height:28px;border-radius:10px;">
+            <svg class="w-[16px] h-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <div class="mt-3">
+            <div class="text-[12px] font-extrabold">Menu</div>
+            <div class="muted text-[10px] mt-1">Carte principale</div>
+          </div>
+          <div class="mt-auto pt-3 flex justify-end">
+            <span class="text-[12px] font-black" style="color: var(--c-menu);">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://ramadan-greycorner.pages.dev/"
+         class="tile glass p-4 min-h-[104px]">
+        <div class="accent" style="background: radial-gradient(circle at 30% 30%, rgba(245,158,11,.95), transparent 60%);"></div>
+        <div class="relative flex flex-col h-full">
+          <div class="icon" style="color: var(--c-ram); width:28px;height:28px;border-radius:10px;">
+            <svg class="w-[16px] h-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+          </div>
+          <div class="mt-3">
+            <div class="text-[12px] font-extrabold">Menu Ramadan</div>
+            <div class="muted text-[10px] mt-1">Ftours & saisonnier</div>
+          </div>
+          <div class="mt-auto pt-3 flex justify-end">
+            <span class="text-[12px] font-black" style="color: var(--c-ram);">→</span>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <!-- Dernier: Fiche technique / Food cost / Comptabilité -->
+    <section class="mt-5 grid grid-cols-1 gap-3 pb-10">
+      <a href="https://fiche-technique.pages.dev/"
+         class="tile glass banner">
+        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(251,113,133,.95), transparent 60%);"></div>
+        <div class="relative flex items-center gap-4 flex-1 min-w-0">
+          <div class="icon" style="color: var(--c-rec);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path>
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <div class="text-[13px] font-extrabold">Fiche Technique</div>
+            <div class="muted text-[11px] mt-0.5 truncate">Recettes • fiches tech</div>
+          </div>
+        </div>
+        <span class="arrow" style="color: var(--c-rec);">→</span>
+      </a>
+
+      <a href="https://costfood.pages.dev/"
+         class="tile glass banner">
+        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(129,140,248,.95), transparent 60%);"></div>
+        <div class="relative flex items-center gap-4 flex-1 min-w-0">
+          <div class="icon" style="color: var(--c-cost);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M11 19V6m0 13l-4-4m4 4l4-4M5 5h14"></path>
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <div class="text-[13px] font-extrabold">Food Cost</div>
+            <div class="muted text-[11px] mt-0.5 truncate">Analytique • coûts</div>
+          </div>
+        </div>
+        <span class="arrow" style="color: var(--c-cost);">→</span>
+      </a>
+
+      <a href="https://depenses-grey-corner.pages.dev/"
+         class="tile glass banner">
+        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(148,163,184,.95), transparent 60%);"></div>
+        <div class="relative flex items-center gap-4 flex-1 min-w-0">
+          <div class="icon" style="color: var(--c-fin);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-14v2m0 16v2"></path>
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <div class="text-[13px] font-extrabold">Comptabilité</div>
+            <div class="muted text-[11px] mt-0.5 truncate">Achats • facturation</div>
+          </div>
+        </div>
+        <span class="arrow" style="color: var(--c-fin);">→</span>
+      </a>
+    </section>
+
+    <div class="h-6"></div>
+  </main>
 </body>
 </html>
