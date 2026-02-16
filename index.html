@@ -2,280 +2,506 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Direction • Grey Corner Ramadan Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Direction • Grey Corner Mobile Hub</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    :root{ --gold:#fbbf24; --emerald:#059669; --night:#0f172a; }
-    body{
-      background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
-      font-family:'Plus Jakarta Sans',sans-serif;
-      color:#f8fafc;
-      min-height:100vh;
+    :root{
+      --bg0:#070A12;
+      --bg1:#0B1223;
+      --card: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.10);
+      --muted: rgba(226,232,240,.68);
+      --text: #F8FAFC;
+
+      --c-rh:#60A5FA;
+      --c-plan:#C084FC;
+      --c-live:#34D399;
+      --c-pres:#2DD4BF;
+      --c-point:#FBBF24;
+      --c-menu:#22D3EE;
+      --c-ram:#F59E0B;
+      --c-rec:#FB7185;
+      --c-cost:#818CF8;
+      --c-fin:#94A3B8;
+
+      --radius: 20px;
     }
 
-    .card-ramadan{
-      background: rgba(30,41,59,0.4);
-      border: 1px solid rgba(251,191,36,0.15);
-      transition: all .4s cubic-bezier(.23,1,.32,1);
-      position: relative;
+    html,body{
+      height:100%;
+      font-family:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1200px 700px at 20% -10%, rgba(34,211,238,.14), transparent 60%),
+        radial-gradient(900px 600px at 110% 10%, rgba(251,191,36,.14), transparent 55%),
+        radial-gradient(800px 600px at 40% 120%, rgba(192,132,252,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg0));
+      color:var(--text);
+      -webkit-tap-highlight-color: transparent;
     }
-    /* fallback si backdrop-filter non supporté */
-    @supports (backdrop-filter: blur(16px)) {
-      .card-ramadan{ backdrop-filter: blur(16px); }
+
+    /* Safe areas iPhone */
+    .safe{
+      padding-left: max(16px, env(safe-area-inset-left));
+      padding-right: max(16px, env(safe-area-inset-right));
     }
-    .card-ramadan:hover{
-      transform: translateY(-4px);
-      border-color: var(--gold);
-      box-shadow: 0 0 20px rgba(251,191,36,0.15);
-      background: rgba(30,41,59,0.7);
+
+    /* Bottom nav safe */
+    .safe-bottom{
+      padding-bottom: max(14px, env(safe-area-inset-bottom));
     }
-    .card-ramadan::before{
-      content:'';
+
+    /* Glass */
+    .glass{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* Header glow */
+    .glow{
+      box-shadow:
+        0 18px 50px rgba(0,0,0,.45),
+        0 0 0 1px rgba(255,255,255,.06) inset;
+    }
+
+    /* Tile */
+    .tile{
+      position:relative;
+      border-radius: var(--radius);
+      overflow:hidden;
+      transform: translateZ(0);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .tile:active{ transform: scale(.985); }
+
+    .tile::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(220px 120px at 20% 20%, rgba(255,255,255,.10), transparent 60%),
+        radial-gradient(180px 140px at 90% 30%, rgba(255,255,255,.06), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+
+    .accent{
       position:absolute;
-      left:0; top:0; bottom:0;
-      width:4px;
-      border-radius:4px 0 0 4px;
-      opacity:.8;
+      inset: 0;
+      opacity:.22;
+      filter: blur(18px);
+      transform: translateZ(0);
+      pointer-events:none;
     }
 
-    .border-personnel::before{ background:#3b82f6; box-shadow:2px 0 10px #3b82f6; }
-    .border-planning::before{ background:#a855f7; box-shadow:2px 0 10px #a855f7; }
-    .border-live::before{ background:#10b981; box-shadow:2px 0 10px #10b981; }
-    .border-menu::before{ background:#06b6d4; box-shadow:2px 0 10px #06b6d4; }
-    .border-ramadan::before{ background:#fbbf24; box-shadow:2px 0 15px #fbbf24; }
-    .border-tech::before{ background:#ef4444; box-shadow:2px 0 10px #ef4444; }
-    .border-cost::before{ background:#6366f1; box-shadow:2px 0 10px #6366f1; }
-    .border-finance::before{ background:#94a3b8; box-shadow:2px 0 10px #94a3b8; }
-    .border-presence::before{ background:#14b8a6; box-shadow:2px 0 10px #14b8a6; }
-    .border-pointage::before{ background:#f59e0b; box-shadow:2px 0 10px #f59e0b; }
-
-    .status-ping{
-      position:absolute;
-      top:20px; right:20px;
-      height:8px; width:8px;
-      background-color:#10b981;
-      border-radius:50%;
-    }
-    .status-ping::after{
-      content:'';
-      position:absolute;
-      width:100%; height:100%;
-      background-color:#10b981;
-      border-radius:50%;
-      animation: ping 1.5s infinite;
-    }
-    @keyframes ping{ 75%,100%{ transform:scale(3); opacity:0; } }
-
-    .google-pill{
-      background: rgba(251,191,36,0.05);
-      border: 1px solid rgba(251,191,36,0.3);
-      border-radius:100px;
-      transition: all .3s ease;
-    }
-    .google-pill:hover{
-      background: rgba(251,191,36,0.15);
-      transform: scale(1.03);
-      border-color: var(--gold);
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
     }
 
-    @keyframes fadeIn{
-      from{ opacity:0; transform:translateY(15px); }
-      to{ opacity:1; transform:translateY(0); }
-    }
-    .animate-reveal{ animation: fadeIn .6s ease-out forwards; opacity:0; }
-    .icon-box{ background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+    .muted{ color: var(--muted); }
 
-    .stars{
-      position:fixed;
-      top:0; left:0; width:100%; height:100%;
-      background-image: radial-gradient(white, rgba(255,255,255,.2) 1px, transparent 15px);
-      background-size:100px 100px;
-      opacity:.05;
-      z-index:-1;
+    /* Live dot */
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: var(--c-live);
+      box-shadow: 0 0 0 6px rgba(52,211,153,.10);
+      position:relative;
+    }
+    .dot::after{
+      content:"";
+      position:absolute; inset:-6px;
+      border-radius:999px;
+      border:1px solid rgba(52,211,153,.35);
+      animation: pulse 1.6s infinite;
+    }
+    @keyframes pulse{
+      0%{ transform: scale(.65); opacity:.9; }
+      100%{ transform: scale(1.25); opacity:0; }
     }
 
-    /* accessibilité : réduire animations */
+    /* Bottom nav */
+    .dock{
+      position: sticky;
+      bottom: 0;
+      z-index: 30;
+    }
+    .dock-inner{
+      border-radius: 22px;
+      padding: 10px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.50);
+    }
+    .dock a{
+      border-radius: 16px;
+      padding: 10px 12px;
+      display:flex; flex-direction:column;
+      align-items:center;
+      gap:6px;
+      min-width: 72px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      border: 1px solid transparent;
+    }
+    .dock a:active{ transform: scale(.98); }
+    .dock a:hover{ background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.10); }
+
+    .icon{
+      width: 26px; height: 26px;
+      display:grid; place-items:center;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+    }
+
+    /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
-      .animate-reveal{ animation:none; opacity:1; }
-      .card-ramadan{ transition:none; }
-      .status-ping::after{ animation:none; }
+      .dot::after{ animation:none; }
+      .tile, .dock a{ transition:none; }
     }
   </style>
 </head>
 
-<body class="antialiased">
-  <div class="stars"></div>
+<body>
+  <main class="safe max-w-[560px] mx-auto">
+    <!-- Top header -->
+    <section class="pt-8 pb-5">
+      <div class="glass glow rounded-[26px] p-5">
+        <div class="flex items-center gap-4">
+          <div class="relative">
+            <div class="absolute -inset-2 rounded-full opacity-40"
+                 style="background: radial-gradient(circle at 30% 30%, rgba(251,191,36,.35), transparent 60%);"></div>
+            <img src="LOGO.jpg" alt="Logo Grey Corner"
+                 class="relative w-16 h-16 rounded-full border border-white/15 bg-white p-1" />
+          </div>
 
-  <div class="flex flex-col items-center py-12 px-6">
-    <div class="w-full max-w-[460px]">
+          <div class="flex-1">
+            <div class="flex items-center justify-between gap-3">
+              <h1 class="text-[16px] font-extrabold tracking-wide uppercase">Management Hub</h1>
+              <span class="chip text-[11px] font-bold">
+                <span class="text-amber-300">🌙</span>
+                <span class="muted">Ramadan 2026</span>
+              </span>
+            </div>
+            <p class="muted text-[12px] mt-1 leading-snug">
+              Accès rapide aux outils Grey Corner — optimisé mobile
+            </p>
 
-      <header class="text-center mb-12 animate-reveal" style="animation-delay:0ms">
-        <div class="relative inline-block mb-6">
-          <div class="absolute -top-4 -right-4 text-amber-400 text-2xl opacity-80 rotate-12">🌙</div>
-          <img src="LOGO.jpg" alt="Logo Grey Corner" class="w-24 h-24 relative rounded-full border-4 border-amber-400 shadow-[0_0_30px_rgba(251,191,36,0.2)] bg-white p-1">
+            <div class="flex items-center gap-2 mt-3">
+              <div class="dot" aria-hidden="true"></div>
+              <span class="text-[12px] font-semibold text-emerald-200">Live prêt</span>
+              <span class="muted text-[12px]">•</span>
+              <span class="muted text-[12px]">Fès</span>
+            </div>
+          </div>
         </div>
-        <h1 class="text-2xl font-black tracking-widest text-white uppercase">Management Hub</h1>
-        <div class="flex items-center justify-center gap-2 mt-2">
-          <span class="h-px w-6 bg-amber-400 opacity-40"></span>
-          <p class="text-[10px] text-amber-400 uppercase tracking-[0.4em] font-black">Édition Ramadan</p>
-          <span class="h-px w-6 bg-amber-400 opacity-40"></span>
-        </div>
-      </header>
+      </div>
+    </section>
 
-      <nav class="flex flex-col gap-4">
-
-        <a href="https://personnelgreycorner.pages.dev/" target="_blank" rel="noopener noreferrer"
-           class="animate-reveal card-ramadan border-personnel group flex items-center p-5 rounded-2xl"
-           style="animation-delay:100ms">
-          <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-blue-400 transition-all group-hover:bg-blue-500 group-hover:text-white">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z">
-              </path>
-            </svg>
-          </div>
-          <div class="flex flex-col text-left">
-            <span class="text-[14px] font-extrabold text-white uppercase tracking-tight">Gestion RH</span>
-            <span class="text-[11px] text-slate-400 font-medium">Contrats & Dossiers Staff</span>
-          </div>
-        </a>
-
-        <a href="https://grey-corner-app.pages.dev/" target="_blank" rel="noopener noreferrer"
-           class="animate-reveal card-ramadan border-planning group flex items-center p-5 rounded-2xl"
-           style="animation-delay:200ms">
-          <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-purple-400 transition-all group-hover:bg-purple-500 group-hover:text-white">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <!-- FIX ICI -->
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-              </path>
-            </svg>
-          </div>
-          <div class="flex flex-col text-left">
-            <span class="text-[14px] font-extrabold text-white uppercase tracking-tight">Plannings Hebdo</span>
-            <span class="text-[11px] text-slate-400 font-medium">Flux Opérationnel Ramadan</span>
-          </div>
-        </a>
-
-        <a href="https://dashboard-presence.pages.dev/" target="_blank" rel="noopener noreferrer"
-           class="animate-reveal card-ramadan border-live group flex items-center p-5 rounded-2xl"
-           style="animation-delay:250ms">
-          <span class="status-ping" aria-hidden="true"></span>
-          <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-emerald-400 transition-all group-hover:bg-emerald-500 group-hover:text-white">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z">
-              </path>
-            </svg>
-          </div>
-          <div class="flex flex-col text-left">
-            <span class="text-[14px] font-extrabold text-emerald-400 uppercase tracking-tight">Supervision Live</span>
-            <span class="text-[11px] text-slate-400 font-medium">Tableau de Bord Temps Réel</span>
-          </div>
-        </a>
-
-        <div class="grid grid-cols-2 gap-4">
-          <a href="https://feuille-de-presence.pages.dev/" target="_blank" rel="noopener noreferrer"
-             class="animate-reveal card-ramadan border-presence p-5 rounded-2xl" style="animation-delay:300ms">
-            <span class="text-[12px] font-black text-white uppercase block mb-1">Présence</span>
-            <span class="text-[10px] text-teal-400 font-bold uppercase tracking-wider">Feuille Digitale</span>
-          </a>
-          <a href="https://pointage-greycorner.pages.dev/" target="_blank" rel="noopener noreferrer"
-             class="animate-reveal card-ramadan border-pointage p-5 rounded-2xl" style="animation-delay:350ms">
-            <span class="text-[12px] font-black text-white uppercase block mb-1">Pointage</span>
-            <span class="text-[10px] text-amber-500 font-bold uppercase tracking-wider">Entrées/Sorties</span>
-          </a>
-        </div>
-
-        <div class="py-4 flex justify-center animate-reveal" style="animation-delay:400ms">
-          <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1"
-             target="_blank" rel="noopener noreferrer"
-             class="google-pill px-8 py-4 flex items-center gap-5">
-            <div class="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center text-white shadow-[0_0_15px_rgba(245,158,11,0.4)]">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+    <!-- Primary tiles (big) -->
+    <section class="grid grid-cols-2 gap-4">
+      <!-- Supervision Live -->
+      <a target="_blank" rel="noopener noreferrer" href="https://dashboard-presence.pages.dev/"
+         class="tile glass p-4 min-h-[124px]">
+        <div class="accent" style="background: radial-gradient(circle at 30% 30%, rgba(52,211,153,.9), transparent 60%);"></div>
+        <div class="relative flex flex-col h-full">
+          <div class="flex items-center justify-between">
+            <div class="icon" style="color: var(--c-live);">
+              <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
-            <div class="flex flex-col text-left">
-              <div class="flex items-center gap-2">
-                <span class="text-[10px] font-black text-amber-400 uppercase tracking-[0.2em]">Avis Clients</span>
-                <span class="bg-amber-400/20 text-amber-400 text-[9px] px-2 py-0.5 rounded-full font-bold border border-amber-400/30">★ 4.8</span>
-              </div>
-              <span class="text-[14px] font-bold text-white tracking-tight">Réputation Google</span>
-            </div>
-          </a>
+            <span class="chip text-[10px] font-extrabold" style="border-color: rgba(52,211,153,.35);">
+              <span class="dot" style="width:8px;height:8px;box-shadow:none;"></span>
+              LIVE
+            </span>
+          </div>
+          <div class="mt-3">
+            <div class="text-[13px] font-extrabold tracking-tight">Supervision</div>
+            <div class="muted text-[11px] mt-1">Tableau temps réel</div>
+          </div>
+          <div class="mt-auto pt-3 flex items-center justify-between">
+            <span class="muted text-[10px]">Ouvrir</span>
+            <span class="text-[12px] font-black" style="color: var(--c-live);">→</span>
+          </div>
         </div>
+      </a>
 
-        <a href="https://greycorner.pages.dev/" target="_blank" rel="noopener noreferrer"
-           class="animate-reveal card-ramadan border-menu group flex items-center p-5 rounded-2xl"
-           style="animation-delay:450ms">
-          <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-cyan-400 transition-all group-hover:bg-cyan-500 group-hover:text-white">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <!-- Plannings -->
+      <a target="_blank" rel="noopener noreferrer" href="https://grey-corner-app.pages.dev/"
+         class="tile glass p-4 min-h-[124px]">
+        <div class="accent" style="background: radial-gradient(circle at 30% 30%, rgba(192,132,252,.95), transparent 60%);"></div>
+        <div class="relative flex flex-col h-full">
+          <div class="icon" style="color: var(--c-plan);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
-              </path>
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
           </div>
-          <div class="flex flex-col text-left">
-            <span class="text-[14px] font-extrabold text-white uppercase tracking-tight">Menu Principal</span>
-            <span class="text-[11px] text-slate-400 font-medium">Édition de la Carte</span>
+          <div class="mt-3">
+            <div class="text-[13px] font-extrabold tracking-tight">Plannings</div>
+            <div class="muted text-[11px] mt-1">Hebdo • Ramadan</div>
           </div>
-        </a>
-
-        <a href="https://ramadan-greycorner.pages.dev/" target="_blank" rel="noopener noreferrer"
-           class="animate-reveal card-ramadan border-ramadan group flex items-center p-5 rounded-2xl bg-amber-400/5"
-           style="animation-delay:500ms">
-          <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-amber-400 transition-all group-hover:bg-amber-500 group-hover:text-white shadow-[0_0_15px_rgba(251,191,36,0.1)]">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
+          <div class="mt-auto pt-3 flex items-center justify-between">
+            <span class="muted text-[10px]">Ouvrir</span>
+            <span class="text-[12px] font-black" style="color: var(--c-plan);">→</span>
           </div>
-          <div class="flex flex-col text-left">
-            <span class="text-[14px] font-extrabold text-amber-400 uppercase tracking-tight">Menu Ramadan 🌙</span>
-            <span class="text-[11px] text-amber-200/60 font-medium italic">Saisonnier & Ftours</span>
-          </div>
-        </a>
-
-        <div class="grid grid-cols-2 gap-4">
-          <a href="https://fiche-technique.pages.dev/" target="_blank" rel="noopener noreferrer"
-             class="animate-reveal card-ramadan border-tech p-5 rounded-2xl" style="animation-delay:600ms">
-            <span class="text-[12px] font-black text-white uppercase block mb-1">Recettes</span>
-            <span class="text-[10px] text-red-400 font-bold uppercase tracking-wider">Fiches Tech</span>
-          </a>
-          <a href="https://costfood.pages.dev/" target="_blank" rel="noopener noreferrer"
-             class="animate-reveal card-ramadan border-cost p-5 rounded-2xl" style="animation-delay:700ms">
-            <span class="text-[12px] font-black text-white uppercase block mb-1">Analytique</span>
-            <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-wider">Food Cost</span>
-          </a>
         </div>
+      </a>
+    </section>
 
-        <a href="https://depenses-grey-corner.pages.dev/" target="_blank" rel="noopener noreferrer"
-           class="animate-reveal card-ramadan border-finance group flex items-center p-5 rounded-2xl"
-           style="animation-delay:800ms">
-          <div class="w-12 h-12 flex items-center justify-center icon-box rounded-xl mr-5 text-slate-400 transition-all group-hover:bg-slate-400 group-hover:text-slate-900">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2">
-              </path>
+    <!-- Secondary tiles (compact list) -->
+    <section class="mt-5 grid grid-cols-1 gap-3">
+      <!-- RH -->
+      <a target="_blank" rel="noopener noreferrer" href="https://personnelgreycorner.pages.dev/"
+         class="tile glass p-4">
+        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(96,165,250,.95), transparent 60%);"></div>
+        <div class="relative flex items-center gap-4">
+          <div class="icon" style="color: var(--c-rh);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path>
             </svg>
           </div>
-          <div class="flex flex-col text-left">
-            <span class="text-[14px] font-extrabold text-white uppercase tracking-tight">Comptabilité</span>
-            <span class="text-[11px] text-slate-400 font-medium">Achats & Facturation</span>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <div class="text-[13px] font-extrabold">Gestion RH</div>
+              <span class="text-[12px] font-black" style="color: var(--c-rh);">→</span>
+            </div>
+            <div class="muted text-[11px] mt-0.5">Contrats & dossiers staff</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Présence + Pointage (2 colonnes) -->
+      <div class="grid grid-cols-2 gap-3">
+        <a target="_blank" rel="noopener noreferrer" href="https://feuille-de-presence.pages.dev/"
+           class="tile glass p-4 min-h-[104px]">
+          <div class="accent" style="background: radial-gradient(circle at 25% 25%, rgba(45,212,191,.95), transparent 60%);"></div>
+          <div class="relative flex flex-col h-full">
+            <div class="icon" style="color: var(--c-pres);">
+              <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12h6m-6 4h6M7 7h10M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div class="mt-3">
+              <div class="text-[12px] font-extrabold">Présence</div>
+              <div class="muted text-[10px] mt-1">Feuille digitale</div>
+            </div>
+            <div class="mt-auto pt-3 flex justify-end">
+              <span class="text-[12px] font-black" style="color: var(--c-pres);">→</span>
+            </div>
           </div>
         </a>
 
-      </nav>
+        <a target="_blank" rel="noopener noreferrer" href="https://pointage-greycorner.pages.dev/"
+           class="tile glass p-4 min-h-[104px]">
+          <div class="accent" style="background: radial-gradient(circle at 25% 25%, rgba(251,191,36,.95), transparent 60%);"></div>
+          <div class="relative flex flex-col h-full">
+            <div class="icon" style="color: var(--c-point);">
+              <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 8v4l3 3M12 2a10 10 0 100 20 10 10 0 000-20z"></path>
+              </svg>
+            </div>
+            <div class="mt-3">
+              <div class="text-[12px] font-extrabold">Pointage</div>
+              <div class="muted text-[10px] mt-1">Entrées / sorties</div>
+            </div>
+            <div class="mt-auto pt-3 flex justify-end">
+              <span class="text-[12px] font-black" style="color: var(--c-point);">→</span>
+            </div>
+          </div>
+        </a>
+      </div>
 
-      <footer class="mt-16 text-center animate-reveal" style="animation-delay:900ms">
-        <p class="text-slate-500 text-[9px] font-black uppercase tracking-[0.5em] mb-2">Management Hub • Ramadan 2026</p>
-        <span class="text-amber-500 text-xl opacity-30">✨</span>
-      </footer>
+      <!-- Menus (2 tiles) -->
+      <div class="grid grid-cols-2 gap-3">
+        <a target="_blank" rel="noopener noreferrer" href="https://greycorner.pages.dev/"
+           class="tile glass p-4 min-h-[104px]">
+          <div class="accent" style="background: radial-gradient(circle at 30% 30%, rgba(34,211,238,.95), transparent 60%);"></div>
+          <div class="relative flex flex-col h-full">
+            <div class="icon" style="color: var(--c-menu);">
+              <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+            <div class="mt-3">
+              <div class="text-[12px] font-extrabold">Menu</div>
+              <div class="muted text-[10px] mt-1">Carte principale</div>
+            </div>
+            <div class="mt-auto pt-3 flex justify-end">
+              <span class="text-[12px] font-black" style="color: var(--c-menu);">→</span>
+            </div>
+          </div>
+        </a>
 
+        <a target="_blank" rel="noopener noreferrer" href="https://ramadan-greycorner.pages.dev/"
+           class="tile glass p-4 min-h-[104px]">
+          <div class="accent" style="background: radial-gradient(circle at 30% 30%, rgba(245,158,11,.95), transparent 60%);"></div>
+          <div class="relative flex flex-col h-full">
+            <div class="icon" style="color: var(--c-ram);">
+              <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+              </svg>
+            </div>
+            <div class="mt-3">
+              <div class="text-[12px] font-extrabold">Ramadan</div>
+              <div class="muted text-[10px] mt-1">Ftours & saisonnier</div>
+            </div>
+            <div class="mt-auto pt-3 flex justify-end">
+              <span class="text-[12px] font-black" style="color: var(--c-ram);">→</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Recettes + Food Cost -->
+      <div class="grid grid-cols-2 gap-3">
+        <a target="_blank" rel="noopener noreferrer" href="https://fiche-technique.pages.dev/"
+           class="tile glass p-4 min-h-[104px]">
+          <div class="accent" style="background: radial-gradient(circle at 30% 30%, rgba(251,113,133,.95), transparent 60%);"></div>
+          <div class="relative flex flex-col h-full">
+            <div class="icon" style="color: var(--c-rec);">
+              <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path>
+              </svg>
+            </div>
+            <div class="mt-3">
+              <div class="text-[12px] font-extrabold">Recettes</div>
+              <div class="muted text-[10px] mt-1">Fiches tech</div>
+            </div>
+            <div class="mt-auto pt-3 flex justify-end">
+              <span class="text-[12px] font-black" style="color: var(--c-rec);">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a target="_blank" rel="noopener noreferrer" href="https://costfood.pages.dev/"
+           class="tile glass p-4 min-h-[104px]">
+          <div class="accent" style="background: radial-gradient(circle at 30% 30%, rgba(129,140,248,.95), transparent 60%);"></div>
+          <div class="relative flex flex-col h-full">
+            <div class="icon" style="color: var(--c-cost);">
+              <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M11 19V6m0 13l-4-4m4 4l4-4M5 5h14"></path>
+              </svg>
+            </div>
+            <div class="mt-3">
+              <div class="text-[12px] font-extrabold">Food Cost</div>
+              <div class="muted text-[10px] mt-1">Analytique</div>
+            </div>
+            <div class="mt-auto pt-3 flex justify-end">
+              <span class="text-[12px] font-black" style="color: var(--c-cost);">→</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Comptabilité -->
+      <a target="_blank" rel="noopener noreferrer" href="https://depenses-grey-corner.pages.dev/"
+         class="tile glass p-4">
+        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(148,163,184,.95), transparent 60%);"></div>
+        <div class="relative flex items-center gap-4">
+          <div class="icon" style="color: var(--c-fin);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-14v2m0 16v2"></path>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <div class="text-[13px] font-extrabold">Comptabilité</div>
+              <span class="text-[12px] font-black" style="color: var(--c-fin);">→</span>
+            </div>
+            <div class="muted text-[11px] mt-0.5">Achats & facturation</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Avis Google (CTA) -->
+      <a target="_blank" rel="noopener noreferrer"
+         href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1"
+         class="tile glass p-4">
+        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(251,191,36,.95), transparent 60%);"></div>
+        <div class="relative flex items-center gap-4">
+          <div class="icon" style="color: var(--c-point);">
+            <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <div class="text-[13px] font-extrabold">Avis Clients</div>
+              <span class="chip text-[10px] font-extrabold" style="border-color: rgba(251,191,36,.35); color:#FDE68A;">
+                ★ 4.8
+              </span>
+            </div>
+            <div class="muted text-[11px] mt-0.5">Réputation Google</div>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <div class="h-28"></div>
+  </main>
+
+  <!-- Bottom Dock -->
+  <div class="dock safe safe-bottom pb-4">
+    <div class="glass dock-inner max-w-[560px] mx-auto">
+      <div class="flex items-center justify-between gap-2">
+        <a target="_blank" rel="noopener noreferrer" href="https://dashboard-presence.pages.dev/">
+          <div class="icon" style="color: var(--c-live);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div class="text-[10px] font-extrabold muted">Live</div>
+        </a>
+
+        <a target="_blank" rel="noopener noreferrer" href="https://grey-corner-app.pages.dev/">
+          <div class="icon" style="color: var(--c-plan);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <div class="text-[10px] font-extrabold muted">Planning</div>
+        </a>
+
+        <a target="_blank" rel="noopener noreferrer" href="https://pointage-greycorner.pages.dev/">
+          <div class="icon" style="color: var(--c-point);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3M12 2a10 10 0 100 20 10 10 0 000-20z"></path>
+            </svg>
+          </div>
+          <div class="text-[10px] font-extrabold muted">Pointage</div>
+        </a>
+
+        <a target="_blank" rel="noopener noreferrer" href="https://greycorner.pages.dev/">
+          <div class="icon" style="color: var(--c-menu);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <div class="text-[10px] font-extrabold muted">Menu</div>
+        </a>
+      </div>
     </div>
   </div>
 </body>
