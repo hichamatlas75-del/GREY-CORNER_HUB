@@ -153,10 +153,43 @@
       flex: 0 0 auto;
     }
 
+    /* Floating footer dock */
+    .dock{
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 50;
+      pointer-events: none;
+    }
+    .dock-inner{
+      pointer-events: auto;
+      margin: 0 auto;
+      max-width: 560px;
+      border-radius: 22px;
+      padding: 10px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.50);
+    }
+    .dock a{
+      border-radius: 16px;
+      padding: 10px 12px;
+      display:flex; flex-direction:column;
+      align-items:center;
+      gap:6px;
+      min-width: 74px;
+      border: 1px solid transparent;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .dock a:active{ transform: scale(.98); }
+    .dock a:hover{ background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.10); }
+
+    /* Reserve space so dock doesn't cover content */
+    .dock-spacer{ height: 110px; }
+
     /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
       .dot::after{ animation:none; }
-      .tile{ transition:none; }
+      .tile, .dock a{ transition:none; }
     }
   </style>
 </head>
@@ -197,7 +230,7 @@
       </div>
     </section>
 
-    <!-- LONG BANNERS (ordre demandé) -->
+    <!-- LONG BANNERS (sans supervision/planning/menu ici) -->
     <section class="grid grid-cols-1 gap-3">
       <!-- Avis Google -->
       <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1"
@@ -241,51 +274,46 @@
         <span class="arrow" style="color: var(--c-rh);">→</span>
       </a>
 
-      <!-- Planning -->
-      <a href="https://grey-corner-app.pages.dev/"
+      <!-- Menu (bannière longue) -->
+      <a href="https://greycorner.pages.dev/"
          class="tile glass banner">
-        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(192,132,252,.95), transparent 60%);"></div>
+        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(34,211,238,.95), transparent 60%);"></div>
         <div class="relative flex items-center gap-4 flex-1 min-w-0">
-          <div class="icon" style="color: var(--c-plan);">
+          <div class="icon" style="color: var(--c-menu);">
             <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
             </svg>
           </div>
           <div class="min-w-0">
-            <div class="text-[13px] font-extrabold">Planning</div>
-            <div class="muted text-[11px] mt-0.5 truncate">Plannings hebdo • Ramadan</div>
+            <div class="text-[13px] font-extrabold">Menu</div>
+            <div class="muted text-[11px] mt-0.5 truncate">Carte principale</div>
           </div>
         </div>
-        <span class="arrow" style="color: var(--c-plan);">→</span>
+        <span class="arrow" style="color: var(--c-menu);">→</span>
       </a>
 
-      <!-- Supervision -->
-      <a href="https://dashboard-presence.pages.dev/"
+      <!-- Menu Ramadan (bannière longue) -->
+      <a href="https://ramadan-greycorner.pages.dev/"
          class="tile glass banner">
-        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(52,211,153,.9), transparent 60%);"></div>
+        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(245,158,11,.95), transparent 60%);"></div>
         <div class="relative flex items-center gap-4 flex-1 min-w-0">
-          <div class="icon" style="color: var(--c-live);">
+          <div class="icon" style="color: var(--c-ram);">
             <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
             </svg>
           </div>
           <div class="min-w-0">
-            <div class="flex items-center gap-2">
-              <span class="text-[13px] font-extrabold">Supervision</span>
-              <span class="chip text-[10px] font-extrabold" style="border-color: rgba(52,211,153,.35); padding:6px 10px;">
-                <span class="dot" style="width:8px;height:8px;box-shadow:none;"></span> LIVE
-              </span>
-            </div>
-            <div class="muted text-[11px] mt-0.5 truncate">Tableau de bord temps réel</div>
+            <div class="text-[13px] font-extrabold">Menu Ramadan</div>
+            <div class="muted text-[11px] mt-0.5 truncate">Ftours & saisonnier</div>
           </div>
         </div>
-        <span class="arrow" style="color: var(--c-live);">→</span>
+        <span class="arrow" style="color: var(--c-ram);">→</span>
       </a>
     </section>
 
-    <!-- Sous: Présence / Pointage -->
+    <!-- Présence / Pointage -->
     <section class="mt-5 grid grid-cols-2 gap-3">
       <a href="https://feuille-de-presence.pages.dev/"
          class="tile glass p-4 min-h-[104px]">
@@ -328,87 +356,53 @@
       </a>
     </section>
 
-    <!-- Après: Menu / Menu Ramadan -->
+    <!-- Dernier: Fiche technique (courte) + Food cost (courte) + Comptabilité (longue) -->
     <section class="mt-5 grid grid-cols-2 gap-3">
-      <a href="https://greycorner.pages.dev/"
+      <!-- Fiche technique (courte) -->
+      <a href="https://fiche-technique.pages.dev/"
          class="tile glass p-4 min-h-[104px]">
-        <div class="accent" style="background: radial-gradient(circle at 30% 30%, rgba(34,211,238,.95), transparent 60%);"></div>
+        <div class="accent" style="background: radial-gradient(circle at 25% 25%, rgba(251,113,133,.95), transparent 60%);"></div>
         <div class="relative flex flex-col h-full">
-          <div class="icon" style="color: var(--c-menu); width:28px;height:28px;border-radius:10px;">
+          <div class="icon" style="color: var(--c-rec); width:28px;height:28px;border-radius:10px;">
             <svg class="w-[16px] h-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path>
             </svg>
           </div>
           <div class="mt-3">
-            <div class="text-[12px] font-extrabold">Menu</div>
-            <div class="muted text-[10px] mt-1">Carte principale</div>
+            <div class="text-[12px] font-extrabold">Fiche Tech</div>
+            <div class="muted text-[10px] mt-1">Recettes</div>
           </div>
           <div class="mt-auto pt-3 flex justify-end">
-            <span class="text-[12px] font-black" style="color: var(--c-menu);">→</span>
+            <span class="text-[12px] font-black" style="color: var(--c-rec);">→</span>
           </div>
         </div>
       </a>
 
-      <a href="https://ramadan-greycorner.pages.dev/"
+      <!-- Food cost (courte) -->
+      <a href="https://costfood.pages.dev/"
          class="tile glass p-4 min-h-[104px]">
-        <div class="accent" style="background: radial-gradient(circle at 30% 30%, rgba(245,158,11,.95), transparent 60%);"></div>
+        <div class="accent" style="background: radial-gradient(circle at 25% 25%, rgba(129,140,248,.95), transparent 60%);"></div>
         <div class="relative flex flex-col h-full">
-          <div class="icon" style="color: var(--c-ram); width:28px;height:28px;border-radius:10px;">
+          <div class="icon" style="color: var(--c-cost); width:28px;height:28px;border-radius:10px;">
             <svg class="w-[16px] h-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M11 19V6m0 13l-4-4m4 4l4-4M5 5h14"></path>
             </svg>
           </div>
           <div class="mt-3">
-            <div class="text-[12px] font-extrabold">Menu Ramadan</div>
-            <div class="muted text-[10px] mt-1">Ftours & saisonnier</div>
+            <div class="text-[12px] font-extrabold">Food Cost</div>
+            <div class="muted text-[10px] mt-1">Analytique</div>
           </div>
           <div class="mt-auto pt-3 flex justify-end">
-            <span class="text-[12px] font-black" style="color: var(--c-ram);">→</span>
+            <span class="text-[12px] font-black" style="color: var(--c-cost);">→</span>
           </div>
         </div>
       </a>
     </section>
 
-    <!-- Dernier: Fiche technique / Food cost / Comptabilité -->
-    <section class="mt-5 grid grid-cols-1 gap-3 pb-10">
-      <a href="https://fiche-technique.pages.dev/"
-         class="tile glass banner">
-        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(251,113,133,.95), transparent 60%);"></div>
-        <div class="relative flex items-center gap-4 flex-1 min-w-0">
-          <div class="icon" style="color: var(--c-rec);">
-            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path>
-            </svg>
-          </div>
-          <div class="min-w-0">
-            <div class="text-[13px] font-extrabold">Fiche Technique</div>
-            <div class="muted text-[11px] mt-0.5 truncate">Recettes • fiches tech</div>
-          </div>
-        </div>
-        <span class="arrow" style="color: var(--c-rec);">→</span>
-      </a>
-
-      <a href="https://costfood.pages.dev/"
-         class="tile glass banner">
-        <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(129,140,248,.95), transparent 60%);"></div>
-        <div class="relative flex items-center gap-4 flex-1 min-w-0">
-          <div class="icon" style="color: var(--c-cost);">
-            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M11 19V6m0 13l-4-4m4 4l4-4M5 5h14"></path>
-            </svg>
-          </div>
-          <div class="min-w-0">
-            <div class="text-[13px] font-extrabold">Food Cost</div>
-            <div class="muted text-[11px] mt-0.5 truncate">Analytique • coûts</div>
-          </div>
-        </div>
-        <span class="arrow" style="color: var(--c-cost);">→</span>
-      </a>
-
+    <!-- Comptabilité (bannière longue, dernier) -->
+    <section class="mt-3">
       <a href="https://depenses-grey-corner.pages.dev/"
          class="tile glass banner">
         <div class="accent" style="background: radial-gradient(circle at 20% 20%, rgba(148,163,184,.95), transparent 60%);"></div>
@@ -428,7 +422,48 @@
       </a>
     </section>
 
-    <div class="h-6"></div>
+    <!-- Spacer for floating dock -->
+    <div class="dock-spacer"></div>
   </main>
+
+  <!-- Floating footer: Supervision Live, Menu, Planning -->
+  <div class="dock safe safe-bottom pb-4">
+    <div class="glass dock-inner">
+      <div class="flex items-center justify-between gap-2">
+        <!-- Supervision Live -->
+        <a href="https://dashboard-presence.pages.dev/">
+          <div class="icon" style="color: var(--c-live); width:30px;height:30px;border-radius:12px;">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div class="text-[10px] font-extrabold muted">Live</div>
+        </a>
+
+        <!-- Menu -->
+        <a href="https://greycorner.pages.dev/">
+          <div class="icon" style="color: var(--c-menu); width:30px;height:30px;border-radius:12px;">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <div class="text-[10px] font-extrabold muted">Menu</div>
+        </a>
+
+        <!-- Planning -->
+        <a href="https://grey-corner-app.pages.dev/">
+          <div class="icon" style="color: var(--c-plan); width:30px;height:30px;border-radius:12px;">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <div class="text-[10px] font-extrabold muted">Planning</div>
+        </a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
