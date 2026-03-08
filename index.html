@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Grey Corner • Mobile Hub</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-deep: #E0F2FE;
+      --bg-base: #F0F9FF;
+      --surface: rgba(255, 255, 255, 0.6);
+      --surface2: rgba(255, 255, 255, 0.9);
+      --stroke: rgba(12, 74, 110, 0.08);
+      --stroke-light: rgba(12, 74, 110, 0.15);
+      --text-main: #0C4A6E;
+      --text-muted: #0284C7;
+
+      --a-gold: #D97706;
+      --a-emerald: #059669;
+      --a-sky: #0EA5E9;
+      --a-violet: #7C3AED;
+      --a-teal: #0D9488;
+      --a-cyan: #0891B2;
+      --a-amber: #D97706;
+      --a-rose: #E11D48;
+      --a-indigo: #4F46E5;
+      --a-slate: #0284C7;
+
+      --r: 24px;
+    }
+
+    html,
+    body {
+      height: 100%;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      color: var(--text-main);
+      background-color: var(--bg-deep);
+      background-image: radial-gradient(circle at 50% 0%, var(--bg-base) 0%, var(--bg-deep) 100%);
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+
+    /* Animated Orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: -1;
+      animation: float 20s infinite ease-in-out alternate;
+    }
+
+    .orb-1 {
+      top: -10%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: rgba(34, 211, 238, 0.15);
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      top: 40%;
+      right: -20%;
+      width: 500px;
+      height: 500px;
+      background: rgba(192, 132, 252, 0.12);
+      animation-delay: -5s;
+    }
+
+    .orb-3 {
+      bottom: -10%;
+      left: 20%;
+      width: 450px;
+      height: 450px;
+      background: rgba(251, 191, 36, 0.12);
+      animation-delay: -10s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(30px, 50px) scale(1.1);
+      }
+    }
+
+    .safe {
+      padding-left: max(20px, env(safe-area-inset-left));
+      padding-right: max(20px, env(safe-area-inset-right));
+    }
+
+    .safe-bottom {
+      padding-bottom: max(20px, env(safe-area-inset-bottom));
+    }
+
+    /* Premium Glassmorphism */
+    .glass {
+      background: linear-gradient(145deg, var(--surface2) 0%, var(--surface) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--stroke);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    /* Hero Section */
+    .hero {
+      border-radius: calc(var(--r) + 8px);
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 30px 60px rgba(0, 0, 0, .05),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+      border: 1px solid var(--stroke-light);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(120% 120% at 50% -20%, rgba(255, 255, 255, 0.1), transparent 70%);
+      pointer-events: none;
+    }
+
+    .muted {
+      color: var(--text-muted);
+    }
+
+    /* Interactive Banners & Tiles */
+    .banner,
+    .tile {
+      position: relative;
+      border-radius: var(--r);
+      overflow: hidden;
+      transform: translateZ(0);
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .banner:hover,
+    .tile:hover {
+      transform: translateY(-2px);
+      border-color: var(--stroke-light);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 100%);
+    }
+
+    .banner:active,
+    .tile:active {
+      transform: translateY(1px) scale(0.98);
+      transition: all 0.1s ease;
+    }
+
+    .banner::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+      transform: skewX(-20deg);
+      transition: 0.5s;
+    }
+
+    .banner:hover::after {
+      left: 150%;
+    }
+
+    .banner-inner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      border: 1px solid var(--stroke-light);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5));
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .banner-bg-glow {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--accent);
+      filter: blur(40px);
+      opacity: 0.15;
+      transform: translateY(-50%);
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .banner:hover .banner-bg-glow {
+      opacity: 0.3;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(12, 74, 110, .08);
+      background: rgba(255, 255, 255, .8);
+      backdrop-filter: blur(10px);
+      white-space: nowrap;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1);
+    }
+
+    .chev {
+      font-weight: 900;
+      font-size: 16px;
+      opacity: 0.8;
+      flex: 0 0 auto;
+      transition: transform 0.3s ease;
+    }
+
+    .banner:hover .chev {
+      transform: translateX(4px);
+      opacity: 1;
+    }
+
+    .tile-inner {
+      position: relative;
+      padding: 18px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mini-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      border: 1px solid var(--stroke-light);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5));
+      display: grid;
+      place-items: center;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--a-emerald);
+      box-shadow: 0 0 10px var(--a-emerald);
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .dot::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 999px;
+      border: 1px solid var(--a-emerald);
+      animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.8);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(2.5);
+        opacity: 0;
+      }
+    }
+
+    /* Floating Dock */
+    .dock {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 50;
+      pointer-events: none;
+      padding-bottom: env(safe-area-inset-bottom, 24px);
+    }
+
+    .dock-backdrop {
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 140px;
+      background: linear-gradient(to top, rgba(224, 242, 254, 0.95) 0%, rgba(224, 242, 254, 0.5) 50%, transparent 100%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .dock-inner {
+      pointer-events: auto;
+      margin: 0 auto;
+      max-width: 380px;
+      border-radius: 32px;
+      padding: 10px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, .08), inset 0 1px 0 rgba(255, 255, 255, 1);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(30px) saturate(200%);
+      -webkit-backdrop-filter: blur(30px) saturate(200%);
+      border: 1px solid var(--stroke-light);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .dock a {
+      border-radius: 22px;
+      padding: 10px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid transparent;
+      transition: all .2s cubic-bezier(0.25, 1, 0.5, 1);
+      position: relative;
+      flex: 1;
+    }
+
+    .dock a:active {
+      transform: scale(.92);
+    }
+
+    .dock a:hover {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(12, 74, 110, .08);
+    }
+
+    .dock-ico {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      transition: transform 0.2s ease;
+      color: var(--text-muted);
+    }
+
+    .dock a:hover .dock-ico {
+      transform: translateY(-3px);
+      filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.2));
+    }
+
+    .dock a[data-active="true"] {
+      background: rgba(255, 255, 255, 1);
+      border-color: rgba(255, 255, 255, .15);
+    }
+
+    .dock a[data-color="gold"]:hover .dock-ico {
+      color: var(--a-gold);
+    }
+
+    .dock a[data-color="emerald"]:hover .dock-ico {
+      color: var(--a-emerald);
+    }
+
+    .dock a[data-color="cyan"]:hover .dock-ico {
+      color: var(--a-cyan);
+    }
+
+    .dock a[data-color="violet"]:hover .dock-ico {
+      color: var(--a-violet);
+    }
+
+    .dock-text {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+    }
+
+    .dock a:hover .dock-text {
+      color: var(--text-main);
+    }
+
+    .dock-spacer {
+      height: 160px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .dot::after,
+      .orb {
+        animation: none;
+      }
+
+      .banner,
+      .tile,
+      .dock a {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Animated Background Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <main class="safe max-w-[560px] mx-auto relative z-10">
+    <!-- Header -->
+    <section class="pt-8 pb-5">
+      <div class="glass hero p-6">
+        <div class="relative flex items-center gap-5">
+          <div class="relative">
+            <div class="absolute -inset-2 rounded-full opacity-50"
+              style="background: radial-gradient(circle at 30% 30%, rgba(251,191,36,.4), transparent 70%);"></div>
+            <img src="LOGO.jpg" alt="Logo Grey Corner"
+              class="relative w-16 h-16 rounded-full border border-sky-900/15 bg-white/80 p-1 backdrop-blur-sm" />
+          </div>
+
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between gap-3">
+              <h1 class="text-[17px] font-extrabold tracking-wide uppercase truncate text-sky-900">Management Hub</h1>
+              <span class="pill">
+                <span class="text-amber-600">🌙</span>
+                Ramadan 2026
+              </span>
+            </div>
+
+            <p class="muted text-[13px] mt-1.5 leading-snug">
+              Hub mobile — accès rapide aux outils
+            </p>
+
+            <div class="flex items-center gap-2.5 mt-4">
+              <span class="dot" aria-hidden="true"></span>
+              <span class="text-[12px] font-bold text-emerald-600 tracking-wide">Live prêt</span>
+              <span class="muted text-[12px] opacity-50">•</span>
+              <span class="muted text-[12px] tracking-wide">Fès</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNIÈRES LONGUES -->
+    <section class="grid grid-cols-1 gap-4">
+      <!-- Gestion RH -->
+      <a href="https://personnelgreycorner.pages.dev/" class="banner glass" style="--accent: var(--a-sky);">
+        <div class="banner-bg-glow"></div>
+        <div class="banner-inner">
+          <div class="flex items-center gap-4 flex-1 min-w-0">
+            <div class="icon" style="color: var(--a-sky);">
+              <svg class="w-[20px] h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z">
+                </path>
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <div class="text-[14px] font-extrabold text-sky-900 tracking-wide">Gestion RH</div>
+              <div class="muted text-[12px] mt-1 truncate">Contrats • staff • dossiers</div>
+            </div>
+          </div>
+          <span class="chev" style="color: var(--a-sky);">→</span>
+        </div>
+      </a>
+
+      <!-- Menu -->
+      <a href="https://menugreycorner.pages.dev/" class="banner glass" style="--accent: var(--a-cyan);">
+        <div class="banner-bg-glow"></div>
+        <div class="banner-inner">
+          <div class="flex items-center gap-4 flex-1 min-w-0">
+            <div class="icon" style="color: var(--a-cyan);">
+              <svg class="w-[20px] h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                </path>
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <div class="text-[14px] font-extrabold text-sky-900 tracking-wide">Menu Principal</div>
+              <div class="muted text-[12px] mt-1 truncate">Carte & produits</div>
+            </div>
+          </div>
+          <span class="chev" style="color: var(--a-cyan);">→</span>
+        </div>
+      </a>
+
+      <!-- Menu Ramadan -->
+      <a href="https://ramadan-greycorner.pages.dev/" class="banner glass" style="--accent: var(--a-amber);">
+        <div class="banner-bg-glow"></div>
+        <div class="banner-inner">
+          <div class="flex items-center gap-4 flex-1 min-w-0">
+            <div class="icon" style="color: var(--a-amber);">
+              <svg class="w-[20px] h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <div class="text-[14px] font-extrabold text-sky-900 tracking-wide">Spécial Ramadan</div>
+              <div class="muted text-[12px] mt-1 truncate">Ftours & offres saisonnières</div>
+            </div>
+          </div>
+          <span class="chev" style="color: var(--a-amber);">→</span>
+        </div>
+      </a>
+    </section>
+
+    <!-- Présence / Pointage -->
+    <section class="mt-4 grid grid-cols-2 gap-4">
+      <a href="https://feuille-de-presence.pages.dev/" class="tile glass">
+        <div class="tile-inner">
+          <div class="mini-icon" style="color: var(--a-teal);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12h6m-6 4h6M7 7h10M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <div class="text-[13px] font-extrabold text-sky-900 tracking-wide">Présence</div>
+          <div class="muted text-[11px] mt-1">Feuille digitale</div>
+          <div class="mt-auto flex justify-end">
+            <span class="text-[14px] font-black" style="color: var(--a-teal);">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://pointage-greycorner.pages.dev/" class="tile glass">
+        <div class="tile-inner">
+          <div class="mini-icon" style="color: var(--a-gold);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 8v4l3 3M12 2a10 10 0 100 20 10 10 0 000-20z"></path>
+            </svg>
+          </div>
+          <div class="text-[13px] font-extrabold text-sky-900 tracking-wide">Pointage</div>
+          <div class="muted text-[11px] mt-1">Entrées / sorties</div>
+          <div class="mt-auto flex justify-end">
+            <span class="text-[14px] font-black" style="color: var(--a-gold);">→</span>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <!-- Fiche technique + Food cost -->
+    <section class="mt-4 grid grid-cols-2 gap-4">
+      <a href="https://fiche-technique.pages.dev/" class="tile glass">
+        <div class="tile-inner">
+          <div class="mini-icon" style="color: var(--a-rose);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path>
+            </svg>
+          </div>
+          <div class="text-[13px] font-extrabold text-sky-900 tracking-wide">Fiche Tech</div>
+          <div class="muted text-[11px] mt-1">Recettes & dosages</div>
+          <div class="mt-auto flex justify-end">
+            <span class="text-[14px] font-black" style="color: var(--a-rose);">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://costfood.pages.dev/" class="tile glass">
+        <div class="tile-inner">
+          <div class="mini-icon" style="color: var(--a-indigo);">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M11 19V6m0 13l-4-4m4 4l4-4M5 5h14"></path>
+            </svg>
+          </div>
+          <div class="text-[13px] font-extrabold text-sky-900 tracking-wide">Food Cost</div>
+          <div class="muted text-[11px] mt-1">Marge & Analytique</div>
+          <div class="mt-auto flex justify-end">
+            <span class="text-[14px] font-black" style="color: var(--a-indigo);">→</span>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <!-- Comptabilité -->
+    <section class="mt-4">
+      <a href="https://depenses-grey-corner.pages.dev/" class="banner glass" style="--accent: var(--a-slate);">
+        <div class="banner-bg-glow"></div>
+        <div class="banner-inner">
+          <div class="flex items-center gap-4 flex-1 min-w-0">
+            <div class="icon" style="color: var(--a-slate);">
+              <svg class="w-[20px] h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-14v2m0 16v2"></path>
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <div class="text-[14px] font-extrabold text-sky-900 tracking-wide">Comptabilité</div>
+              <div class="muted text-[12px] mt-1 truncate">Achats • Dépenses • Factures</div>
+            </div>
+          </div>
+          <span class="chev" style="color: var(--a-slate);">→</span>
+        </div>
+      </a>
+    </section>
+
+    <div class="dock-spacer"></div>
+  </main>
+
+  <div class="dock-backdrop"></div>
+
+  <!-- Footer flottant: Avis, Live, Menu, Planning -->
+  <div class="dock">
+    <div class="dock-inner">
+      <!-- Avis -->
+      <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1" data-color="gold">
+        <div class="dock-ico">
+          <svg class="w-[20px] h-[20px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+        </div>
+        <div class="dock-text">Avis</div>
+      </a>
+
+      <!-- Live -->
+      <a href="https://dashboard-presence.pages.dev/" data-color="emerald">
+        <div class="dock-ico">
+          <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <div class="dock-text">Live</div>
+      </a>
+
+      <!-- Menu -->
+      <a href="https://greycorner.pages.dev/" data-color="cyan">
+        <div class="dock-ico">
+          <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+            </path>
+          </svg>
+        </div>
+        <div class="dock-text">Menu</div>
+      </a>
+
+      <!-- Planning -->
+      <a href="https://grey-corner-app.pages.dev/" data-color="violet">
+        <div class="dock-ico">
+          <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+        </div>
+        <div class="dock-text">Planning</div>
+      </a>
+    </div>
+  </div>
+</body>
+
+</html>
