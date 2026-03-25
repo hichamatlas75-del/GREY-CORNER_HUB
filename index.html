@@ -3,248 +3,204 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>Grey Corner • iOS Hub</title>
+<title>Grey Corner • Hub</title>
 
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  /* Nouvelle Palette Grey Corner */
-  --bg-deep: #dbeafe;
-  --bg-base: #f5f9fe;
-  --surface: rgba(255, 255, 255, 0.68);
-  --surface2: rgba(255, 255, 255, 0.90);
-  --stroke: rgba(30, 64, 175, 0.09);
-  --stroke-med: rgba(30, 64, 175, 0.15);
-  
-  --text: #1e3a5f;
-  --text-soft: rgba(30, 58, 95, 0.65);
-  --accent: #f59e0b;
-  --accent-bg: rgba(245, 158, 11, 0.10);
-  --blue-muted: #1d4ed8;
-
-  --shadow-card: 0 8px 28px rgba(30, 64, 175, 0.06), 0 2px 8px rgba(30, 64, 175, 0.04);
+  --bg:       #0b0d10;
+  --bg2:      #111318;
+  --bg3:      #161920;
+  --border:   rgba(212,175,80,0.12);
+  --border2:  rgba(212,175,80,0.26);
+  --gold:     #d4af50;
+  --gold2:    #f0d080;
+  --gold-dim: rgba(212,175,80,0.14);
+  --text:     #e8dfc8;
+  --text-soft:#a0907a;
+  --text-dim: rgba(232,223,200,0.40);
+  --shadow:   0 12px 40px rgba(0,0,0,0.55);
+  --shadow-sm:0 4px 16px rgba(0,0,0,0.40);
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
 body {
-  font-family: "Plus Jakarta Sans", -apple-system, sans-serif;
-  background-color: var(--bg-base);
+  font-family: "DM Sans", -apple-system, sans-serif;
+  background: var(--bg);
   color: var(--text);
-  line-height: 1.4;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
-
-/* CONTAINER */
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:0; opacity:.45;
+}
+body::after {
+  content:'';
+  position:fixed; top:-25%; left:50%; transform:translateX(-50%);
+  width:700px; height:420px;
+  background:radial-gradient(ellipse, rgba(212,175,80,0.055) 0%, transparent 68%);
+  pointer-events:none; z-index:0;
+}
 .page {
-  max-width: 560px;
-  margin: auto;
-  padding: 20px;
-  padding-top: max(20px, env(safe-area-inset-top));
-  padding-bottom: 120px;
+  position:relative; z-index:1;
+  max-width:500px; margin:auto;
+  padding:24px 18px;
+  padding-top:max(24px, env(safe-area-inset-top));
+  padding-bottom:110px;
 }
-
 /* HEADER */
 .header {
-  background: linear-gradient(160deg, var(--surface2) 0%, var(--surface) 100%);
-  border: 1px solid var(--stroke-med);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: 28px;
-  padding: 22px;
-  margin-bottom: 25px;
-  box-shadow: var(--shadow-card);
+  display:flex; align-items:center; gap:18px;
+  padding:20px 22px;
+  background:var(--bg2);
+  border:1px solid var(--border2);
+  border-radius:24px;
+  margin-bottom:28px;
+  box-shadow:var(--shadow);
+  position:relative; overflow:hidden;
 }
-
+.header::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity:.55;
+}
 .logo {
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
-  object-fit: cover;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  width:56px; height:56px; border-radius:14px; object-fit:cover;
+  border:1px solid var(--border2);
+  box-shadow:0 4px 16px rgba(0,0,0,.5), 0 0 0 1px rgba(212,175,80,.08);
+  flex-shrink:0;
 }
-
-.title {
-  font-family: "DM Serif Display", serif;
-  font-size: 24px;
-  color: #0f2744;
-  letter-spacing: -0.02em;
+.header-text .name {
+  font-family:"Cormorant Garamond",serif;
+  font-size:27px; font-weight:500; letter-spacing:.01em;
+  color:var(--gold2); line-height:1.1;
 }
-
-.subtitle {
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--accent);
-  margin-top: 2px;
+.header-text .sub {
+  font-size:10px; font-weight:500; text-transform:uppercase;
+  letter-spacing:.16em; color:var(--text-soft); margin-top:4px;
 }
-
-/* SECTION */
-.section-title {
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--text-soft);
-  margin: 25px 0 10px 10px;
+/* SECTION LABEL */
+.section-label {
+  display:flex; align-items:center; gap:10px;
+  font-size:9px; font-weight:600; text-transform:uppercase;
+  letter-spacing:.18em; color:var(--text-dim);
+  margin:24px 0 10px 6px;
 }
-
-/* CARDS */
+.section-label::after {
+  content:''; flex:1; height:1px;
+  background:linear-gradient(90deg, var(--border2), transparent);
+}
+/* CARD */
 .card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  border-radius: 22px;
-  background: var(--surface2);
-  border: 1px solid var(--stroke);
-  margin-bottom: 12px;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.2s ease;
-  box-shadow: var(--shadow-card);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:15px 16px; border-radius:18px;
+  background:var(--bg2); border:1px solid var(--border);
+  margin-bottom:10px; text-decoration:none; color:inherit;
+  transition:all .2s ease; box-shadow:var(--shadow-sm);
+  position:relative; overflow:hidden;
 }
-
-.card:active {
-  transform: scale(0.97);
-  background: var(--surface);
-  border-color: var(--accent);
+.card::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(212,175,80,.04) 0%, transparent 60%);
+  pointer-events:none;
 }
-
-.card-left {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-}
-
+.card:active { transform:scale(.97); border-color:var(--gold); background:var(--bg3); }
+.card-left { display:flex; align-items:center; gap:14px; }
 .icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--accent-bg);
-  border: 1px solid rgba(245, 158, 11, 0.2);
-  font-size: 20px;
+  width:44px; height:44px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--gold-dim); border:1px solid var(--border2);
+  font-size:20px; flex-shrink:0;
 }
-
 .card-name {
-  font-weight: 700;
-  font-size: 15px;
-  color: #0f2744;
+  font-family:"Cormorant Garamond",serif;
+  font-size:18px; font-weight:600; color:var(--text); line-height:1.2;
 }
-
-.card-desc {
-  font-size: 12px;
-  color: var(--text-soft);
-  font-weight: 500;
-}
-
-.arrow {
-  color: var(--accent);
-  font-weight: bold;
-  opacity: 0.5;
-}
-
+.card-desc { font-size:11px; font-weight:400; color:var(--text-soft); margin-top:2px; }
+.arrow { color:var(--gold); font-size:18px; opacity:.55; }
 /* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 .tile {
-  padding: 18px;
-  border-radius: 22px;
-  background: var(--surface2);
-  border: 1px solid var(--stroke);
-  text-align: center;
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--text);
-  box-shadow: var(--shadow-card);
-  transition: 0.2s;
+  padding:18px 12px; border-radius:18px;
+  background:var(--bg2); border:1px solid var(--border);
+  text-align:center;
+  font-family:"Cormorant Garamond",serif;
+  font-size:16px; font-weight:600;
+  text-decoration:none; color:var(--text);
+  box-shadow:var(--shadow-sm); transition:.2s;
+  position:relative; overflow:hidden;
 }
-
-.tile:active {
-  background: var(--accent-bg);
-  border-color: var(--accent);
+.tile::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(212,175,80,.05) 0%, transparent 70%);
+  pointer-events:none;
 }
-
-/* DOCK IOS GLASS */
+.tile .tile-emoji { display:block; font-size:22px; margin-bottom:6px; }
+.tile:active { background:var(--bg3); border-color:var(--gold); transform:scale(.96); }
+/* DOCK */
 .dock {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 92%;
-  max-width: 500px;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 30px;
-  display: flex;
-  justify-content: space-around;
-  padding: 12px 8px;
-  box-shadow: 0 15px 35px rgba(30, 64, 175, 0.12);
-  z-index: 100;
+  position:fixed;
+  bottom:max(18px, env(safe-area-inset-bottom));
+  left:50%; transform:translateX(-50%);
+  width:90%; max-width:460px;
+  background:rgba(15,17,22,.92);
+  backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);
+  border:1px solid var(--border2);
+  border-radius:28px;
+  display:flex; justify-content:space-around; align-items:center;
+  padding:10px 8px;
+  box-shadow:0 20px 60px rgba(0,0,0,.65), 0 0 0 1px rgba(212,175,80,.05);
+  z-index:100;
 }
-
+.dock::before {
+  content:''; position:absolute; top:0; left:20%; right:20%; height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity:.35; border-radius:1px;
+}
 .dock a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--text-soft);
-  text-decoration: none;
-  width: 20%;
+  display:flex; flex-direction:column; align-items:center; gap:5px;
+  font-size:9px; font-weight:600; text-transform:uppercase;
+  letter-spacing:.1em; color:var(--text-soft); text-decoration:none;
+  width:22%; transition:.2s;
 }
-
 .dock-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  margin-bottom: 5px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  transition: 0.2s;
+  width:46px; height:46px; border-radius:14px;
+  background:var(--bg3); border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px; transition:.2s;
 }
-
-.dock a:active .dock-icon {
-  transform: scale(0.85);
-  background: var(--accent-bg);
+.dock a:active .dock-icon { transform:scale(.84); background:var(--gold-dim); border-color:var(--gold); }
+.dock a:active { color:var(--gold); }
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
 }
-
-.dock a:active {
-    color: var(--accent);
-}
+.header { animation:fadeUp .5s ease both .05s; }
+.card:nth-of-type(1) { animation:fadeUp .5s ease both .12s; }
+.card:nth-of-type(2) { animation:fadeUp .5s ease both .17s; }
+.card:nth-of-type(3) { animation:fadeUp .5s ease both .34s; }
+.grid .tile:nth-child(1) { animation:fadeUp .5s ease both .24s; }
+.grid .tile:nth-child(2) { animation:fadeUp .5s ease both .28s; }
+.grid .tile:nth-child(3) { animation:fadeUp .5s ease both .32s; }
+.grid .tile:nth-child(4) { animation:fadeUp .5s ease both .36s; }
 </style>
 </head>
-
 <body>
-
 <div class="page">
 
   <div class="header">
-    <div style="display:flex; align-items: center; gap:16px;">
-      <img src="LOGO.png" class="logo" alt="Logo">
-      <div>
-        <div class="title">Grey Corner</div>
-        <div class="subtitle">Management Hub • Fès</div>
-      </div>
+    <img src="LOGO__1_.png" class="logo" alt="Grey Corner">
+    <div class="header-text">
+      <div class="name">Grey Corner</div>
+      <div class="sub">Management Hub &nbsp;·&nbsp; Fès</div>
     </div>
   </div>
 
-  <div class="section-title">Applications</div>
+  <div class="section-label">Applications</div>
 
   <a href="https://personnelgreycorner.pages.dev/" class="card">
     <div class="card-left">
@@ -254,7 +210,7 @@ body {
         <div class="card-desc">Staff & contrats</div>
       </div>
     </div>
-    <span class="arrow">→</span>
+    <span class="arrow">›</span>
   </a>
 
   <a href="https://menugreycorner.pages.dev/" class="card">
@@ -265,19 +221,27 @@ body {
         <div class="card-desc">Produits & carte</div>
       </div>
     </div>
-    <span class="arrow">→</span>
+    <span class="arrow">›</span>
   </a>
 
-  <div class="section-title">Outils</div>
+  <div class="section-label">Outils</div>
 
   <div class="grid">
-    <a href="https://feuille-de-presence.pages.dev/" class="tile">Présence</a>
-    <a href="https://pointage-greycorner.pages.dev/" class="tile">Pointage</a>
-    <a href="https://fiche-technique.pages.dev/" class="tile">Fiche Tech</a>
-    <a href="https://costfood.pages.dev/" class="tile">Food Cost</a>
+    <a href="https://feuille-de-presence.pages.dev/" class="tile">
+      <span class="tile-emoji">📋</span>Présence
+    </a>
+    <a href="https://pointage-greycorner.pages.dev/" class="tile">
+      <span class="tile-emoji">⏱️</span>Pointage
+    </a>
+    <a href="https://fiche-technique.pages.dev/" class="tile">
+      <span class="tile-emoji">📝</span>Fiche Tech
+    </a>
+    <a href="https://costfood.pages.dev/" class="tile">
+      <span class="tile-emoji">🧮</span>Food Cost
+    </a>
   </div>
 
-  <div class="section-title">Finance</div>
+  <div class="section-label">Finance</div>
 
   <a href="https://depenses-grey-corner.pages.dev/" class="card">
     <div class="card-left">
@@ -287,7 +251,7 @@ body {
         <div class="card-desc">Dépenses & achats</div>
       </div>
     </div>
-    <span class="arrow">→</span>
+    <span class="arrow">›</span>
   </a>
 
 </div>
@@ -295,24 +259,20 @@ body {
 <div class="dock">
   <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1">
     <div class="dock-icon">⭐</div>
-    AVIS
+    Avis
   </a>
-
   <a href="https://dashboard-presence.pages.dev/">
     <div class="dock-icon">📊</div>
-    LIVE
+    Live
   </a>
-
   <a href="https://greycorner.pages.dev/">
     <div class="dock-icon">🏠</div>
-    SITE
+    Site
   </a>
-
   <a href="https://grey-corner-app.pages.dev/">
     <div class="dock-icon">📅</div>
-    PLANNING
+    Planning
   </a>
 </div>
-
 </body>
 </html>
