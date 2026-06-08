@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>Grey Corner • Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#f5f1e8;
+  --bg2:#ffffff;
+  --bg3:#f0ebe1;
+
+  --gold:#b88a2f;
+  --gold2:#d7b067;
+
+  --border:rgba(184,138,47,0.10);
+  --border2:rgba(184,138,47,0.18);
+
+  --text:#2a241d;
+  --text-soft:#7c6d5c;
+  --text-dim:rgba(42,36,29,0.45);
+
+  --glass:rgba(255,255,255,0.72);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+body{
+  font-family:"DM Sans",-apple-system,sans-serif;
+  background:
+    radial-gradient(circle at top left,#fff8ec 0%,#f5f1e8 35%,#eee6d9 100%);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
+}
+
+.page{
+  position:relative;
+  z-index:1;
+  max-width:500px;
+  margin:auto;
+  padding:24px 18px 120px;
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:18px 20px;
+  border-radius:26px;
+
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+
+  border:1px solid rgba(255,255,255,0.65);
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+
+  margin-bottom:26px;
+}
+
+.logo{
+  width:58px;
+  height:58px;
+  border-radius:18px;
+  object-fit:cover;
+  border:1px solid var(--border2);
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+.header-text .name{
+  font-family:"Cormorant Garamond",serif;
+  font-size:30px;
+  font-weight:600;
+  letter-spacing:.02em;
+  color:var(--gold);
+}
+
+.header-text .sub{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--text-soft);
+}
+
+/* SECTION */
+.section-label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  color:var(--text-dim);
+  margin:24px 0 12px 6px;
+}
+
+.section-label::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background:linear-gradient(
+    90deg,
+    rgba(184,138,47,0.25),
+    transparent
+  );
+}
+
+/* CARD */
+.card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:16px;
+  margin-bottom:12px;
+
+  border-radius:22px;
+
+  text-decoration:none;
+  color:inherit;
+
+  background:var(--glass);
+  backdrop-filter:blur(16px);
+
+  border:1px solid rgba(255,255,255,0.75);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.8);
+
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease;
+}
+
+.card:active{
+  transform:scale(.985);
+}
+
+.card-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.icon{
+  width:46px;
+  height:46px;
+
+  border-radius:16px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.9),
+      rgba(255,248,235,0.7)
+    );
+
+  border:1px solid rgba(184,138,47,0.16);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.8),
+    0 4px 12px rgba(0,0,0,0.04);
+
+  font-size:19px;
+}
+
+.card-name{
+  font-family:"Cormorant Garamond",serif;
+  font-size:20px;
+  font-weight:600;
+  color:#2b241b;
+}
+
+.card-desc{
+  font-size:11px;
+  color:var(--text-soft);
+}
+
+.arrow{
+  color:var(--gold);
+  font-size:20px;
+  opacity:.65;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.tile{
+  padding:18px 10px;
+
+  border-radius:22px;
+
+  text-align:center;
+  text-decoration:none;
+
+  font-family:"Cormorant Garamond",serif;
+  font-size:17px;
+  font-weight:600;
+
+  color:var(--text);
+
+  background:var(--glass);
+  backdrop-filter:blur(14px);
+
+  border:1px solid rgba(255,255,255,0.75);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.85);
+
+  transition:transform .15s ease;
+}
+
+.tile:active{
+  transform:scale(.98);
+}
+
+.tile-emoji{
+  display:block;
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+/* DOCK */
+.dock{
+  position:fixed;
+  bottom:16px;
+  left:50%;
+  transform:translateX(-50%);
+
+  width:92%;
+  max-width:460px;
+
+  padding:10px 8px;
+
+  display:flex;
+  justify-content:space-around;
+
+  border-radius:28px;
+
+  background:rgba(255,255,255,0.72);
+  backdrop-filter:blur(24px);
+
+  border:1px solid rgba(255,255,255,0.75);
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+
+  z-index:100;
+}
+
+.dock a{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+
+  width:22%;
+
+  text-decoration:none;
+
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+
+  color:var(--text-soft);
+}
+
+.dock-icon{
+  width:46px;
+  height:46px;
+
+  border-radius:16px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f6efe3
+    );
+
+  border:1px solid rgba(184,138,47,0.14);
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.header,
+.card,
+.tile{
+  animation:fadeUp .22s ease;
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <img src="LOGO.png" class="logo" alt="Grey Corner">
+
+    <div class="header-text">
+      <div class="name">Grey Corner</div>
+      <div class="sub">Management Hub · Fès</div>
+    </div>
+  </div>
+
+  <!-- RH -->
+  <div class="section-label">Ressources Humaines</div>
+
+  <a href="https://personnelgreycorner.pages.dev/" class="card">
+    <div class="card-left">
+      <div class="icon">👥</div>
+      <div>
+        <div class="card-name">Gestion RH</div>
+        <div class="card-desc">Staff & contrats</div>
+      </div>
+    </div>
+    <span class="arrow">›</span>
+  </a>
+
+  <div class="grid">
+    <a href="https://feuille-de-presence.pages.dev/" class="tile">
+      <span class="tile-emoji">📋</span>
+      Présence
+    </a>
+    <a href="https://pointage-greycorner.pages.dev/" class="tile">
+      <span class="tile-emoji">⏱️</span>
+      Pointage
+    </a>
+  </div>
+
+  <!-- FINANCE & STOCK -->
+  <div class="section-label">Finance & Stock</div>
+
+  <a href="https://grey-stock.pages.dev/" class="card">
+    <div class="card-left">
+      <div class="icon">📦</div>
+      <div>
+        <div class="card-name">Suivi Commandes</div>
+        <div class="card-desc">Tracking journalier & stock</div>
+      </div>
+    </div>
+    <span class="arrow">›</span>
+  </a>
+
+  <a href="https://depenses-grey-corner.pages.dev/" class="card">
+    <div class="card-left">
+      <div class="icon">💰</div>
+      <div>
+        <div class="card-name">Comptabilité</div>
+        <div class="card-desc">Dépenses & achats</div>
+      </div>
+    </div>
+    <span class="arrow">›</span>
+  </a>
+
+  <div class="grid">
+    <a href="https://fiche-technique.pages.dev/" class="tile">
+      <span class="tile-emoji">📝</span>
+      Fiche Tech
+    </a>
+    <a href="https://costfood.pages.dev/" class="tile">
+      <span class="tile-emoji">🧮</span>
+      Food Cost
+    </a>
+  </div>
+
+  <!-- ESPACE SERVEURS -->
+  <div class="section-label">Service</div>
+
+  <a href="https://espace-serveurs-hub.pages.dev/admin.html" class="card">
+    <div class="card-left">
+      <div class="icon">🔱</div>
+      <div>
+        <div class="card-name">Espace Serveurs</div>
+        <div class="card-desc">Live orders & kitchen control</div>
+      </div>
+    </div>
+    <span class="arrow">›</span>
+  </a>
+
+</div>
+
+<!-- DOCK -->
+<div class="dock">
+
+  <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1">
+    <div class="dock-icon">⭐</div>
+    Avis
+  </a>
+
+  <a href="https://dashboard-presence.pages.dev/">
+    <div class="dock-icon">📊</div>
+    Live
+  </a>
+
+  <a href="https://greycorner.pages.dev/">
+    <div class="dock-icon">🏠</div>
+    Site
+  </a>
+
+  <a href="https://grey-corner-app.pages.dev/">
+    <div class="dock-icon">📅</div>
+    Planning
+  </a>
+
+</div>
+
+</body>
+</html>
