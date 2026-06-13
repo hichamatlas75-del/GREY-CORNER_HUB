@@ -3,36 +3,40 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>Grey Corner · Hub</title>
+<title>Grey Corner • Hub</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --bg:#f5f1e8;
+  --bg2:#ffffff;
+  --bg3:#f0ebe1;
+
   --gold:#b88a2f;
-  --gold2:#d4a84b;
+  --gold2:#d7b067;
+
+  --border:rgba(184,138,47,0.10);
+  --border2:rgba(184,138,47,0.18);
+
   --text:#2a241d;
   --text-soft:#7c6d5c;
-  --text-dim:rgba(42,36,29,0.38);
-  --glass:rgba(255,255,255,0.74);
-  --border:rgba(184,138,47,0.11);
-  --border2:rgba(184,138,47,0.20);
-  --shadow-card:0 8px 28px rgba(0,0,0,0.055);
-  --shadow-dock:0 16px 40px rgba(0,0,0,0.10);
-  --r-card:20px;
-  --r-icon:14px;
-  --r-tile:18px;
+  --text-dim:rgba(42,36,29,0.45);
+
+  --glass:rgba(255,255,255,0.72);
 }
 
-*{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
 
 body{
   font-family:"DM Sans",-apple-system,sans-serif;
-  background: #f5f1e8;
-  background-image:
-    radial-gradient(ellipse at 20% 0%, #fff8ec 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 100%, #ede5d4 0%, transparent 55%);
+  background:
+    radial-gradient(circle at top left,#fff8ec 0%,#f5f1e8 35%,#eee6d9 100%);
   color:var(--text);
   min-height:100vh;
   overflow-x:hidden;
@@ -43,7 +47,7 @@ body::before{
   content:'';
   position:fixed;
   inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.016'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");
   pointer-events:none;
   z-index:0;
 }
@@ -53,186 +57,227 @@ body::before{
   z-index:1;
   max-width:500px;
   margin:auto;
-  padding:20px 16px 128px;
+  padding:24px 18px 120px;
 }
 
-/* ── HEADER ── */
+/* HEADER */
 .header{
   display:flex;
   align-items:center;
-  gap:14px;
-  padding:14px 18px;
+  gap:16px;
+  padding:18px 20px;
   border-radius:26px;
+
   background:var(--glass);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,0.70);
-  box-shadow:var(--shadow-card), inset 0 1px 0 rgba(255,255,255,0.75);
-  margin-bottom:24px;
+  backdrop-filter:blur(18px);
+
+  border:1px solid rgba(255,255,255,0.65);
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+
+  margin-bottom:26px;
 }
 
 .logo{
-  width:52px; height:52px;
-  border-radius:16px;
+  width:58px;
+  height:58px;
+  border-radius:18px;
   object-fit:cover;
   border:1px solid var(--border2);
-  box-shadow:0 4px 14px rgba(0,0,0,0.09);
-  flex-shrink:0;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
 }
 
 .header-text .name{
   font-family:"Cormorant Garamond",serif;
-  font-size:28px;
+  font-size:30px;
   font-weight:600;
   letter-spacing:.02em;
   color:var(--gold);
-  line-height:1;
 }
 
 .header-text .sub{
   font-size:10px;
   text-transform:uppercase;
-  letter-spacing:.18em;
+  letter-spacing:.16em;
   color:var(--text-soft);
-  margin-top:3px;
 }
 
-/* ── SECTION LABEL ── */
+/* SECTION */
 .section-label{
   display:flex;
   align-items:center;
   gap:10px;
   font-size:9px;
-  font-weight:500;
   text-transform:uppercase;
-  letter-spacing:.20em;
+  letter-spacing:.18em;
   color:var(--text-dim);
-  margin:22px 0 10px 4px;
+  margin:24px 0 12px 6px;
 }
-
-.section-label span{ white-space:nowrap; }
 
 .section-label::after{
   content:'';
   flex:1;
   height:1px;
-  background:linear-gradient(90deg, rgba(184,138,47,0.22), transparent);
+  background:linear-gradient(
+    90deg,
+    rgba(184,138,47,0.25),
+    transparent
+  );
 }
 
-/* ── CARD ── */
+/* CARD */
 .card{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:13px 14px;
-  margin-bottom:8px;
-  border-radius:var(--r-card);
+
+  padding:16px;
+  margin-bottom:12px;
+
+  border-radius:22px;
+
   text-decoration:none;
   color:inherit;
+
   background:var(--glass);
   backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  border:1px solid rgba(255,255,255,0.78);
-  box-shadow:var(--shadow-card), inset 0 1px 0 rgba(255,255,255,0.85);
-  transition:transform .13s ease, box-shadow .13s ease;
+
+  border:1px solid rgba(255,255,255,0.75);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.8);
+
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease;
 }
 
-.card:active{ transform:scale(.983); box-shadow:0 4px 14px rgba(0,0,0,0.05); }
+.card:active{
+  transform:scale(.985);
+}
 
-.card-left{ display:flex; align-items:center; gap:12px; }
+.card-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
 
 .icon{
-  width:42px; height:42px;
-  border-radius:var(--r-icon);
-  display:flex; align-items:center; justify-content:center;
-  font-size:18px;
-  background:linear-gradient(145deg, rgba(255,255,255,0.92), rgba(255,248,234,0.72));
-  border:1px solid rgba(184,138,47,0.14);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.85), 0 3px 10px rgba(0,0,0,0.04);
-  flex-shrink:0;
+  width:46px;
+  height:46px;
+
+  border-radius:16px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.9),
+      rgba(255,248,235,0.7)
+    );
+
+  border:1px solid rgba(184,138,47,0.16);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.8),
+    0 4px 12px rgba(0,0,0,0.04);
+
+  font-size:19px;
 }
 
 .card-name{
   font-family:"Cormorant Garamond",serif;
-  font-size:19px;
+  font-size:20px;
   font-weight:600;
   color:#2b241b;
-  line-height:1.1;
 }
 
-.card-desc{ font-size:11px; color:var(--text-soft); margin-top:2px; }
+.card-desc{
+  font-size:11px;
+  color:var(--text-soft);
+}
 
-.arrow{ color:var(--gold2); font-size:18px; opacity:.7; }
+.arrow{
+  color:var(--gold);
+  font-size:20px;
+  opacity:.65;
+}
 
-/* ── GRID TILES ── */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-bottom:8px;
+  gap:12px;
 }
 
 .tile{
-  padding:15px 8px 13px;
-  border-radius:var(--r-tile);
+  padding:18px 10px;
+
+  border-radius:22px;
+
   text-align:center;
   text-decoration:none;
+
   font-family:"Cormorant Garamond",serif;
-  font-size:16px;
+  font-size:17px;
   font-weight:600;
+
   color:var(--text);
+
   background:var(--glass);
   backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,0.78);
-  box-shadow:var(--shadow-card), inset 0 1px 0 rgba(255,255,255,0.88);
-  transition:transform .13s ease;
+
+  border:1px solid rgba(255,255,255,0.75);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.85);
+
+  transition:transform .15s ease;
 }
 
-.tile:active{ transform:scale(.978); }
-
-.tile-emoji{ display:block; font-size:20px; margin-bottom:6px; }
-
-.badge-new{
-  display:inline-block;
-  font-size:8px;
-  font-family:"DM Sans",sans-serif;
-  font-weight:500;
-  text-transform:uppercase;
-  letter-spacing:.06em;
-  background:rgba(184,138,47,0.12);
-  color:var(--gold);
-  border:1px solid rgba(184,138,47,0.22);
-  border-radius:6px;
-  padding:1px 5px;
-  margin-left:3px;
-  vertical-align:middle;
+.tile:active{
+  transform:scale(.98);
 }
 
-/* ── DIVIDER THIN ── */
-.divider{
-  height:1px;
-  background:linear-gradient(90deg, transparent, rgba(184,138,47,0.12), transparent);
-  margin:6px 0 14px;
+.tile-emoji{
+  display:block;
+  font-size:22px;
+  margin-bottom:8px;
 }
 
-/* ── DOCK ── */
+/* DOCK */
 .dock{
   position:fixed;
-  bottom:14px;
+  bottom:16px;
   left:50%;
   transform:translateX(-50%);
-  width:calc(100% - 32px);
-  max-width:468px;
-  padding:9px 6px;
+
+  width:92%;
+  max-width:460px;
+
+  padding:10px 8px;
+
   display:flex;
   justify-content:space-around;
-  border-radius:26px;
-  background:rgba(255,255,255,0.76);
-  backdrop-filter:blur(26px);
-  -webkit-backdrop-filter:blur(26px);
-  border:1px solid rgba(255,255,255,0.80);
-  box-shadow:var(--shadow-dock), inset 0 1px 0 rgba(255,255,255,0.95);
+
+  border-radius:28px;
+
+  background:rgba(255,255,255,0.72);
+  backdrop-filter:blur(24px);
+
+  border:1px solid rgba(255,255,255,0.75);
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+
   z-index:100;
 }
 
@@ -240,67 +285,86 @@ body::before{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:4px;
+  gap:5px;
+
   width:22%;
+
   text-decoration:none;
+
   font-size:9px;
   text-transform:uppercase;
-  letter-spacing:.07em;
+  letter-spacing:.08em;
+
   color:var(--text-soft);
 }
 
 .dock-icon{
-  width:44px; height:44px;
-  border-radius:15px;
-  display:flex; align-items:center; justify-content:center;
-  font-size:18px;
-  background:linear-gradient(145deg, #ffffff, #f6efe3);
-  border:1px solid rgba(184,138,47,0.13);
-  box-shadow:0 3px 10px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.95);
+  width:46px;
+  height:46px;
+
+  border-radius:16px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f6efe3
+    );
+
+  border:1px solid rgba(184,138,47,0.14);
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
-/* ── ANIMATIONS ── */
+/* ANIMATIONS */
 @keyframes fadeUp{
-  from{ opacity:0; transform:translateY(6px); }
-  to{ opacity:1; transform:translateY(0); }
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
-.header{ animation:fadeUp .20s ease both; }
-.card{ animation:fadeUp .20s ease both; }
-.tile{ animation:fadeUp .20s ease both; }
-
-.section-label:nth-of-type(1) ~ .card,
-.section-label:nth-of-type(1) ~ .grid .tile{ animation-delay:.03s; }
-.section-label:nth-of-type(2) ~ .card,
-.section-label:nth-of-type(2) ~ .grid .tile{ animation-delay:.06s; }
-.section-label:nth-of-type(3) ~ .card,
-.section-label:nth-of-type(3) ~ .grid .tile{ animation-delay:.09s; }
+.header,
+.card,
+.tile{
+  animation:fadeUp .22s ease;
+}
 </style>
 </head>
 
 <body>
+
 <div class="page">
 
   <!-- HEADER -->
   <div class="header">
     <img src="LOGO.png" class="logo" alt="Grey Corner">
+
     <div class="header-text">
       <div class="name">Grey Corner</div>
       <div class="sub">Management Hub · Fès</div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════
-       RH
-  ═══════════════════════════════ -->
-  <div class="section-label"><span>Ressources humaines</span></div>
+  <!-- RH -->
+  <div class="section-label">Ressources Humaines</div>
 
   <a href="https://personnelgreycorner.pages.dev/" class="card">
     <div class="card-left">
       <div class="icon">👥</div>
       <div>
         <div class="card-name">Gestion RH</div>
-        <div class="card-desc">Staff, contrats & dossiers</div>
+        <div class="card-desc">Staff & contrats</div>
       </div>
     </div>
     <span class="arrow">›</span>
@@ -315,42 +379,21 @@ body::before{
       <span class="tile-emoji">⏱️</span>
       Pointage
     </a>
-    <a href="https://grey-corner-app.pages.dev/" class="tile">
-      <span class="tile-emoji">📅</span>
-      Planning
-    </a>
-    <a href="https://personnelgreycorner.pages.dev/conges.html" class="tile">
-      <span class="tile-emoji">🌴</span>
-      Congés <span class="badge-new">+</span>
-    </a>
   </div>
 
-  <!-- ═══════════════════════════════
-       FINANCE & STOCK
-  ═══════════════════════════════ -->
-  <div class="section-label"><span>Finance & Stock</span></div>
+  <!-- FINANCE & STOCK -->
+  <div class="section-label">Finance & Stock</div>
 
   <a href="https://grey-stock.pages.dev/" class="card">
     <div class="card-left">
       <div class="icon">📦</div>
       <div>
-        <div class="card-name">Grey Stock</div>
-        <div class="card-desc">Commandes, livraisons & stock</div>
+        <div class="card-name">Suivi Commandes</div>
+        <div class="card-desc">Tracking journalier & stock</div>
       </div>
     </div>
     <span class="arrow">›</span>
   </a>
-
-  <div class="grid">
-    <a href="https://grey-stock.pages.dev/#inventaire" class="tile">
-      <span class="tile-emoji">🗂️</span>
-      Inventaires <span class="badge-new">+</span>
-    </a>
-    <a href="https://grey-stock.pages.dev/#casse" class="tile">
-      <span class="tile-emoji">🚫</span>
-      Casse <span class="badge-new">+</span>
-    </a>
-  </div>
 
   <a href="https://depenses-grey-corner.pages.dev/" class="card">
     <div class="card-left">
@@ -374,10 +417,8 @@ body::before{
     </a>
   </div>
 
-  <!-- ═══════════════════════════════
-       SERVICE & CLIENT
-  ═══════════════════════════════ -->
-  <div class="section-label"><span>Service & Client</span></div>
+  <!-- ESPACE SERVEURS -->
+  <div class="section-label">Service</div>
 
   <a href="https://espace-serveurs-hub.pages.dev/admin.html" class="card">
     <div class="card-left">
@@ -390,32 +431,19 @@ body::before{
     <span class="arrow">›</span>
   </a>
 
-  <a href="https://menugreycorner.pages.dev/" class="card">
-    <div class="card-left">
-      <div class="icon">📱</div>
-      <div>
-        <div class="card-name">Menu Client <span class="badge-new">+</span></div>
-        <div class="card-desc">GPS · Sur place · Précommande</div>
-      </div>
-    </div>
-    <span class="arrow">›</span>
-  </a>
-
 </div>
 
-<!-- ═══════════════════════════════
-     DOCK
-═══════════════════════════════ -->
+<!-- DOCK -->
 <div class="dock">
-
-  <a href="https://dashboard-presence.pages.dev/">
-    <div class="dock-icon">📊</div>
-    Live
-  </a>
 
   <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1">
     <div class="dock-icon">⭐</div>
     Avis
+  </a>
+
+  <a href="https://dashboard-presence.pages.dev/">
+    <div class="dock-icon">📊</div>
+    Live
   </a>
 
   <a href="https://greycorner.pages.dev/">
@@ -423,9 +451,9 @@ body::before{
     Site
   </a>
 
-  <a href="https://grey-stock.pages.dev/#annonces">
-    <div class="dock-icon">🔔</div>
-    Alertes
+  <a href="https://grey-corner-app.pages.dev/">
+    <div class="dock-icon">📅</div>
+    Planning
   </a>
 
 </div>
