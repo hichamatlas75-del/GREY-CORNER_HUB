@@ -5,25 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>Grey Corner • Hub</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#f5f1e8;
-  --bg2:#ffffff;
-  --bg3:#f0ebe1;
+  /* Ivory & antique brass — a fine-dining menu card, not a glass panel */
+  --paper:#faf7f0;
+  --paper2:#fffefb;
+  --ink:#231f1a;
+  --ink-soft:#6b6154;
+  --ink-dim:rgba(35,31,26,0.42);
 
-  --gold:#b88a2f;
-  --gold2:#d7b067;
+  --brass:#9c7a3c;
+  --brass-light:#c8ab6a;
+  --brass-deep:#7c5f2c;
 
-  --border:rgba(184,138,47,0.10);
-  --border2:rgba(184,138,47,0.18);
+  --hairline:rgba(35,31,26,0.10);
+  --hairline-gold:rgba(156,122,60,0.35);
 
-  --text:#2a241d;
-  --text-soft:#7c6d5c;
-  --text-dim:rgba(42,36,29,0.45);
-
-  --glass:rgba(255,255,255,0.72);
+  --shadow:0 18px 40px rgba(35,31,26,0.06);
 }
 
 *{
@@ -36,18 +36,19 @@
 body{
   font-family:"DM Sans",-apple-system,sans-serif;
   background:
-    radial-gradient(circle at top left,#fff8ec 0%,#f5f1e8 35%,#eee6d9 100%);
-  color:var(--text);
+    linear-gradient(180deg,#fdfbf6 0%,#f6f1e6 60%,#f1ead9 100%);
+  color:var(--ink);
   min-height:100vh;
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
 
+/* fine paper grain, barely there */
 body::before{
   content:'';
   position:fixed;
   inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
   pointer-events:none;
   z-index:0;
 }
@@ -57,226 +58,238 @@ body::before{
   z-index:1;
   max-width:500px;
   margin:auto;
-  padding:24px 18px 120px;
+  padding:34px 20px 130px;
 }
 
-/* HEADER */
+/* HEADER — letterpress card, not glass */
 .header{
+  position:relative;
   display:flex;
+  flex-direction:column;
   align-items:center;
-  gap:16px;
-  padding:18px 20px;
-  border-radius:26px;
+  text-align:center;
+  gap:14px;
+  padding:30px 20px 24px;
 
-  background:var(--glass);
-  backdrop-filter:blur(18px);
+  background:var(--paper2);
+  border:1px solid var(--hairline-gold);
+  box-shadow:var(--shadow);
 
-  border:1px solid rgba(255,255,255,0.65);
+  margin-bottom:8px;
+}
 
-  box-shadow:
-    0 12px 35px rgba(0,0,0,0.06),
-    inset 0 1px 0 rgba(255,255,255,0.7);
-
-  margin-bottom:26px;
+.header::before,
+.header::after{
+  content:'';
+  position:absolute;
+  left:20px;
+  right:20px;
+  height:1px;
+}
+.header::before{
+  top:8px;
+  background:var(--hairline-gold);
+}
+.header::after{
+  bottom:8px;
+  background:var(--hairline-gold);
 }
 
 .logo{
-  width:58px;
-  height:58px;
-  border-radius:18px;
+  width:64px;
+  height:64px;
   object-fit:cover;
-  border:1px solid var(--border2);
-  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  border:1px solid var(--hairline-gold);
+  box-shadow:0 8px 20px rgba(35,31,26,0.10);
+}
+
+.header-text .eyebrow{
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.32em;
+  color:var(--brass);
+  margin-bottom:6px;
 }
 
 .header-text .name{
   font-family:"Cormorant Garamond",serif;
-  font-size:30px;
+  font-size:34px;
   font-weight:600;
-  letter-spacing:.02em;
-  color:var(--gold);
+  letter-spacing:.03em;
+  color:var(--ink);
+  line-height:1;
 }
 
 .header-text .sub{
+  margin-top:6px;
   font-size:10px;
   text-transform:uppercase;
-  letter-spacing:.16em;
-  color:var(--text-soft);
+  letter-spacing:.2em;
+  color:var(--ink-soft);
 }
 
-/* SECTION */
+/* SECTION LABEL — menu heading */
 .section-label{
   display:flex;
   align-items:center;
-  gap:10px;
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:.18em;
-  color:var(--text-dim);
-  margin:24px 0 12px 6px;
+  gap:12px;
+  font-family:"Cormorant Garamond",serif;
+  font-style:italic;
+  font-size:15px;
+  letter-spacing:.04em;
+  color:var(--brass-deep);
+  margin:34px 4px 14px;
+}
+
+.section-label::before{
+  content:'';
+  width:18px;
+  height:1px;
+  background:var(--brass);
+  flex-shrink:0;
 }
 
 .section-label::after{
   content:'';
   flex:1;
   height:1px;
-  background:linear-gradient(
-    90deg,
-    rgba(184,138,47,0.25),
-    transparent
-  );
+  background:linear-gradient(90deg,var(--hairline-gold),transparent);
 }
 
-/* CARD */
+/* CARD — flat paper, hairline border, no blur */
 .card{
   display:flex;
   align-items:center;
   justify-content:space-between;
 
-  padding:16px;
-  margin-bottom:12px;
-
-  border-radius:22px;
+  padding:18px 18px;
+  margin-bottom:10px;
 
   text-decoration:none;
   color:inherit;
 
-  background:var(--glass);
-  backdrop-filter:blur(16px);
+  background:var(--paper2);
+  border:1px solid var(--hairline);
+  border-left:2px solid var(--brass);
 
-  border:1px solid rgba(255,255,255,0.75);
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.05),
-    inset 0 1px 0 rgba(255,255,255,0.8);
+  box-shadow:0 8px 22px rgba(35,31,26,0.045);
 
   transition:
     transform .15s ease,
+    border-color .15s ease,
     box-shadow .15s ease;
 }
 
 .card:active{
   transform:scale(.985);
+  border-left-color:var(--brass-deep);
 }
 
 .card-left{
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:16px;
 }
 
 .icon{
-  width:46px;
-  height:46px;
-
-  border-radius:16px;
+  width:42px;
+  height:42px;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,0.9),
-      rgba(255,248,235,0.7)
-    );
+  background:var(--paper);
+  border:1px solid var(--hairline-gold);
 
-  border:1px solid rgba(184,138,47,0.16);
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.8),
-    0 4px 12px rgba(0,0,0,0.04);
-
-  font-size:19px;
+  font-size:17px;
 }
 
 .card-name{
   font-family:"Cormorant Garamond",serif;
   font-size:20px;
   font-weight:600;
-  color:#2b241b;
+  color:var(--ink);
 }
 
 .card-desc{
   font-size:11px;
-  color:var(--text-soft);
+  color:var(--ink-soft);
+  margin-top:1px;
 }
 
 .arrow{
-  color:var(--gold);
-  font-size:20px;
-  opacity:.65;
+  color:var(--brass);
+  font-size:18px;
+  opacity:.75;
+  font-family:"Cormorant Garamond",serif;
 }
 
 /* GRID */
 .grid{
   display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:10px;
+}
+
+.grid.two{
   grid-template-columns:1fr 1fr;
-  gap:12px;
 }
 
 .tile{
-  padding:18px 10px;
-
-  border-radius:22px;
+  padding:18px 8px 16px;
 
   text-align:center;
   text-decoration:none;
 
-  font-family:"Cormorant Garamond",serif;
-  font-size:17px;
-  font-weight:600;
+  background:var(--paper2);
+  border:1px solid var(--hairline);
+  border-top:2px solid var(--brass);
 
-  color:var(--text);
+  box-shadow:0 8px 20px rgba(35,31,26,0.04);
 
-  background:var(--glass);
-  backdrop-filter:blur(14px);
-
-  border:1px solid rgba(255,255,255,0.75);
-
-  box-shadow:
-    0 10px 25px rgba(0,0,0,0.05),
-    inset 0 1px 0 rgba(255,255,255,0.85);
-
-  transition:transform .15s ease;
+  transition:transform .15s ease, border-color .15s ease;
 }
 
 .tile:active{
   transform:scale(.98);
+  border-top-color:var(--brass-deep);
 }
 
 .tile-emoji{
   display:block;
-  font-size:22px;
+  font-size:19px;
   margin-bottom:8px;
+  opacity:.9;
 }
 
-/* DOCK */
+.tile-name{
+  font-family:"Cormorant Garamond",serif;
+  font-size:15px;
+  font-weight:600;
+  color:var(--ink);
+  letter-spacing:.01em;
+}
+
+/* DOCK — brass hairline, flat ivory */
 .dock{
   position:fixed;
-  bottom:16px;
+  bottom:18px;
   left:50%;
   transform:translateX(-50%);
 
   width:92%;
   max-width:460px;
 
-  padding:10px 8px;
+  padding:12px 6px;
 
   display:flex;
   justify-content:space-around;
 
-  border-radius:28px;
+  background:var(--paper2);
+  border:1px solid var(--hairline-gold);
 
-  background:rgba(255,255,255,0.72);
-  backdrop-filter:blur(24px);
-
-  border:1px solid rgba(255,255,255,0.75);
-
-  box-shadow:
-    0 18px 40px rgba(0,0,0,0.10),
-    inset 0 1px 0 rgba(255,255,255,0.9);
+  box-shadow:0 20px 45px rgba(35,31,26,0.12);
 
   z-index:100;
 }
@@ -285,7 +298,7 @@ body::before{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:5px;
+  gap:6px;
 
   width:22%;
 
@@ -293,40 +306,30 @@ body::before{
 
   font-size:9px;
   text-transform:uppercase;
-  letter-spacing:.08em;
+  letter-spacing:.1em;
 
-  color:var(--text-soft);
+  color:var(--ink-soft);
 }
 
 .dock-icon{
-  width:46px;
-  height:46px;
-
-  border-radius:16px;
+  width:42px;
+  height:42px;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  background:
-    linear-gradient(
-      145deg,
-      #ffffff,
-      #f6efe3
-    );
+  background:var(--paper);
+  border:1px solid var(--hairline-gold);
 
-  border:1px solid rgba(184,138,47,0.14);
-
-  box-shadow:
-    0 4px 12px rgba(0,0,0,0.05),
-    inset 0 1px 0 rgba(255,255,255,0.9);
+  font-size:15px;
 }
 
 /* ANIMATIONS */
 @keyframes fadeUp{
   from{
     opacity:0;
-    transform:translateY(8px);
+    transform:translateY(6px);
   }
   to{
     opacity:1;
@@ -337,7 +340,7 @@ body::before{
 .header,
 .card,
 .tile{
-  animation:fadeUp .22s ease;
+  animation:fadeUp .25s ease;
 }
 </style>
 </head>
@@ -349,10 +352,10 @@ body::before{
   <!-- HEADER -->
   <div class="header">
     <img src="LOGO.png" class="logo" alt="Grey Corner">
-
     <div class="header-text">
+      <div class="eyebrow">Management Hub</div>
       <div class="name">Grey Corner</div>
-      <div class="sub">Management Hub · Fès</div>
+      <div class="sub">Fès · Maroc</div>
     </div>
   </div>
 
@@ -373,15 +376,15 @@ body::before{
   <div class="grid">
     <a href="https://feuille-de-presence.pages.dev/" class="tile">
       <span class="tile-emoji">📋</span>
-      Présence
+      <span class="tile-name">Présence</span>
     </a>
     <a href="https://pointage-greycorner.pages.dev/" class="tile">
       <span class="tile-emoji">⏱️</span>
-      Pointage
+      <span class="tile-name">Pointage</span>
     </a>
     <a href="https://paie-grey-corner.pages.dev/" class="tile">
       <span class="tile-emoji">💵</span>
-      Paie
+      <span class="tile-name">Paie</span>
     </a>
   </div>
 
@@ -410,18 +413,18 @@ body::before{
     <span class="arrow">›</span>
   </a>
 
-  <div class="grid">
+  <div class="grid two">
     <a href="https://fiche-technique.pages.dev/" class="tile">
       <span class="tile-emoji">📝</span>
-      Fiche Tech
+      <span class="tile-name">Fiche Tech</span>
     </a>
     <a href="https://costfood.pages.dev/" class="tile">
       <span class="tile-emoji">🧮</span>
-      Food Cost
+      <span class="tile-name">Food Cost</span>
     </a>
   </div>
 
-  <!-- ESPACE SERVEURS -->
+  <!-- SERVICE -->
   <div class="section-label">Service</div>
 
   <a href="https://espace-serveurs-hub.pages.dev/admin.html" class="card">
