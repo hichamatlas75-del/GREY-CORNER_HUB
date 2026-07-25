@@ -1,3 +1,8 @@
+Voici le code HTML mis à jour.
+
+Le lien `[https://grey-vault.pages.dev](https://grey-vault.pages.dev)` a été intégré au dock sous forme d'icône **Vault**, et le bouton **Avis** a été transformé en un **bouton flottant** élégant qui reste fixé en bas à droite de l'écran, parfaitement fidèle au design de l'établissement.
+
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -325,6 +330,43 @@ body::before{
   font-size:15px;
 }
 
+/* FLOATING AVIS BUTTON */
+.floating-reviews{
+  position:fixed;
+  bottom:90px;
+  right:16px;
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  padding:10px 16px;
+
+  background:var(--paper2);
+  border:1px solid var(--hairline-gold);
+  border-left:3px solid var(--brass);
+
+  box-shadow:0 12px 30px rgba(35,31,26,0.15);
+
+  text-decoration:none;
+  color:var(--ink);
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+
+  z-index:101;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+
+.floating-reviews:active{
+  transform:scale(.95);
+}
+
+.floating-reviews-icon{
+  font-size:16px;
+}
+
 /* ANIMATIONS */
 @keyframes fadeUp{
   from{
@@ -462,12 +504,18 @@ body::before{
 
 </div>
 
+<!-- FLOATING AVIS BUTTON -->
+<a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1" class="floating-reviews">
+  <span class="floating-reviews-icon">⭐</span>
+  <span>Avis</span>
+</a>
+
 <!-- DOCK -->
 <div class="dock">
 
-  <a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1">
-    <div class="dock-icon">⭐</div>
-    Avis
+  <a href="https://grey-vault.pages.dev">
+    <div class="dock-icon">🔐</div>
+    Vault
   </a>
 
   <a href="https://dashboard-presence.pages.dev/">
@@ -489,3 +537,5 @@ body::before{
 
 </body>
 </html>
+
+```
