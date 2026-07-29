@@ -1,10 +1,10 @@
-const CACHE_NAME = 'grey-corner-hub-v2';
+const CACHE_NAME = 'grey-corner-hub-v3';
 const ASSETS = [
-  './',
-  './index.html',
-  './manifest.json',
-  './pwa-icon.png',
-  './LOGO.png'
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/pwa-icon.png',
+  '/LOGO.png'
 ];
 
 // Install Event
@@ -31,11 +31,26 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch Event
+// Fetch Event - Cache first with navigation rescue to prevent ERR_FAILED
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request);
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      return fetch(event.request).then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200 && event.request.url.startsWith(self.location.origin)) {
+          const responseClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
+        }
+        return networkResponse;
+      }).catch(() => {
+        if (event.request.mode === 'navigate') {
+          return caches.match('/') || caches.match('/index.html');
+        }
+      });
     })
   );
 });
