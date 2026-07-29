@@ -1,8 +1,9 @@
-const CACHE_NAME = 'grey-corner-hub-v1';
+const CACHE_NAME = 'grey-corner-hub-v2';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
+  './pwa-icon.png',
   './LOGO.png'
 ];
 

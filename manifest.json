@@ -9,10 +9,15 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "LOGO.png",
+      "src": "pwa-icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "LOGO.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ]
 }
