@@ -10,13 +10,11 @@
 <link rel="icon" type="image/png" href="pwa-icon.png"/>
 <link rel="apple-touch-icon" href="pwa-icon.png"/>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  /* Ivory & antique brass — a fine-dining menu card, not a glass panel */
+  /* Ivory & antique brass — fine-dining menu card aesthetic */
   --paper:#faf7f0;
   --paper2:#fffefb;
   --ink:#231f1a;
@@ -31,6 +29,22 @@
   --hairline-gold:rgba(156,122,60,0.35);
 
   --shadow:0 18px 40px rgba(35,31,26,0.06);
+
+  /* SECTION COLOR CODES — refined luxury muted tones */
+  /* RH: Terracotta / Warm Copper */
+  --sec-rh:#964b38;
+  --sec-rh-bg:rgba(150,75,56,0.05);
+  --sec-rh-border:rgba(150,75,56,0.35);
+
+  /* Finance & Stock: Deep Emerald / Sage */
+  --sec-finance:#2e5a44;
+  --sec-finance-bg:rgba(46,90,68,0.05);
+  --sec-finance-border:rgba(46,90,68,0.35);
+
+  /* Service: Deep Sapphire / Indigo */
+  --sec-service:#2c4366;
+  --sec-service-bg:rgba(44,67,102,0.05);
+  --sec-service-border:rgba(44,67,102,0.35);
 }
 
 *{
@@ -50,7 +64,7 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-/* fine paper grain, barely there */
+/* fine paper grain */
 body::before{
   content:'';
   position:fixed;
@@ -68,7 +82,7 @@ body::before{
   padding:34px 20px 130px;
 }
 
-/* HEADER — letterpress card, not glass */
+/* HEADER */
 .header{
   position:relative;
   display:flex;
@@ -82,7 +96,7 @@ body::before{
   border:1px solid var(--hairline-gold);
   box-shadow:var(--shadow);
 
-  margin-bottom:8px;
+  margin-bottom:16px;
 }
 
 .header::before,
@@ -135,86 +149,86 @@ body::before{
   color:var(--ink-soft);
 }
 
-/* SEARCH — same paper-card language as the header */
-.search-wrap{
+/* RECHERCHE RAPIDE */
+.search-container{
   position:relative;
-  margin:14px 0 4px;
+  margin-bottom:20px;
 }
 
 .search-input{
   width:100%;
-  padding:14px 40px 14px 18px;
+  padding:12px 38px 12px 38px;
   background:var(--paper2);
   border:1px solid var(--hairline-gold);
-  box-shadow:0 8px 22px rgba(35,31,26,0.045);
+  border-radius:0;
   font-family:"DM Sans",sans-serif;
   font-size:13px;
   color:var(--ink);
-  letter-spacing:.02em;
+  box-shadow:0 4px 14px rgba(35,31,26,0.03);
+  outline:none;
+  transition:border-color .2s ease, box-shadow .2s ease;
 }
 
 .search-input::placeholder{
-  color:var(--ink-dim);
+  color:var(--ink-soft);
+  opacity:0.65;
+  font-style:italic;
 }
 
 .search-input:focus{
-  outline:none;
   border-color:var(--brass);
+  box-shadow:0 6px 18px rgba(156,122,60,0.12);
 }
 
-.search-icon{
+.search-icon-left{
   position:absolute;
-  right:16px;
+  left:12px;
   top:50%;
   transform:translateY(-50%);
-  font-size:14px;
   color:var(--brass);
   pointer-events:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .search-clear{
   position:absolute;
-  right:14px;
+  right:10px;
   top:50%;
   transform:translateY(-50%);
   background:none;
   border:none;
-  font-size:16px;
   color:var(--ink-soft);
+  font-size:16px;
   cursor:pointer;
   display:none;
   padding:4px;
   line-height:1;
 }
 
-.search-empty{
-  display:none;
-  text-align:center;
-  padding:34px 16px;
-  color:var(--ink-soft);
-  font-family:"Cormorant Garamond",serif;
-  font-style:italic;
-  font-size:16px;
+.search-clear.show{
+  display:block;
 }
 
-/* SECTION LABEL — menu heading */
+/* SECTION LABEL */
 .section-label{
   display:flex;
   align-items:center;
   gap:12px;
   font-family:"Cormorant Garamond",serif;
   font-style:italic;
-  font-size:15px;
+  font-size:16px;
+  font-weight:600;
   letter-spacing:.04em;
-  color:var(--brass-deep);
-  margin:34px 4px 14px;
+  margin:28px 4px 14px;
+  transition:opacity .2s ease;
 }
 
 .section-label::before{
   content:'';
   width:18px;
   height:1px;
-  background:var(--brass);
   flex-shrink:0;
 }
 
@@ -222,10 +236,43 @@ body::before{
   content:'';
   flex:1;
   height:1px;
-  background:linear-gradient(90deg,var(--hairline-gold),transparent);
 }
 
-/* CARD — flat paper, hairline border, no blur */
+/* COLOR-CODED SECTIONS */
+/* RH */
+.sec-rh.section-label{
+  color:var(--sec-rh);
+}
+.sec-rh.section-label::before{
+  background:var(--sec-rh);
+}
+.sec-rh.section-label::after{
+  background:linear-gradient(90deg,var(--sec-rh-border),transparent);
+}
+
+/* Finance */
+.sec-finance.section-label{
+  color:var(--sec-finance);
+}
+.sec-finance.section-label::before{
+  background:var(--sec-finance);
+}
+.sec-finance.section-label::after{
+  background:linear-gradient(90deg,var(--sec-finance-border),transparent);
+}
+
+/* Service */
+.sec-service.section-label{
+  color:var(--sec-service);
+}
+.sec-service.section-label::before{
+  background:var(--sec-service);
+}
+.sec-service.section-label::after{
+  background:linear-gradient(90deg,var(--sec-service-border),transparent);
+}
+
+/* CARDS */
 .card{
   display:flex;
   align-items:center;
@@ -239,7 +286,6 @@ body::before{
 
   background:var(--paper2);
   border:1px solid var(--hairline);
-  border-left:2px solid var(--brass);
 
   box-shadow:0 8px 22px rgba(35,31,26,0.045);
 
@@ -249,31 +295,53 @@ body::before{
     box-shadow .15s ease;
 }
 
+.card.sec-rh{
+  border-left:3px solid var(--sec-rh);
+}
+.card.sec-rh .icon{
+  border-color:var(--sec-rh-border);
+  color:var(--sec-rh);
+  background:var(--sec-rh-bg);
+}
+
+.card.sec-finance{
+  border-left:3px solid var(--sec-finance);
+}
+.card.sec-finance .icon{
+  border-color:var(--sec-finance-border);
+  color:var(--sec-finance);
+  background:var(--sec-finance-bg);
+}
+
+.card.sec-service{
+  border-left:3px solid var(--sec-service);
+}
+.card.sec-service .icon{
+  border-color:var(--sec-service-border);
+  color:var(--sec-service);
+  background:var(--sec-service-bg);
+}
+
 .card:active{
   transform:scale(.985);
-  border-left-color:var(--brass-deep);
 }
 
 .card-left{
   display:flex;
   align-items:center;
   gap:16px;
-  min-width:0;
 }
 
 .icon{
   width:42px;
   height:42px;
-  flex-shrink:0;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  background:var(--paper);
   border:1px solid var(--hairline-gold);
-
-  font-size:17px;
+  flex-shrink:0;
 }
 
 .card-name{
@@ -294,14 +362,14 @@ body::before{
   font-size:18px;
   opacity:.75;
   font-family:"Cormorant Garamond",serif;
-  flex-shrink:0;
 }
 
-/* GRID */
+/* GRID & TILES */
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
   gap:10px;
+  margin-bottom:10px;
 }
 
 .grid.two{
@@ -316,23 +384,46 @@ body::before{
 
   background:var(--paper2);
   border:1px solid var(--hairline);
-  border-top:2px solid var(--brass);
 
   box-shadow:0 8px 20px rgba(35,31,26,0.04);
 
   transition:transform .15s ease, border-color .15s ease;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.tile.sec-rh{
+  border-top:2px solid var(--sec-rh);
+}
+.tile.sec-rh .tile-icon{
+  color:var(--sec-rh);
+}
+
+.tile.sec-finance{
+  border-top:2px solid var(--sec-finance);
+}
+.tile.sec-finance .tile-icon{
+  color:var(--sec-finance);
+}
+
+.tile.sec-service{
+  border-top:2px solid var(--sec-service);
+}
+.tile.sec-service .tile-icon{
+  color:var(--sec-service);
 }
 
 .tile:active{
   transform:scale(.98);
-  border-top-color:var(--brass-deep);
 }
 
-.tile-emoji{
-  display:block;
-  font-size:19px;
+.tile-icon{
+  display:flex;
+  align-items:center;
+  justify-content:center;
   margin-bottom:8px;
-  opacity:.9;
 }
 
 .tile-name{
@@ -343,7 +434,17 @@ body::before{
   letter-spacing:.01em;
 }
 
-/* DOCK — brass hairline, flat ivory */
+/* NO RESULTS NOTICE */
+.no-results{
+  display:none;
+  text-align:center;
+  padding:30px 20px;
+  color:var(--ink-soft);
+  font-style:italic;
+  font-size:14px;
+}
+
+/* DOCK */
 .dock{
   position:fixed;
   bottom:18px;
@@ -381,6 +482,11 @@ body::before{
   letter-spacing:.1em;
 
   color:var(--ink-soft);
+  transition:color .15s ease;
+}
+
+.dock a:hover, .dock a:active{
+  color:var(--brass-deep);
 }
 
 .dock-icon{
@@ -393,8 +499,7 @@ body::before{
 
   background:var(--paper);
   border:1px solid var(--hairline-gold);
-
-  font-size:15px;
+  color:var(--brass);
 }
 
 /* FLOATING AVIS BUTTON */
@@ -431,7 +536,9 @@ body::before{
 }
 
 .floating-reviews-icon{
-  font-size:16px;
+  color:#d97706; /* Star Gold */
+  display:flex;
+  align-items:center;
 }
 
 /* ANIMATIONS */
@@ -448,7 +555,8 @@ body::before{
 
 .header,
 .card,
-.tile{
+.tile,
+.search-container{
   animation:fadeUp .25s ease;
 }
 
@@ -540,7 +648,6 @@ body::before{
   padding:4px 6px;
   line-height:1;
 }
-
 </style>
 </head>
 
@@ -573,26 +680,148 @@ body::before{
     </div>
   </div>
 
-  <!-- SEARCH -->
-  <div class="search-wrap">
-    <input id="search-input" class="search-input" type="text" placeholder="Rechercher un module…" autocomplete="off">
-    <span id="search-icon" class="search-icon">🔍</span>
-    <button id="search-clear" class="search-clear" title="Effacer">✕</button>
+  <!-- BARRE DE RECHERCHE RAPIDE -->
+  <div class="search-container">
+    <span class="search-icon-left">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </span>
+    <input type="text" id="search-input" class="search-input" placeholder="Rechercher un module (ex: Paie, Caisse, Stock)..." aria-label="Rechercher un module">
+    <button id="search-clear" class="search-clear" title="Effacer la recherche">✕</button>
   </div>
 
-  <div id="search-empty" class="search-empty">Aucun module ne correspond à votre recherche.</div>
+  <div id="no-results" class="no-results">Aucun module ne correspond à votre recherche.</div>
 
-  <!-- SECTIONS (rendered dynamically from MODULES config) -->
-  <div id="sections-container"></div>
+  <!-- SECTION RH -->
+  <div class="section-label sec-rh" data-section="rh">Ressources Humaines</div>
 
-  <!-- SERVICE (kept separate as it stands outside the two-column groups) -->
-  <div id="service-container"></div>
+  <a href="https://personnelgreycorner.pages.dev/" class="card sec-rh" data-search="gestion rh staff contrats personnel ressources humaines">
+    <div class="card-left">
+      <div class="icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div>
+        <div class="card-name">Gestion RH</div>
+        <div class="card-desc">Staff & contrats</div>
+      </div>
+    </div>
+    <span class="arrow">›</span>
+  </a>
+
+  <div class="grid" data-section="rh">
+    <a href="https://feuille-de-presence.pages.dev/" class="tile sec-rh" data-search="presence feuille de presence rtt conges rh">
+      <span class="tile-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><polyline points="9 11 12 14 22 4"/></svg>
+      </span>
+      <span class="tile-name">Présence</span>
+    </a>
+    <a href="https://pointage-greycorner.pages.dev/" class="tile sec-rh" data-search="pointage heures horloge time tracker rh">
+      <span class="tile-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </span>
+      <span class="tile-name">Pointage</span>
+    </a>
+    <a href="https://paie-grey-corner.pages.dev/" class="tile sec-rh" data-search="paie salaire fiche de paie virement rh">
+      <span class="tile-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+      </span>
+      <span class="tile-name">Paie</span>
+    </a>
+  </div>
+
+  <!-- SECTION FINANCE & STOCK -->
+  <div class="section-label sec-finance" data-section="finance">Finance & Stock</div>
+
+  <a href="https://grey-stock.pages.dev/" class="card sec-finance" data-search="suivi commandes stock tracking journalier inventaire">
+    <div class="card-left">
+      <div class="icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      </div>
+      <div>
+        <div class="card-name">Suivi Commandes</div>
+        <div class="card-desc">Tracking journalier & stock</div>
+      </div>
+    </div>
+    <span class="arrow">›</span>
+  </a>
+
+  <a href="https://depenses-grey-corner.pages.dev/" class="card sec-finance" data-search="comptabilite depenses achats argent banque compta">
+    <div class="card-left">
+      <div class="icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"/></svg>
+      </div>
+      <div>
+        <div class="card-name">Comptabilité</div>
+        <div class="card-desc">Dépenses & achats</div>
+      </div>
+    </div>
+    <span class="arrow">›</span>
+  </a>
+
+  <!-- MODIFIÉ: ACHATS ET RECETTE CAISSE -->
+  <a href="https://achats-grey-corner.pages.dev/" class="card sec-finance" data-search="achats et recette caisse commandes fournisseurs suivi caisse vente recette">
+    <div class="card-left">
+      <div class="icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      </div>
+      <div>
+        <div class="card-name">Achats & Recette Caisse</div>
+        <div class="card-desc">Commandes fournisseurs & recettes de caisse</div>
+      </div>
+    </div>
+    <span class="arrow">›</span>
+  </a>
+
+  <a href="https://facture-grey-corner.pages.dev/" class="card sec-finance" data-search="factures facturation suivi reglements avoirs">
+    <div class="card-left">
+      <div class="icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1z"/><path d="M16 8H8"/><path d="M16 12H8"/><path d="M13 16H8"/></svg>
+      </div>
+      <div>
+        <div class="card-name">Factures</div>
+        <div class="card-desc">Facturation & suivi</div>
+      </div>
+    </div>
+    <span class="arrow">›</span>
+  </a>
+
+  <div class="grid two" data-section="finance">
+    <a href="https://fiche-technique.pages.dev/" class="tile sec-finance" data-search="fiche tech technique recette ingredients portion">
+      <span class="tile-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </span>
+      <span class="tile-name">Fiche Tech</span>
+    </a>
+    <a href="https://costfood.pages.dev/" class="tile sec-finance" data-search="food cost cout matiere marge rentabilite">
+      <span class="tile-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"/></svg>
+      </span>
+      <span class="tile-name">Food Cost</span>
+    </a>
+  </div>
+
+  <!-- SECTION SERVICE -->
+  <div class="section-label sec-service" data-section="service">Service</div>
+
+  <a href="https://espace-serveurs-hub.pages.dev/admin.html" class="card sec-service" data-search="espace serveurs live orders kitchen control cuisine salle service">
+    <div class="card-left">
+      <div class="icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/><path d="M12 2v2"/></svg>
+      </div>
+      <div>
+        <div class="card-name">Espace Serveurs</div>
+        <div class="card-desc">Live orders & kitchen control</div>
+      </div>
+    </div>
+    <span class="arrow">›</span>
+  </a>
 
 </div>
 
 <!-- FLOATING AVIS BUTTON -->
-<a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1" class="floating-reviews">
-  <span class="floating-reviews-icon">⭐</span>
+<a href="https://search.google.com/local/reviews?placeid=ChIJs_pxZQCLnw0RcXRA2bTib5k&sort=1" class="floating-reviews" target="_blank" rel="noopener">
+  <span class="floating-reviews-icon">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+  </span>
   <span>Avis</span>
 </a>
 
@@ -600,153 +829,36 @@ body::before{
 <div class="dock">
 
   <a href="https://grey-vault.pages.dev">
-    <div class="dock-icon">🔐</div>
+    <div class="dock-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
     Vault
   </a>
 
   <a href="https://dashboard-presence.pages.dev/">
-    <div class="dock-icon">📊</div>
+    <div class="dock-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    </div>
     Live
   </a>
 
   <a href="https://greycorner.pages.dev/">
-    <div class="dock-icon">🏠</div>
+    <div class="dock-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
     Site
   </a>
 
   <a href="https://grey-corner-app.pages.dev/">
-    <div class="dock-icon">📅</div>
+    <div class="dock-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    </div>
     Planning
   </a>
 
 </div>
 
 <script>
-  /* ============================================================
-     MODULES CONFIG — single source of truth for every hub entry.
-     Add / remove / rename a module by editing this array only.
-     type: "card" (full row, name+desc) or "tile" (compact grid item)
-     ============================================================ */
-  const SECTIONS = [
-    {
-      label: "Ressources Humaines",
-      items: [
-        { type:"card", name:"Gestion RH", desc:"Staff & contrats", icon:"👥", url:"https://personnelgreycorner.pages.dev/" },
-        { type:"tile", name:"Présence", emoji:"📋", url:"https://feuille-de-presence.pages.dev/" },
-        { type:"tile", name:"Pointage", emoji:"⏱️", url:"https://pointage-greycorner.pages.dev/" },
-        { type:"tile", name:"Paie", emoji:"💵", url:"https://paie-grey-corner.pages.dev/" }
-      ]
-    },
-    {
-      label: "Finance & Stock",
-      items: [
-        { type:"card", name:"Suivi Commandes", desc:"Tracking journalier & stock", icon:"📦", url:"https://grey-stock.pages.dev/" },
-        { type:"card", name:"Comptabilité", desc:"Dépenses & achats", icon:"💰", url:"https://depenses-grey-corner.pages.dev/" },
-        { type:"card", name:"Achats & Recette Caisse", desc:"Commandes fournisseurs et recette journalière", icon:"🛒", url:"https://achats-grey-corner.pages.dev/" },
-        { type:"card", name:"Factures", desc:"Facturation & suivi", icon:"🧾", url:"https://facture-grey-corner.pages.dev/" },
-        { type:"tile", name:"Fiche Tech", emoji:"📝", url:"https://fiche-technique.pages.dev/", twoCol:true },
-        { type:"tile", name:"Food Cost", emoji:"🧮", url:"https://costfood.pages.dev/", twoCol:true }
-      ]
-    }
-  ];
-
-  const SERVICE_SECTION = {
-    label: "Service",
-    items: [
-      { type:"card", name:"Espace Serveurs", desc:"Live orders & kitchen control", icon:"🔱", url:"https://espace-serveurs-hub.pages.dev/admin.html" }
-    ]
-  };
-
-  const searchableText = (item) =>
-    (item.name + " " + (item.desc || "")).toLowerCase();
-
-  function renderCard(item){
-    return `<a href="${item.url}" class="card" data-search="${searchableText(item)}">
-      <div class="card-left">
-        <div class="icon">${item.icon}</div>
-        <div>
-          <div class="card-name">${item.name}</div>
-          <div class="card-desc">${item.desc}</div>
-        </div>
-      </div>
-      <span class="arrow">›</span>
-    </a>`;
-  }
-
-  function renderTile(item){
-    return `<a href="${item.url}" class="tile" data-search="${searchableText(item)}">
-      <span class="tile-emoji">${item.emoji}</span>
-      <span class="tile-name">${item.name}</span>
-    </a>`;
-  }
-
-  function renderSection(section){
-    const cards = section.items.filter(i => i.type === "card").map(renderCard).join("");
-    const threeColTiles = section.items.filter(i => i.type === "tile" && !i.twoCol);
-    const twoColTiles = section.items.filter(i => i.type === "tile" && i.twoCol);
-
-    let html = `<div class="section-label">${section.label}</div>` + cards;
-
-    if (threeColTiles.length){
-      html += `<div class="grid">${threeColTiles.map(renderTile).join("")}</div>`;
-    }
-    if (twoColTiles.length){
-      html += `<div class="grid two">${twoColTiles.map(renderTile).join("")}</div>`;
-    }
-    return `<div class="section-block">${html}</div>`;
-  }
-
-  document.getElementById("sections-container").innerHTML =
-    SECTIONS.map(renderSection).join("");
-  document.getElementById("service-container").innerHTML =
-    renderSection(SERVICE_SECTION);
-
-  /* ============================================================
-     SEARCH — filters every .card and .tile by data-search attr
-     ============================================================ */
-  const searchInput = document.getElementById("search-input");
-  const searchClear = document.getElementById("search-clear");
-  const searchEmpty = document.getElementById("search-empty");
-  const sectionLabels = document.querySelectorAll(".section-label");
-
-  function applySearch(){
-    const q = searchInput.value.trim().toLowerCase();
-    searchClear.style.display = q ? "block" : "none";
-
-    let anyVisible = false;
-
-    // toggle each item
-    document.querySelectorAll("[data-search]").forEach(el => {
-      const match = !q || el.getAttribute("data-search").includes(q);
-      el.style.display = match ? "" : "none";
-      if (match) anyVisible = true;
-    });
-
-    // hide section labels whose section has zero visible items
-    document.querySelectorAll(".section-label").forEach(label => {
-      let sib = label.nextElementSibling;
-      let visible = false;
-      while (sib && !sib.classList.contains("section-label")){
-        if (sib.matches("[data-search]") && sib.style.display !== "none") visible = true;
-        if (sib.classList.contains("grid")){
-          const anyChild = Array.from(sib.children).some(c => c.style.display !== "none");
-          if (anyChild) visible = true;
-        }
-        sib = sib.nextElementSibling;
-      }
-      label.style.display = visible ? "" : "none";
-    });
-
-    searchEmpty.style.display = (q && !anyVisible) ? "block" : "none";
-  }
-
-  searchInput.addEventListener("input", applySearch);
-  searchClear.addEventListener("click", () => {
-    searchInput.value = "";
-    applySearch();
-    searchInput.focus();
-  });
-
   // Service Worker Registration
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -761,18 +873,15 @@ body::before{
   const btnCloseBanner = document.getElementById('btn-close-banner');
   const pwaSub = document.getElementById('pwa-banner-sub');
 
-  // Check if app is already running as installed PWA (standalone)
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 
   if (!isStandalone) {
-    // 1. Android / Chrome / Edge install prompt listener
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
       if (pwaBanner) pwaBanner.classList.add('show');
     });
 
-    // 2. iOS Safari detection (iOS doesn't support beforeinstallprompt)
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     if (isIOS && pwaBanner) {
       if (pwaSub) pwaSub.textContent = "Appuyez sur Partager ⎋ puis 'Sur l'écran d'accueil'";
@@ -798,6 +907,81 @@ body::before{
   if (btnCloseBanner) {
     btnCloseBanner.addEventListener('click', () => {
       if (pwaBanner) pwaBanner.classList.remove('show');
+    });
+  }
+
+  // LOGIQUE DE RECHERCHE DYNAMIQUE
+  const searchInput = document.getElementById('search-input');
+  const searchClear = document.getElementById('search-clear');
+  const noResults = document.getElementById('no-results');
+  const cards = document.querySelectorAll('.card');
+  const tiles = document.querySelectorAll('.tile');
+
+  function filterItems() {
+    const query = searchInput.value.trim().toLowerCase();
+
+    if (query.length > 0) {
+      searchClear.classList.add('show');
+    } else {
+      searchClear.classList.remove('show');
+    }
+
+    let totalVisible = 0;
+
+    // Filter Cards
+    cards.forEach(card => {
+      const searchData = card.getAttribute('data-search') || '';
+      const text = card.textContent.toLowerCase() + ' ' + searchData;
+      if (text.includes(query)) {
+        card.style.display = 'flex';
+        totalVisible++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Filter Tiles
+    tiles.forEach(tile => {
+      const searchData = tile.getAttribute('data-search') || '';
+      const text = tile.textContent.toLowerCase() + ' ' + searchData;
+      if (text.includes(query)) {
+        tile.style.display = 'flex';
+        totalVisible++;
+      } else {
+        tile.style.display = 'none';
+      }
+    });
+
+    // Manage empty sections visibility
+    ['rh', 'finance', 'service'].forEach(sec => {
+      const secLabel = document.querySelector(`.section-label[data-section="${sec}"]`);
+      const secCards = document.querySelectorAll(`.card.sec-${sec}`);
+      const secTiles = document.querySelectorAll(`.tile.sec-${sec}`);
+
+      let secVisibleCount = 0;
+      secCards.forEach(c => { if (c.style.display !== 'none') secVisibleCount++; });
+      secTiles.forEach(t => { if (t.style.display !== 'none') secVisibleCount++; });
+
+      if (secLabel) {
+        secLabel.style.display = (secVisibleCount > 0) ? 'flex' : 'none';
+      }
+    });
+
+    // Toggle No Results Notice
+    if (noResults) {
+      noResults.style.display = (totalVisible === 0) ? 'block' : 'none';
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', filterItems);
+  }
+
+  if (searchClear) {
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      filterItems();
+      searchInput.focus();
     });
   }
 </script>
