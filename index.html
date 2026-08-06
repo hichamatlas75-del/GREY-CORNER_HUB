@@ -859,10 +859,33 @@ body::before{
 </div>
 
 <script>
-  // Service Worker Registration
+  // Service Worker Registration & Auto-Update Force Check
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').catch(err => console.error('Service Worker Error:', err));
+      navigator.serviceWorker.register('/sw.js').then((reg) => {
+        // Force l'inspection de mise à jour du SW à chaque ouverture
+        reg.update();
+
+        reg.addEventListener('updatefound', () => {
+          const newWorker = reg.installing;
+          if (newWorker) {
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                // Nouveau contenu détecté, rechargement automatique
+                window.location.reload();
+              }
+            });
+          }
+        });
+      }).catch(err => console.error('Service Worker Error:', err));
+
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+          refreshing = true;
+          window.location.reload();
+        }
+      });
     });
   }
 
