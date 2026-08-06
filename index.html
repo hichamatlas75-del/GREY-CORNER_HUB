@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,6 +10,8 @@
 <link rel="icon" type="image/png" href="pwa-icon.png"/>
 <link rel="apple-touch-icon" href="pwa-icon.png"/>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
@@ -134,6 +135,68 @@ body::before{
   color:var(--ink-soft);
 }
 
+/* SEARCH — same paper-card language as the header */
+.search-wrap{
+  position:relative;
+  margin:14px 0 4px;
+}
+
+.search-input{
+  width:100%;
+  padding:14px 40px 14px 18px;
+  background:var(--paper2);
+  border:1px solid var(--hairline-gold);
+  box-shadow:0 8px 22px rgba(35,31,26,0.045);
+  font-family:"DM Sans",sans-serif;
+  font-size:13px;
+  color:var(--ink);
+  letter-spacing:.02em;
+}
+
+.search-input::placeholder{
+  color:var(--ink-dim);
+}
+
+.search-input:focus{
+  outline:none;
+  border-color:var(--brass);
+}
+
+.search-icon{
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:14px;
+  color:var(--brass);
+  pointer-events:none;
+}
+
+.search-clear{
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  background:none;
+  border:none;
+  font-size:16px;
+  color:var(--ink-soft);
+  cursor:pointer;
+  display:none;
+  padding:4px;
+  line-height:1;
+}
+
+.search-empty{
+  display:none;
+  text-align:center;
+  padding:34px 16px;
+  color:var(--ink-soft);
+  font-family:"Cormorant Garamond",serif;
+  font-style:italic;
+  font-size:16px;
+}
+
 /* SECTION LABEL — menu heading */
 .section-label{
   display:flex;
@@ -195,11 +258,13 @@ body::before{
   display:flex;
   align-items:center;
   gap:16px;
+  min-width:0;
 }
 
 .icon{
   width:42px;
   height:42px;
+  flex-shrink:0;
 
   display:flex;
   align-items:center;
@@ -229,6 +294,7 @@ body::before{
   font-size:18px;
   opacity:.75;
   font-family:"Cormorant Garamond",serif;
+  flex-shrink:0;
 }
 
 /* GRID */
@@ -474,6 +540,19 @@ body::before{
   padding:4px 6px;
   line-height:1;
 }
+
+/* WIDER LAYOUT ON DESKTOP */
+@media (min-width: 900px){
+  .page{
+    max-width:920px;
+  }
+  #sections-container{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0 32px;
+    align-items:start;
+  }
+}
 </style>
 </head>
 
@@ -506,106 +585,20 @@ body::before{
     </div>
   </div>
 
-  <!-- RH -->
-  <div class="section-label">Ressources Humaines</div>
-
-  <a href="https://personnelgreycorner.pages.dev/" class="card">
-    <div class="card-left">
-      <div class="icon">👥</div>
-      <div>
-        <div class="card-name">Gestion RH</div>
-        <div class="card-desc">Staff & contrats</div>
-      </div>
-    </div>
-    <span class="arrow">›</span>
-  </a>
-
-  <div class="grid">
-    <a href="https://feuille-de-presence.pages.dev/" class="tile">
-      <span class="tile-emoji">📋</span>
-      <span class="tile-name">Présence</span>
-    </a>
-    <a href="https://pointage-greycorner.pages.dev/" class="tile">
-      <span class="tile-emoji">⏱️</span>
-      <span class="tile-name">Pointage</span>
-    </a>
-    <a href="https://paie-grey-corner.pages.dev/" class="tile">
-      <span class="tile-emoji">💵</span>
-      <span class="tile-name">Paie</span>
-    </a>
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <input id="search-input" class="search-input" type="text" placeholder="Rechercher un module…" autocomplete="off">
+    <span id="search-icon" class="search-icon">🔍</span>
+    <button id="search-clear" class="search-clear" title="Effacer">✕</button>
   </div>
 
-  <!-- FINANCE & STOCK -->
-  <div class="section-label">Finance & Stock</div>
+  <div id="search-empty" class="search-empty">Aucun module ne correspond à votre recherche.</div>
 
-  <a href="https://grey-stock.pages.dev/" class="card">
-    <div class="card-left">
-      <div class="icon">📦</div>
-      <div>
-        <div class="card-name">Suivi Commandes</div>
-        <div class="card-desc">Tracking journalier & stock</div>
-      </div>
-    </div>
-    <span class="arrow">›</span>
-  </a>
+  <!-- SECTIONS (rendered dynamically from MODULES config) -->
+  <div id="sections-container"></div>
 
-  <a href="https://depenses-grey-corner.pages.dev/" class="card">
-    <div class="card-left">
-      <div class="icon">💰</div>
-      <div>
-        <div class="card-name">Comptabilité</div>
-        <div class="card-desc">Dépenses & achats</div>
-      </div>
-    </div>
-    <span class="arrow">›</span>
-  </a>
-
-  <a href="https://achats-grey-corner.pages.dev/" class="card">
-    <div class="card-left">
-      <div class="icon">🛒</div>
-      <div>
-        <div class="card-name">Achats et Recette caisse</div>
-        <div class="card-desc">Commandes fournisseurs et recette journalière</div>
-      </div>
-    </div>
-    <span class="arrow">›</span>
-  </a>
-
-  <a href="https://facture-grey-corner.pages.dev/" class="card">
-    <div class="card-left">
-      <div class="icon">🧾</div>
-      <div>
-        <div class="card-name">Factures</div>
-        <div class="card-desc">Facturation & suivi</div>
-      </div>
-    </div>
-    <span class="arrow">›</span>
-  </a>
-
-  <div class="grid two">
-    <a href="https://fiche-technique.pages.dev/" class="tile">
-      <span class="tile-emoji">📝</span>
-      <span class="tile-name">Fiche Tech</span>
-    </a>
-    <a href="https://costfood.pages.dev/" class="tile">
-      <span class="tile-emoji">🧮</span>
-      <span class="tile-name">Food Cost</span>
-    </a>
-  </div>
-
-  <!-- SERVICE -->
-  <div class="section-label">Service</div>
-
-  <a href="https://espace-serveurs-hub.pages.dev/admin.html" class="card">
-    <div class="card-left">
-      <div class="icon">🔱</div>
-      <div>
-        <div class="card-name">Espace Serveurs</div>
-        <div class="card-desc">Live orders & kitchen control</div>
-      </div>
-    </div>
-    <span class="arrow">›</span>
-  </a>
+  <!-- SERVICE (kept separate as it stands outside the two-column groups) -->
+  <div id="service-container"></div>
 
 </div>
 
@@ -641,6 +634,131 @@ body::before{
 </div>
 
 <script>
+  /* ============================================================
+     MODULES CONFIG — single source of truth for every hub entry.
+     Add / remove / rename a module by editing this array only.
+     type: "card" (full row, name+desc) or "tile" (compact grid item)
+     ============================================================ */
+  const SECTIONS = [
+    {
+      label: "Ressources Humaines",
+      items: [
+        { type:"card", name:"Gestion RH", desc:"Staff & contrats", icon:"👥", url:"https://personnelgreycorner.pages.dev/" },
+        { type:"tile", name:"Présence", emoji:"📋", url:"https://feuille-de-presence.pages.dev/" },
+        { type:"tile", name:"Pointage", emoji:"⏱️", url:"https://pointage-greycorner.pages.dev/" },
+        { type:"tile", name:"Paie", emoji:"💵", url:"https://paie-grey-corner.pages.dev/" }
+      ]
+    },
+    {
+      label: "Finance & Stock",
+      items: [
+        { type:"card", name:"Suivi Commandes", desc:"Tracking journalier & stock", icon:"📦", url:"https://grey-stock.pages.dev/" },
+        { type:"card", name:"Comptabilité", desc:"Dépenses & achats", icon:"💰", url:"https://depenses-grey-corner.pages.dev/" },
+        { type:"card", name:"Achats & Recette Caisse", desc:"Commandes fournisseurs et recette journalière", icon:"🛒", url:"https://achats-grey-corner.pages.dev/" },
+        { type:"card", name:"Factures", desc:"Facturation & suivi", icon:"🧾", url:"https://facture-grey-corner.pages.dev/" },
+        { type:"tile", name:"Fiche Tech", emoji:"📝", url:"https://fiche-technique.pages.dev/", twoCol:true },
+        { type:"tile", name:"Food Cost", emoji:"🧮", url:"https://costfood.pages.dev/", twoCol:true }
+      ]
+    }
+  ];
+
+  const SERVICE_SECTION = {
+    label: "Service",
+    items: [
+      { type:"card", name:"Espace Serveurs", desc:"Live orders & kitchen control", icon:"🔱", url:"https://espace-serveurs-hub.pages.dev/admin.html" }
+    ]
+  };
+
+  const searchableText = (item) =>
+    (item.name + " " + (item.desc || "")).toLowerCase();
+
+  function renderCard(item){
+    return `<a href="${item.url}" class="card" data-search="${searchableText(item)}">
+      <div class="card-left">
+        <div class="icon">${item.icon}</div>
+        <div>
+          <div class="card-name">${item.name}</div>
+          <div class="card-desc">${item.desc}</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>`;
+  }
+
+  function renderTile(item){
+    return `<a href="${item.url}" class="tile" data-search="${searchableText(item)}">
+      <span class="tile-emoji">${item.emoji}</span>
+      <span class="tile-name">${item.name}</span>
+    </a>`;
+  }
+
+  function renderSection(section){
+    const cards = section.items.filter(i => i.type === "card").map(renderCard).join("");
+    const threeColTiles = section.items.filter(i => i.type === "tile" && !i.twoCol);
+    const twoColTiles = section.items.filter(i => i.type === "tile" && i.twoCol);
+
+    let html = `<div class="section-label">${section.label}</div>` + cards;
+
+    if (threeColTiles.length){
+      html += `<div class="grid">${threeColTiles.map(renderTile).join("")}</div>`;
+    }
+    if (twoColTiles.length){
+      html += `<div class="grid two">${twoColTiles.map(renderTile).join("")}</div>`;
+    }
+    return html;
+  }
+
+  document.getElementById("sections-container").innerHTML =
+    SECTIONS.map(renderSection).join("");
+  document.getElementById("service-container").innerHTML =
+    renderSection(SERVICE_SECTION);
+
+  /* ============================================================
+     SEARCH — filters every .card and .tile by data-search attr
+     ============================================================ */
+  const searchInput = document.getElementById("search-input");
+  const searchClear = document.getElementById("search-clear");
+  const searchEmpty = document.getElementById("search-empty");
+  const sectionLabels = document.querySelectorAll(".section-label");
+
+  function applySearch(){
+    const q = searchInput.value.trim().toLowerCase();
+    searchClear.style.display = q ? "block" : "none";
+
+    let anyVisible = false;
+
+    // toggle each item
+    document.querySelectorAll("[data-search]").forEach(el => {
+      const match = !q || el.getAttribute("data-search").includes(q);
+      el.style.display = match ? "" : "none";
+      if (match) anyVisible = true;
+    });
+
+    // hide section labels whose section has zero visible items
+    document.querySelectorAll(".section-label").forEach(label => {
+      let sib = label.nextElementSibling;
+      let visible = false;
+      while (sib && !sib.classList.contains("section-label")){
+        if (sib.matches("[data-search]") && sib.style.display !== "none") visible = true;
+        if (sib.classList.contains("grid")){
+          const anyChild = Array.from(sib.children).some(c => c.style.display !== "none");
+          if (anyChild) visible = true;
+        }
+        sib = sib.nextElementSibling;
+      }
+      label.style.display = visible ? "" : "none";
+    });
+
+    searchEmpty.style.display = (q && !anyVisible) ? "block" : "none";
+  }
+
+  searchInput.addEventListener("input", applySearch);
+  searchClear.addEventListener("click", () => {
+    searchInput.value = "";
+    applySearch();
+    searchInput.focus();
+  });
+
   // Service Worker Registration
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -698,5 +816,3 @@ body::before{
 
 </body>
 </html>
-
-```
