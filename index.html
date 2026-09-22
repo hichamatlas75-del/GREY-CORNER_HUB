@@ -744,7 +744,6 @@ body::before{
     <span class="arrow">›</span>
   </a>
 
-  <!-- MODIFIÉ: ACHATS ET RECETTE CAISSE -->
   <a href="https://achats-grey-corner.pages.dev/caisse" class="card sec-finance" data-search="achats et recette caisse commandes fournisseurs suivi caisse vente recette">
     <div class="card-left">
       <div class="icon">
@@ -784,10 +783,8 @@ body::before{
     <span class="arrow">›</span>
   </a>
 
-
-
-  <!-- SECTION SERVICE -->
-  <div class="section-label sec-service" data-section="service">Service</div>
+  <!-- SECTION SERVICE & COMMUNICATION -->
+  <div class="section-label sec-service" data-section="service">Service & Communication</div>
 
   <a href="https://espace-serveurs-hub.pages.dev/admin.html" class="card sec-service" data-search="espace serveurs live orders kitchen control cuisine salle service">
     <div class="card-left">
@@ -797,6 +794,20 @@ body::before{
       <div>
         <div class="card-name">Espace Serveurs</div>
         <div class="card-desc">Live orders & kitchen control</div>
+      </div>
+    </div>
+    <span class="arrow">›</span>
+  </a>
+
+  <!-- MODULE INSTAGRAM -->
+  <a href="https://greycorner-instagram.pages.dev/" class="card sec-service" data-search="instagram insta reseaux sociaux communication posts feed marketing visuels">
+    <div class="card-left">
+      <div class="icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </div>
+      <div>
+        <div class="card-name">Instagram</div>
+        <div class="card-desc">Communication & réseaux sociaux</div>
       </div>
     </div>
     <span class="arrow">›</span>
@@ -836,6 +847,14 @@ body::before{
     Planning
   </a>
 
+  <!-- NOUVEL ONGLET DOCK INSTAGRAM -->
+  <a href="https://greycorner-instagram.pages.dev/">
+    <div class="dock-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </div>
+    Insta
+  </a>
+
 </div>
 
 <script>
@@ -843,7 +862,6 @@ body::before{
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/sw.js').then((reg) => {
-        // Force l'inspection de mise à jour du SW à chaque ouverture
         reg.update();
 
         reg.addEventListener('updatefound', () => {
@@ -851,7 +869,6 @@ body::before{
           if (newWorker) {
             newWorker.addEventListener('statechange', () => {
               if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                // Nouveau contenu détecté, rechargement automatique
                 window.location.reload();
               }
             });
