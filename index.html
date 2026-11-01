@@ -364,6 +364,70 @@ body::before{
   font-family:"Cormorant Garamond",serif;
 }
 
+/* COMPOSITE CARD (CREANCE CLIENT & CAISSE) */
+.card-composite{
+  cursor:pointer;
+}
+.card-link-main{
+  text-decoration:none;
+  color:inherit;
+  flex:1;
+  min-width:0;
+  cursor:pointer;
+}
+.card-pills{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-shrink:0;
+  margin-left:12px;
+}
+.card-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:5px 11px;
+  font-family:"DM Sans",-apple-system,sans-serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:var(--sec-service);
+  background:var(--sec-service-bg);
+  border:1px solid var(--sec-service-border);
+  transition:all .15s ease;
+  line-height:1.2;
+}
+.card-pill:hover,
+.card-pill:active{
+  background:var(--sec-service);
+  color:#fff;
+  border-color:var(--sec-service);
+}
+.card-pill.pill-caisse{
+  color:var(--brass-deep);
+  background:rgba(156,122,60,0.08);
+  border-color:var(--hairline-gold);
+}
+.card-pill.pill-caisse:hover,
+.card-pill.pill-caisse:active{
+  background:var(--brass);
+  color:#fff;
+  border-color:var(--brass);
+}
+@media (max-width:380px){
+  .card-pills{
+    flex-direction:column;
+    gap:4px;
+    margin-left:8px;
+  }
+  .card-pill{
+    padding:3px 8px;
+    font-size:10px;
+  }
+}
+
 /* GRID & TILES */
 .grid{
   display:grid;
@@ -785,6 +849,28 @@ body::before{
 
   <!-- SECTION SERVICE & COMMUNICATION -->
   <div class="section-label sec-service" data-section="service">Service & Communication</div>
+
+  <!-- MODULE CRÉANCE CLIENT -->
+  <div class="card sec-service card-composite" data-search="creance creances client credit arrieres solde compte caisse encaissement service communication" onclick="if(!event.target.closest('a')){ window.location.href='https://creancegc.pages.dev/'; }">
+    <a href="https://creancegc.pages.dev/" class="card-left card-link-main" title="Ouvrir Créance Client">
+      <div class="icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="8.5" cy="7" r="4"/>
+          <line x1="19" y1="8" x2="19" y2="14"/>
+          <line x1="22" y1="11" x2="16" y2="11"/>
+        </svg>
+      </div>
+      <div>
+        <div class="card-name">Créance Client</div>
+        <div class="card-desc">Portail clients & encaissements caisse</div>
+      </div>
+    </a>
+    <div class="card-pills">
+      <a href="https://creancegc.pages.dev/" class="card-pill" title="Accès Espace Client">Client</a>
+      <a href="https://creancegc.pages.dev/caisse.html" class="card-pill pill-caisse" title="Accès Espace Caisse">Caisse</a>
+    </div>
+  </div>
 
   <a href="https://espace-serveurs-hub.pages.dev/admin.html" class="card sec-service" data-search="espace serveurs live orders kitchen control cuisine salle service">
     <div class="card-left">

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'grey-corner-hub-v6';
+const CACHE_NAME = 'grey-corner-hub-v7';
 const ASSETS = [
   '/',
   '/index.html',
